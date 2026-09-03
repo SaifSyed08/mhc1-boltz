@@ -38,3 +38,7 @@ data/manifest_source.json
 *.tmp
 data/extract_progress*.json
 data/msa_extract_progress.json
+
+# Personal correspondence draft -- names a third party, not project code.
+# Kept local on purpose; delete this line if you want it tracked.
+reports/EMAIL_DRAFT_*.md
