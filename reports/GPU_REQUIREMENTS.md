@@ -149,6 +149,44 @@ and a single validation sample never finished. **A job that is silently 50x too
 slow is a plausible symptom of being just barely over VRAM, not only of being
 compute-bound.** A clean OOM is the friendlier failure.
 
+
+## Measured: fine-tuning was attempted and does not fit
+
+The arithmetic above predicted this, but predictions are cheap. Three
+configurations were actually run on the 4060 (2026-09-03), each stripping more
+memory than the last. All three died with `CUDA error: out of memory`.
+
+| # | configuration | trainable | result |
+|---|---|---|---|
+| 1 | stock recipe | 453.6M | not attempted -- 9.06 GB of state alone exceeds the card |
+| 2 | `ema: false` + `offload_to_cpu: true` | 453.6M | **OOM on the first training step**, peak 7637 MiB |
+| 3 | as #2 + trunk frozen (`msa_module`, `pairformer_module`) | 281.6M | **OOM**, in `triangular_attention/attention.py:127` |
+
+Configuration 3 is the informative one. Freezing the trunk removes its gradients
+*and* the activations autograd would retain for its backward pass, cutting
+trainable parameters by a third. It still failed, and the failure is in the
+**forward** pass of triangular attention.
+
+That is the crux: triangular attention over a 512-token crop is expensive whether
+or not it is being trained. Validation survives it because no backward graph is
+retained; training does not, because gradients and Adam moments for the structure
+module (281.6M x 12 bytes = 3.4 GB) occupy the space the trunk forward needs.
+
+So the remaining levers are not memory tricks -- they are changes to the training
+objective itself: `diffusion_multiplicity: 16` (the structure module processes 16
+noisy copies per sample), `max_tokens: 512`, or the crop size. Turning those down
+far enough to fit would no longer be fine-tuning Boltz-1 under its own recipe, and
+reporting the result as such would be misleading.
+
+**Conclusion: fine-tuning needs a bigger GPU.** A 40 GB A100 runs
+`configs/mhc1_finetune.yaml` as written. This is now an empirical result rather
+than an estimate, which is a stronger thing to bring to a supervisor.
+
+`configs/mhc1_finetune_8gb.yaml` and the `freeze_trunk` option in `train.py` are
+kept because they are correct and will be useful on real hardware -- freezing the
+trunk is a reasonable fine-tuning strategy for pMHC-I on its merits, not only as a
+memory workaround.
+
 ## Upstream bug worth knowing about
 
 Boltz v1.0.0 made `steering_args` a required positional argument of

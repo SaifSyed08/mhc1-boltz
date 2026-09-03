@@ -1,8 +1,38 @@
 diff --git a/scripts/train/train.py b/scripts/train/train.py
-index 7a6491d..663e1ef 100644
+index 7a6491d..8541898 100644
 --- a/scripts/train/train.py
 +++ b/scripts/train/train.py
-@@ -164,6 +164,17 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -72,6 +72,7 @@ class TrainConfig:
+     find_unused_parameters: Optional[bool] = False
+     save_top_k: Optional[int] = 1
+     validation_only: bool = False
++    freeze_trunk: Optional[list] = None   # LOCAL PATCH: module names to freeze
+     debug: bool = False
+     strict_loading: bool = True
+     load_confidence_from_trunk: Optional[bool] = False
+@@ -161,9 +162,39 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+         if cfg.load_confidence_from_trunk:
+             os.remove(file_path)
+ 
++    # LOCAL PATCH (see reports/UPSTREAM_PATCHES.md): optional trunk freezing.
++    # Boltz has no built-in way to fine-tune a subset of the model. Freezing the
++    # msa and pairformer modules (150.6M of 453.6M trainable params) removes both
++    # their gradients AND the activations autograd would otherwise retain for
++    # their backward pass, which is what makes fine-tuning fit on an 8 GB card.
++    # It is also a defensible strategy for pMHC-I, where the task is largely the
++    # geometry of a peptide in a groove rather than representation learning.
++    freeze = getattr(cfg, "freeze_trunk", None)
++    if freeze:
++        frozen = trainable = 0
++        for name, p in model_module.named_parameters():
++            if name.split(".")[0] in set(freeze):
++                p.requires_grad = False
++                frozen += p.numel()
++            elif p.requires_grad:
++                trainable += p.numel()
++        print(f"[freeze_trunk] froze {freeze}: {frozen/1e6:.1f}M frozen, "
++              f"{trainable/1e6:.1f}M trainable")
++
      # Create checkpoint callback
      callbacks = []
      dirpath = cfg.output
@@ -20,6 +50,18 @@ index 7a6491d..663e1ef 100644
      if not cfg.disable_checkpoint:
          mc = ModelCheckpoint(
              monitor="val/lddt",
+@@ -172,7 +203,10 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+             mode="max",
+             every_n_epochs=1,
+         )
+-        callbacks = [mc]
++        # LOCAL PATCH: was `callbacks = [mc]`, which discards anything already
++        # registered -- including the val_progress dump added above. Appending
++        # keeps both.
++        callbacks.append(mc)
+ 
+     # Create wandb logger
+     loggers = []
 diff --git a/src/boltz/data/feature/featurizer.py b/src/boltz/data/feature/featurizer.py
 index 8fd4379..876b9e5 100644
 --- a/src/boltz/data/feature/featurizer.py
@@ -38,3 +80,26 @@ index 8fd4379..876b9e5 100644
          if compute_constraint_features:
              residue_constraint_features = process_residue_constraint_features(data)
              chain_constraint_features = process_chain_feature_constraints(data)
+diff --git a/src/boltz/model/optim/scheduler.py b/src/boltz/model/optim/scheduler.py
+index 007ec71..ca31330 100644
+--- a/src/boltz/model/optim/scheduler.py
++++ b/src/boltz/model/optim/scheduler.py
+@@ -72,7 +72,17 @@ class AlphaFoldLRScheduler(torch.optim.lr_scheduler._LRScheduler):
+         self.decay_every_n_steps = decay_every_n_steps
+         self.decay_factor = decay_factor
+ 
+-        super().__init__(optimizer, last_epoch=last_epoch, verbose=verbose)
++        # LOCAL PATCH (see reports/UPSTREAM_PATCHES.md): torch deprecated the
++        # `verbose` argument of LRScheduler in 2.4 and has since removed it, so on
++        # modern torch this raised
++        #   TypeError: LRScheduler.__init__() got an unexpected keyword argument 'verbose'
++        # `self.verbose` is still set above, so state_dict() is unchanged. This
++        # fires only on the TRAINING path -- configure_optimizers() is never called
++        # by validation_only, which is why the baseline run never hit it.
++        try:
++            super().__init__(optimizer, last_epoch=last_epoch, verbose=verbose)
++        except TypeError:
++            super().__init__(optimizer, last_epoch=last_epoch)
+ 
+     def state_dict(self) -> dict:
+         state_dict = {k: v for k, v in self.__dict__.items() if k not in ["optimizer"]}

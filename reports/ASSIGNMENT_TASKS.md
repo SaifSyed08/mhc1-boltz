@@ -82,7 +82,7 @@ Legend: **DONE** · **PARTIAL** · **BLOCKED** · **TODO**
 |---|---|---|---|
 | 8.1 | Load processed dataset correctly | DONE | proven by the baseline run reading it |
 | 8.2 | Resume from pretrained weights | DONE | checkpoint loads (confidence keys correctly unused) |
-| 8.3 | Complete multiple epochs without errors | **BLOCKED** | 9.06 GB needed vs ~8.1 GB usable — `GPU_REQUIREMENTS.md` |
+| 8.3 | Complete multiple epochs without errors | **BLOCKED (tested)** | 3 configs run, all OOM; frozen-trunk fails in triangular attention forward — `GPU_REQUIREMENTS.md` |
 | 8.4 | Record metrics in W&B | BLOCKED | depends on 8.3 and 7.5 |
 | 8.5 | Compare against pretrained baseline | BLOCKED | depends on 7.4 + 8.3 |
 

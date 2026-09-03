@@ -241,3 +241,7 @@ model:
     fk_resampling_interval: 3
     guidance_update: false
     num_gd_steps: 16
+
+freeze_trunk:                         # LOCAL: fit fine-tuning into 8 GB
+  - msa_module
+  - pairformer_module
