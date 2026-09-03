@@ -1,0 +1,158 @@
+{
+ "n_samples": 1084,
+ "checks": {
+  "V1": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "sample is a TCR3D MHC-I entry"
+  },
+  "V2_mhc": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "expected MHC-I chain present + enabled"
+  },
+  "V3_peptide": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "expected peptide chain present + enabled"
+  },
+  "V4": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "kept chain sequences match RCSB"
+  },
+  "V5": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "unrelated chains disabled (npz + manifest)"
+  },
+  "V6": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "kept chains form one connected complex"
+  },
+  "V7": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "peptide in alpha1/alpha2 groove"
+  },
+  "V8": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "structural arrays intact"
+  },
+  "V9": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "temporal split matches release date"
+  },
+  "V10": {
+   "pass": 766,
+   "total": 766,
+   "description": "no (allele, peptide) leakage across splits"
+  },
+  "V11": {
+   "pass": 1084,
+   "total": 1084,
+   "description": "Boltz loads / tokenizes / crops the file"
+  },
+  "V12": {
+   "pass": 1457,
+   "total": 1457,
+   "description": "referenced MSA files present on disk"
+  }
+ },
+ "failures": {},
+ "needs_manual_review": [
+  {
+   "pdb_id": "1IM9",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "G1",
+   "contacts": 400
+  },
+  {
+   "pdb_id": "1NAN",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "F1",
+   "contacts": 381
+  },
+  {
+   "pdb_id": "1P1Z",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "C1",
+   "contacts": 297
+  },
+  {
+   "pdb_id": "1P4L",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "C1",
+   "contacts": 302
+  },
+  {
+   "pdb_id": "3DTX",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "C1",
+   "contacts": 419
+  },
+  {
+   "pdb_id": "4HUU",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "C1",
+   "contacts": 412
+  },
+  {
+   "pdb_id": "4HUW",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "I1",
+   "contacts": 447
+  },
+  {
+   "pdb_id": "4HV8",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "E1",
+   "contacts": 391
+  },
+  {
+   "pdb_id": "5GRG",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "C1",
+   "contacts": 191
+  },
+  {
+   "pdb_id": "5TRZ",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "F1",
+   "contacts": 428
+  },
+  {
+   "pdb_id": "6JP3",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "C1",
+   "contacts": 196
+  },
+  {
+   "pdb_id": "7BH8",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "I1",
+   "contacts": 319
+  },
+  {
+   "pdb_id": "7NDT",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "C1",
+   "contacts": 352
+  },
+  {
+   "pdb_id": "7Q9B",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "H1",
+   "contacts": 334
+  },
+  {
+   "pdb_id": "8TQ7",
+   "reason": "ambiguous_peptide_choice_needs_review",
+   "selected_peptide": "J1",
+   "contacts": 414
+  }
+ ]
+}

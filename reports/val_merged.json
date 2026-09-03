@@ -1,0 +1,13 @@
+{
+ "metrics": {
+  "best_rmsd": 2.9822344462076824,
+  "complex_lddt.intra_protein": 0.9239348729451498,
+  "complex_lddt.protein_protein": 0.8825476328531902,
+  "disto_lddt.intra_protein": 0.963508669535319,
+  "disto_lddt.protein_protein": 0.9052760442097981,
+  "lddt.intra_protein": 0.9247515996297201,
+  "lddt.protein_protein": 0.8827045440673829,
+  "rmsd": 3.053017171223958
+ },
+ "n_samples": 30
+}

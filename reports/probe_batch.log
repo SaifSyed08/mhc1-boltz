@@ -1,0 +1,7 @@
+Training dataset size: 914
+Validation dataset size: 99
+val dataloader built (num_workers=0)
+batch 0 ok: 41 keys, msa (1, 2048, 389, 33), coords (1, 1, 3168, 3)
+batch 1 ok: 41 keys, msa (1, 2048, 393, 33), coords (1, 1, 3168, 3)
+batch 2 ok: 41 keys, msa (1, 2048, 385, 33), coords (1, 1, 3168, 3)
+DATA PIPELINE OK

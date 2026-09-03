@@ -1,0 +1,7 @@
+  part 0 ok 192.9 MB
+  part 1 ok 192.9 MB
+  part 2 ok 192.9 MB
+  part 3 ok 192.9 MB
+wrote C:\Users\Saif Syed\mhc1-boltz\data\manifest.json (771587365 bytes) in 430s
+head: b'[{"id": "7m5e", "structure": {"resolution": 0.0, "method": "electron microscopy", "deposit'
+tail: b'chain_2": 1, "valid": true}], "affinity": null, "md": null}]'

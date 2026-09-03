@@ -1,0 +1,15 @@
+selected samples: 715
+records in source manifest: 216870
+of our samples, present in manifest: 715/715
+
+wrote 715 processed NPZ files
+problems: 0
+chains kept: 2127   chains disabled: 2328
+interfaces valid: 1412   invalidated: 3885
+wrote C:\Users\Saif Syed\mhc1-boltz\data\processed\manifest.json (666 records: train+validation only)
+wrote C:\Users\Saif Syed\mhc1-boltz\data\processed\manifest_test.json (49 records: held out, never seen by training)
+    train        599 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\train_ids.txt
+    validation    67 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\validation_ids.txt
+    test          49 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\test_ids.txt
+    required MSA files: 842 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\required_msa_ids.txt
+wrote C:\Users\Saif Syed\mhc1-boltz\reports\write_report.json

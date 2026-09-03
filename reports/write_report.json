@@ -1,0 +1,20 @@
+{
+ "n_selected": 1084,
+ "n_written": 1084,
+ "n_records_in_source_manifest": 216870,
+ "not_in_boltz_manifest": [],
+ "problems": [],
+ "stats": {
+  "valid_interfaces": 2147,
+  "invalidated_interfaces": 5669,
+  "disabled_chains": 3363,
+  "kept_chains": 3231,
+  "chains_field_added": 1084,
+  "connections_reordered": 1084
+ },
+ "splits": {
+  "train": 914,
+  "validation": 99,
+  "test": 71
+ }
+}

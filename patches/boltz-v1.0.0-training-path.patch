@@ -1,0 +1,40 @@
+diff --git a/scripts/train/train.py b/scripts/train/train.py
+index 7a6491d..663e1ef 100644
+--- a/scripts/train/train.py
++++ b/scripts/train/train.py
+@@ -164,6 +164,17 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+     # Create checkpoint callback
+     callbacks = []
+     dirpath = cfg.output
++    # LOCAL PATCH (see reports/UPSTREAM_PATCHES.md): trainer.validate() keeps its
++    # running metric state only in memory and emits nothing until the epoch ends,
++    # so an interrupted validation loses every completed sample. This callback
++    # snapshots the MeanMetric sufficient statistics to disk after each batch.
++    try:
++        sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
++        from val_progress import ValProgressDump
++
++        callbacks.append(ValProgressDump(Path(cfg.output) / "val_state.json"))
++    except Exception as exc:  # never let telemetry break a run
++        print(f"[val_progress] disabled: {type(exc).__name__}: {exc}")
+     if not cfg.disable_checkpoint:
+         mc = ModelCheckpoint(
+             monitor="val/lddt",
+diff --git a/src/boltz/data/feature/featurizer.py b/src/boltz/data/feature/featurizer.py
+index 8fd4379..876b9e5 100644
+--- a/src/boltz/data/feature/featurizer.py
++++ b/src/boltz/data/feature/featurizer.py
+@@ -1215,6 +1215,13 @@ class BoltzFeaturizer:
+ 
+         # Compute residue constraint features
+         residue_constraint_features = {}
++        # LOCAL PATCH (see reports/UPSTREAM_PATCHES.md): chain_constraint_features
++        # was only bound inside the `if` below, yet is splatted unconditionally
++        # into the return dict. compute_constraint_features is passed as True only
++        # from data/module/inference.py:202, so on the TRAINING and VALIDATION
++        # paths (data/module/training.py:282 and :426, neither of which passes it)
++        # every single sample raised UnboundLocalError.
++        chain_constraint_features = {}
+         if compute_constraint_features:
+             residue_constraint_features = process_residue_constraint_features(data)
+             chain_constraint_features = process_chain_feature_constraints(data)

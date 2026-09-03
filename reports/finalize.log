@@ -1,0 +1,62 @@
+=== raw NPZs available: 1149 ===
+entries with both          : 1443/1514
+entries that are fusions   : 30
+ambiguous homology calls   : 2 [(0.18888888888888888, '1ZS8', 274, 'histocompatibility 2, M region locus 10.5'), (0.13857677902621723, '9Z4R', 271, 'Major histocompatibility complex class I-related g')]
+still no MHC-I heavy       : ['1ZS8', '9Z4R']
+
+wrote C:\Users\Saif Syed\mhc1-boltz\data\annotated_entities.json
+    train        914
+    validation    99
+    test         283
+    TOTAL       1296
+
+duplicate pairs entirely within one split (kept): 182 groups, 529 entries
+
+wrote C:\Users\Saif Syed\mhc1-boltz\data\candidates.json and C:\Users\Saif Syed\mhc1-boltz\reports\split_report.json
+flags raised:
+    no_b2m_chain                                               19
+    multiple_mhc_or_peptide_copies_resolved_by_contact         17
+    ambiguous_peptide_choice_needs_review                      14
+
+MHC-peptide contact counts: min=94 p05=263 median=335 max=548
+chains kept per sample: {2: 19, 3: 952}
+chains originally present: median=4 max=41
+
+wrote C:\Users\Saif Syed\mhc1-boltz\data\chain_selection.json
+of our samples, present in manifest: 971/971
+
+wrote 971 processed NPZ files
+problems: 0
+chains kept: 2894   chains disabled: 2999
+interfaces valid: 1923   invalidated: 5055
+wrote C:\Users\Saif Syed\mhc1-boltz\data\processed\manifest.json (909 records: train+validation only)
+wrote C:\Users\Saif Syed\mhc1-boltz\data\processed\manifest_test.json (62 records: held out, never seen by training)
+    train        816 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\train_ids.txt
+    validation    93 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\validation_ids.txt
+    test          62 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\test_ids.txt
+    validation_ids_boltz.txt: 552 upstream + 93 ours = 645
+    required MSA files: 1044 -> C:\Users\Saif Syed\mhc1-boltz\data\processed\required_msa_ids.txt
+wrote C:\Users\Saif Syed\mhc1-boltz\reports\write_report.json
+
+--- dataset-level checks ---
+V9 temporal split consistent with release date: 971/971
+V10 (allele, peptide) pairs confined to one split: 700/700
+
+CHECK                                          PASS    TOTAL
+sample is a TCR3D MHC-I entry                   971      971
+expected MHC-I chain present + enabled          971      971
+expected peptide chain present + enabled        971      971
+kept chain sequences match RCSB                 971      971
+unrelated chains disabled (npz + manifest)      971      971
+kept chains form one connected complex          971      971
+peptide in alpha1/alpha2 groove                 971      971
+structural arrays intact                        971      971
+temporal split matches release date             971      971
+no (allele, peptide) leakage across splits      700      700
+Boltz loads / tokenizes / crops the file        971      971
+
+failure detail:
+    none
+
+wrote C:\Users\Saif Syed\mhc1-boltz\reports\validation_report.json
+=== reports/MILESTONE_SUMMARY.md updated ===

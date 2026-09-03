@@ -1,0 +1,25 @@
+processed samples on disk: 1084, manifest records: 1084 (train+val 1013, test 71)
+
+--- dataset-level checks ---
+V9 temporal split consistent with release date: 1084/1084
+V10 (allele, peptide) pairs confined to one split: 766/766
+V12 referenced MSA files present on disk: 1457/1457
+
+CHECK                                          PASS    TOTAL
+sample is a TCR3D MHC-I entry                  1084     1084
+expected MHC-I chain present + enabled         1084     1084
+expected peptide chain present + enabled       1084     1084
+kept chain sequences match RCSB                1084     1084
+unrelated chains disabled (npz + manifest)     1084     1084
+kept chains form one connected complex         1084     1084
+peptide in alpha1/alpha2 groove                1084     1084
+structural arrays intact                       1084     1084
+temporal split matches release date            1084     1084
+no (allele, peptide) leakage across splits      766      766
+Boltz loads / tokenizes / crops the file       1084     1084
+referenced MSA files present on disk           1457     1457
+
+failure detail:
+    none
+
+wrote C:\Users\Saif Syed\mhc1-boltz\reports\validation_report.json

@@ -1,0 +1,40 @@
+# Virtualenvs -- recreate from reports/GPU_REQUIREMENTS.md ("Environment note")
+.venv/
+.venv-gpu/
+__pycache__/
+*.pyc
+
+# Upstream Boltz checkout. NOT vendored here: it is a clean v1.0.0 tree plus our
+# two-hunk patch, so recreating it is exact and keeps this repo small.
+#
+#   git clone https://github.com/jwohlwend/boltz.git boltz-src
+#   git -C boltz-src checkout v1.0.0
+#   git -C boltz-src apply ../patches/boltz-v1.0.0-training-path.patch
+#
+# See reports/UPSTREAM_PATCHES.md for what the patch fixes and why it is required.
+boltz-src/
+
+# Large downloaded assets (~4.3 GB). Fetch with src/fetch_assets.py.
+data/assets/
+
+# MSA subset (469 MB, 1,457 files). Fetch with:
+#   python src/msa_extract.py --wanted data/processed/required_msa_ids.txt \
+#          --outdir data/msa --workers 48
+data/msa/
+
+# Structure NPZs: raw pulls and the processed dataset. Regenerate with
+# src/tar_extract.py then ./finalize.sh
+data/npz_raw/
+data/processed/structures/
+
+# Byte-offset indices for the two S3 tars. Large, and rebuilt by the scanners.
+data/tar_index/
+data/msa_tar_index/
+
+# The full upstream manifest member, 753 MB. Pull with src/fetch_manifest.py.
+data/manifest_source.json
+
+# Scratch
+*.tmp
+data/extract_progress*.json
+data/msa_extract_progress.json

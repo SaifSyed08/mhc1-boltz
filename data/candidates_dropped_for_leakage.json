@@ -1,0 +1,3383 @@
+[
+ {
+  "pdb_id": "1AO7",
+  "release_date": "1997-09-17",
+  "split": "train",
+  "resolution": 2.6,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1BD2",
+  "release_date": "1998-08-19",
+  "split": "train",
+  "resolution": 2.5,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1BII",
+  "release_date": "1998-10-14",
+  "split": "train",
+  "resolution": 2.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Dd",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RGPGRAFVTI",
+  "peptide_seq_struct": "RGPGRAFVTI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGAMAPRTLLLLLAAALGPTQTRAGSHSLRYFVTAVSRPGFGEPRYMEVGYVDNTEFVRFDSDAENPRYEPRARWIEQEGPEYWERETRRAKGNEQSFRVDLRTALRYYNQSAGGSHTLQWMAGCDVESDGRLLRGYWQFAYDGCDYIALNEDLKTWTAADMAAQITRRKWEQAGAAERDRAYLEGECVEWLRRYLKNGNATLLRTDPPKAHVTHHRRPEGDVTLRCWALGFYPADITLTWQLNGEELTQEMELVETRPAGDGTFQKWASVVVPLGKEQKYTCHVEHEGLPEPLTLRWGKEEPPSSTKTNTVIIAVPVVLGAVVILGAVMAFVMKRRRNTGGKGGDYALAPGSQSSDMSLPDCKV",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1DDH",
+  "release_date": "1999-01-13",
+  "split": "train",
+  "resolution": 3.1,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Dd",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RGPGRAFVTI",
+  "peptide_seq_struct": "RGPGRAFVTI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MSHSLRYFVTAVSRPGFGEPRYMEVGYVDNTEFVRFDSDAENPRYEPRARWIEQEGPEYWERETRRANGNEQSFRVDLRTALRYYNQSAGGSHTLQWMAGCDVESDGRLLRGYWQFAYDGCDYIALNEDLKTWTAADMAAQITRRKWEQAGAAERDRAYLEGECVEWLRRYLKNGNATLLATDPPKAHVTHHRRPEGDVTLRCWALGFYPAEITLTWQLNGEELTQEMELVETRPAGDGTFQKWASVVVPLGKQQKYTCHVEHEGLPEPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1DUZ",
+  "release_date": "2000-02-04",
+  "split": "train",
+  "resolution": 1.8,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1FFN",
+  "release_date": "2002-12-11",
+  "split": "train",
+  "resolution": 2.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "KAVYNFATM",
+  "peptide_seq_struct": "KAVYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "PHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1HHH",
+  "release_date": "1993-10-31",
+  "split": "train",
+  "resolution": 3.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "FLPSDFFPSV",
+  "peptide_seq_struct": "FLPSDFFPSV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1HHK",
+  "release_date": "1993-10-31",
+  "split": "train",
+  "resolution": 2.5,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1HOC",
+  "release_date": "1994-04-30",
+  "split": "train",
+  "resolution": 2.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "ASNENMETM",
+  "peptide_seq_struct": "ASNENMETM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTL",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1I4F",
+  "release_date": "2001-07-25",
+  "split": "train",
+  "resolution": 1.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "GVYDGREHTV",
+  "peptide_seq_struct": "GVYDGREHTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1IM3",
+  "release_date": "2001-06-06",
+  "split": "train",
+  "resolution": 2.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1JF1",
+  "release_date": "2001-09-14",
+  "split": "train",
+  "resolution": 1.85,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1KPR",
+  "release_date": "2003-02-25",
+  "split": "train",
+  "resolution": 2.8,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-E",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "VMAPRTVLL",
+  "peptide_seq_struct": "VMAPRTVLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSLKYFHTSVSRPGRGEPRFISVGYVDDTQFVRFDNDAASPRMVPRAPWMEQEGSEYWDRETRSARDTAQIFRVNLRTLRGYYNQSEAGSHTLQWMHGCELGPDGRFLRGYEQFAYDGKDYLTLNEDLRSWTAVDTAAQISEQKSNDASEAEHQRAYLEDTCVEWLHKYLEKGKETLLHLEPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQQDGEGHTQDTELVETRPAGDGTFQKWAAVVVPSGEEQAYTCHVQHEGLPEPVTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "1M6O",
+  "release_date": "2003-09-02",
+  "split": "train",
+  "resolution": 1.6,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*44",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "EEFGRAFSF",
+  "peptide_seq_struct": "EEFGRAFSF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFITVGYVDDTLFVRFDSDATSPRKEPRAPWIEQEGPEYWDRETQISKTNTQTYRENLRTALRYYNQSEAGSHIIQRMYGCDVGPDGRLLRGYDQDAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQDRAYLEGLCVESLRRYLENGKETLQRADPPKTHVTHHPISDHEVTLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1MHE",
+  "release_date": "1999-03-23",
+  "split": "train",
+  "resolution": 2.85,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-E",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "VMAPRTVLL",
+  "peptide_seq_struct": "VMAPRTVLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSLKYFHTSVSRPGRGEPRFISVGYVDDTQFVRFDNDAASPRMVPRAPWMEQEGSEYWDRETRSARDTAQIFRVNLRTLRGYYNQSEAGSHTLQWMHGCELGPDRRFLRGYEQFAYDGKDYLTLNEDLRSWTAVDTAAQISEQKSNDASEAEHQRAYLEDTCVEWLHKYLEKGKETLLHLEPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQQDGEGHTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPVTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "1N2R",
+  "release_date": "2004-03-16",
+  "split": "train",
+  "resolution": 1.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*44",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "EEFGRAFSF",
+  "peptide_seq_struct": "EEFGRAFSF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFITVGYVDDTLFVRFDSDATSPRKEPRAPWIEQEGPEYWDRETQISKTNTQTYRENLRTALRYYNQSEAGSHIIQRMYGCDVGPDGRLLRGYDQDAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVESLRRYLENGKETLQRADPPKTHVTHHPISDHEVTLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1N5A",
+  "release_date": "2003-01-07",
+  "split": "train",
+  "resolution": 2.85,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "KAVYNFATM",
+  "peptide_seq_struct": "KAVYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1Q94",
+  "release_date": "2004-06-01",
+  "split": "train",
+  "resolution": 2.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*11",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "AIFQSSMTK",
+  "peptide_seq_struct": "AIFQSSMTK",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDQETRNVKAQSQTDRVDLGTLRGYYNQSEDGSHTIQIMYGCDVGPDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAAHAAEQQRAYLEGRCVEWLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1QO3",
+  "release_date": "2000-01-02",
+  "split": "train",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Dd",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RGPGRAFVTI",
+  "peptide_seq_struct": "RGPGRAFVTI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "4"
+  ],
+  "mhc_seq": "MSHSLRYFVTAVSRPGFGEPRYMEVGYVDNTEFVRFDSDAENPRYEPRARWIEQEGPEYWERETRRAKGNEQSFRVDLRTALRYYNQSAGGSHTLQWMAGCDVESDGRLLRGYWQFAYDGCDYIALNEDLKTWTAADMAAQITRRKWEQAGAAERDRAYLEGECVEWLRRYLKNGNATLLRTDPPKAHVTHHRRPEGDVTLRCWALGFYPADITLTWQLNGEELTQEMELVETRPAGDGTFQKWASVVVPLGKEQKYTCHVEHEGLPEPLTLRWGKE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1S7U",
+  "release_date": "2004-05-04",
+  "split": "train",
+  "resolution": 2.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "KAVYNFATM",
+  "peptide_seq_struct": "KAVYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEPPPSTDSYMVIVAVLGVLGAMAIIGAVVAFVMKRRRNTGGKGGDYALAPGSQSSEMSLRDCKA",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1S9W",
+  "release_date": "2004-09-28",
+  "split": "train",
+  "resolution": 2.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "SLLMWITQC",
+  "peptide_seq_struct": "SLLMWITQC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1SYV",
+  "release_date": "2004-10-19",
+  "split": "train",
+  "resolution": 1.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*44",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "EEFGRAFSF",
+  "peptide_seq_struct": "EEFGRAFSF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFITVGYVDDTLFVRFDSDATSPRKEPRAPWIEQEGPEYWDRETQISKTNTQTYRENLRTALRYYNQSEAGSHIIQRMYGCDVGPDGRLLRGYDQYAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQDRAYLEGLCVESLRRYLENGKETLQRADPPKTHVTHHPISDHEVTLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "1WBY",
+  "release_date": "2005-01-19",
+  "split": "train",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "SSLENFRAYV",
+  "peptide_seq_struct": "SSLENFRAYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "1X7Q",
+  "release_date": "2005-08-02",
+  "split": "train",
+  "resolution": 1.45,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*11",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "KTFPPTEPK",
+  "peptide_seq_struct": "KTFPPTEPK",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDQETRNVKAQSQTDRVDLGTLRGYYNQSEDGSHTIQIMYGCDVGPDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAAHAAEQQRAYLEGRCVEWLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "1YN6",
+  "release_date": "2005-06-28",
+  "split": "train",
+  "resolution": 2.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "SSLENFRAYV",
+  "peptide_seq_struct": "SSLENFRAYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "PHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "2AV1",
+  "release_date": "2005-10-18",
+  "split": "train",
+  "resolution": 1.95,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGQTRAVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2AV7",
+  "release_date": "2005-10-18",
+  "split": "train",
+  "resolution": 2.05,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRAVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2BNQ",
+  "release_date": "2005-05-23",
+  "split": "train",
+  "resolution": 1.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2BNR",
+  "release_date": "2005-05-23",
+  "split": "train",
+  "resolution": 1.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQC",
+  "peptide_seq_struct": "SLLMWITQC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2ESV",
+  "release_date": "2006-03-21",
+  "split": "train",
+  "resolution": 2.6,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-E",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "VMAPRTLIL",
+  "peptide_seq_struct": "VMAPRTLIL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "SHSLKYFHTSVSRPGRGEPRFISVGYVDDTQFVRFDNDAASPRMVPRAPWMEQEGSEYWDRETRSARDTAQIFRVNLRTLRGYYNQSEAGSHTLQWMHGCELGPDRRFLRGYEQFAYDGKDYLTLNEDLRSWTAVDTAAQISEQKSNDASEAEHQRAYLEDTCVEWLHKYLEKGKETLLHLEPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQQDGEGHTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPVTLRWKP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "2F53",
+  "release_date": "2006-04-25",
+  "split": "train",
+  "resolution": 2.1,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQC",
+  "peptide_seq_struct": "SLLMWITQC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2F54",
+  "release_date": "2006-04-25",
+  "split": "train",
+  "resolution": 2.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQC",
+  "peptide_seq_struct": "SLLMWITQC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2F74",
+  "release_date": "2006-02-14",
+  "split": "train",
+  "resolution": 2.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "KAVYNFATM",
+  "peptide_seq_struct": "KAVYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2GT9",
+  "release_date": "2007-06-12",
+  "split": "train",
+  "resolution": 1.75,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "EAAGIGILTV",
+  "peptide_seq_struct": "EAAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2P5E",
+  "release_date": "2007-09-25",
+  "split": "train",
+  "resolution": 1.89,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQC",
+  "peptide_seq_struct": "SLLMWITQC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2P5W",
+  "release_date": "2007-09-25",
+  "split": "train",
+  "resolution": 2.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQC",
+  "peptide_seq_struct": "SLLMWITQC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "2PYE",
+  "release_date": "2007-09-25",
+  "split": "train",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQC",
+  "peptide_seq_struct": "SLLMWITQC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3D25",
+  "release_date": "2009-02-10",
+  "split": "train",
+  "resolution": 1.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "VLHDDLLEA",
+  "peptide_seq_struct": "VLHDDLLEA",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3DMM",
+  "release_date": "2009-07-14",
+  "split": "train",
+  "resolution": 2.6,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Dd",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RGPGRAFVTI",
+  "peptide_seq_struct": "RGPGRAFVTI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MSHSLRYFVTAVSRPGFGEPRYMEVGYVDNTEFVRFDSDAENPRYEPRARWIEQEGPEYWERETRRAKGNEQSFRVDLRTALRYYNQSAGGSHTLQWMAGCDVESDGRLLRGYWQFAYDGCDYIALNEDLKTWTAADMAAQITRRKWEQAGAAERDRAYLEGECVEWLRRYLKNGNATLLRTDPPKAHVTHHRRPEGDVTLRCWALGFYPADITLTWQLNGEELTQEMELVETRPAGDGTFQKWASVVVPLGKEQKYTCHVEHEGLPEPLTLRWG",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3ECB",
+  "release_date": "2009-07-14",
+  "split": "train",
+  "resolution": 1.698,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Dd",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RGPGRAFVTI",
+  "peptide_seq_struct": "RGPGRAFVTI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MSHSLRYFVTAVSRPGFGEPRYMEVGYVDNTEFVRFDSDAENPRYEPRARWIEQEGPEYWERETRRAKGNEQSFRVDLRTALRYYNQSAGGSHTLQWMAGCDVESDGRLLRGYWQFAYDGCDYIALNEDLKTWTAADMAAQITRRKWEQAGAAERDRAYLEGECVEWLRRYLKNGNATLLRTDPPKAHVTHHRRPEGDVTLRCWALGFYPADITLTWQLNGEELTQEMELVETRPAGDGTFQKWASVVVPLGKEQKYTCHVEHEGLPEPLTLRWGKE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3FT3",
+  "release_date": "2009-04-28",
+  "split": "train",
+  "resolution": 1.95,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "VLHDDLLEA",
+  "peptide_seq_struct": "VLHDDLLEA",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWVAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3GJF",
+  "release_date": "2009-04-28",
+  "split": "train",
+  "resolution": 1.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3HAE",
+  "release_date": "2009-05-19",
+  "split": "train",
+  "resolution": 2.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3HG1",
+  "release_date": "2009-07-28",
+  "split": "train",
+  "resolution": 3.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3HPJ",
+  "release_date": "2010-06-23",
+  "split": "train",
+  "resolution": 2.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RMFPNAPYL",
+  "peptide_seq_struct": "RMFPNAPYL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3IXA",
+  "release_date": "2010-01-12",
+  "split": "train",
+  "resolution": 2.1,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAPHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3LKP",
+  "release_date": "2010-07-07",
+  "split": "train",
+  "resolution": 1.8,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*35",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LPFDKSTIM",
+  "peptide_seq_struct": "LPFDKSTIM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRTEPRAPWIEQEGPEYWDRNTQIFKTNTQTYRESLRNLRGYYNQSEAGSHIIQRMYGCDLGPDGRLLRGHDQSAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVEWLRRYLENGKETLQRADPPKTHVTHHPVSDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3LKS",
+  "release_date": "2010-07-07",
+  "split": "train",
+  "resolution": 1.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*35",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LPFEKSTVM",
+  "peptide_seq_struct": "LPFEKSTVM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRTEPRAPWIEQEGPEYWDRNTQIFKTNTQTYRESLRNLRGYYNQSEAGSHIIQRMYGCDLGPDGRLLRGHDQSAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVEWLRRYLENGKETLQRADPPKTHVTHHPVSDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3MYJ",
+  "release_date": "2010-08-18",
+  "split": "train",
+  "resolution": 1.89,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "YMFPNAPYL",
+  "peptide_seq_struct": "YMFPNAPYL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3OX8",
+  "release_date": "2011-05-04",
+  "split": "train",
+  "resolution": 2.16,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "FLPSDFFPSV",
+  "peptide_seq_struct": "FLPSDFFPSV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWETAHEAEQWRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3OXR",
+  "release_date": "2011-05-04",
+  "split": "train",
+  "resolution": 1.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "FLPSDFFPSV",
+  "peptide_seq_struct": "FLPSDFFPSV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3OXS",
+  "release_date": "2011-05-04",
+  "split": "train",
+  "resolution": 1.75,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "FLPSDFFPSV",
+  "peptide_seq_struct": "FLPSDFFPSV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMCGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3PQY",
+  "release_date": "2011-05-18",
+  "split": "train",
+  "resolution": 3.192,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SSLENFRAYV",
+  "peptide_seq_struct": "SSLENFRAYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "PHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "3QDG",
+  "release_date": "2011-07-06",
+  "split": "train",
+  "resolution": 2.69,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "3QDM",
+  "release_date": "2011-07-06",
+  "split": "train",
+  "resolution": 2.8,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4E5X",
+  "release_date": "2012-10-10",
+  "split": "train",
+  "resolution": 1.95,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4F7T",
+  "release_date": "2012-10-10",
+  "split": "train",
+  "resolution": 1.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RYGFVANF",
+  "peptide_seq_struct": "RYGFVANF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "4FTV",
+  "release_date": "2013-07-03",
+  "split": "train",
+  "resolution": 2.74,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4HUX",
+  "release_date": "2013-02-27",
+  "split": "train",
+  "resolution": 2.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "ASNENMETM",
+  "peptide_seq_struct": "ASNENMETM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEAYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEPPPST",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4JFF",
+  "release_date": "2013-05-29",
+  "split": "train",
+  "resolution": 2.43,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4L3E",
+  "release_date": "2014-06-11",
+  "split": "train",
+  "resolution": 2.557,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4NSK",
+  "release_date": "2014-01-01",
+  "split": "train",
+  "resolution": 2.6,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "KAPYNFATM",
+  "peptide_seq_struct": "KAPYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "4QOK",
+  "release_date": "2014-12-17",
+  "split": "train",
+  "resolution": 3.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "EAAGIGILTV",
+  "peptide_seq_struct": "EAAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4U1I",
+  "release_date": "2015-04-08",
+  "split": "train",
+  "resolution": 1.92,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*81",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "TPQDLNTML",
+  "peptide_seq_struct": "TPQDLNTML",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFYTSVSRPGRGEPRFISVGYVDDTQFVRFDSDAASPREEPRAPWIEQEGPEYWDRNTQIYKAQAQTDRESLRNLRGYYNQSEAGSHTLQSMYGCDVGPDGRLLRGHNQYAYDGKDYIALNEDLRSWTAADTAAQISQRKLEAARVAEQDRAYLEGECVEWLRRYLENGKDKLERADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWTAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4U1J",
+  "release_date": "2015-04-08",
+  "split": "train",
+  "resolution": 1.38,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*42",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "TPQDLNTML",
+  "peptide_seq_struct": "TPQDLNTML",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFYTSVSRPGRGEPRFISVGYVDDTQFVRFDSDAASPREEPRAPWIEQEGPEYWDRNTQIYKAQAQTDRESLRNLRGYYNQSEAGSHTLQSMYGCDVGPDGRLLRGHNQYAYDGKDYIALNEDLRSWTAADTAAQITQRKWEAARVAEQDRAYLEGTCVEWLRRYLENGKDTLERADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "4WU5",
+  "release_date": "2015-05-06",
+  "split": "train",
+  "resolution": 2.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RYPLTFGW",
+  "peptide_seq_struct": "RYPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "4WU7",
+  "release_date": "2015-05-06",
+  "split": "train",
+  "resolution": 2.297,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RFPLTFGW",
+  "peptide_seq_struct": "RFPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "4WUU",
+  "release_date": "2015-12-30",
+  "split": "train",
+  "resolution": 3.047,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RMFPNAPYL",
+  "peptide_seq_struct": "RMFPNAPYL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEPGSGGGLNDIFEAQKIGWHE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5BRZ",
+  "release_date": "2016-03-02",
+  "split": "train",
+  "resolution": 2.62,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*01",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "EVDPIGHLY",
+  "peptide_seq_struct": "EVDPIGHLY",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQKMEPRAPWIEQEGPEYWDQETRNMKAHSQTDRANLGTLRGYYNQSEDGSHTIQIMYGCDVGPDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAVHAAEQRRVYLEGRCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5E9D",
+  "release_date": "2016-06-08",
+  "split": "train",
+  "resolution": 2.51,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5EU6",
+  "release_date": "2016-03-02",
+  "split": "train",
+  "resolution": 2.02,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "YLEPGPVTV",
+  "peptide_seq_struct": "YLEPGPVTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "5HGA",
+  "release_date": "2016-06-08",
+  "split": "train",
+  "resolution": 2.199,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RFPLTFGW",
+  "peptide_seq_struct": "RFPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "5HGB",
+  "release_date": "2016-06-08",
+  "split": "train",
+  "resolution": 2.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RYPLTFGW",
+  "peptide_seq_struct": "RYPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5IRO",
+  "release_date": "2016-08-24",
+  "split": "train",
+  "resolution": 2.64,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "2"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5IVX",
+  "release_date": "2017-03-29",
+  "split": "train",
+  "resolution": 2.1,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Dd",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "RGPGRAFVTI",
+  "peptide_seq_struct": "RGPGRAFVTI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "MSHSLRYFVTAVSRPGFGEPRYMEVGYVDNTEFVRFDSDAENPRYEPRARWIEQEGPEYWERETRRAKGNEQSFRVDLRTALRYYNQSAGGSHTLQWMAGCDVESDGRLLRGYWQFAYDGCDYIALNEDLKTWTAADMAAQITRRKWEQAGAAERDRAYLEGECVEWLRRYLKNGNATLLRTDPPKAHVTHHRRPEGDVTLRCWALGFYPADITLTWQLNGEELTQEMELVETRPAGDGTFQKWASVVVPLGKEQKYTCHVEHEGLPEPLTLRWGKE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5N6B",
+  "release_date": "2017-10-18",
+  "split": "train",
+  "resolution": 1.71,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLWNGPMAV",
+  "peptide_seq_struct": "LLWNGPMAV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5NHT",
+  "release_date": "2018-05-16",
+  "split": "train",
+  "resolution": 3.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWVAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5NQK",
+  "release_date": "2018-05-30",
+  "split": "train",
+  "resolution": 3.25,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWVAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5SWS",
+  "release_date": "2016-10-05",
+  "split": "train",
+  "resolution": 2.86,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ASNENMETM",
+  "peptide_seq_struct": "ASNENMETM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEPPPST",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5SWZ",
+  "release_date": "2016-10-05",
+  "split": "train",
+  "resolution": 2.65,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ASNENMETM",
+  "peptide_seq_struct": "ASNENMETM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEPPPST",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5T6Z",
+  "release_date": "2017-03-01",
+  "split": "train",
+  "resolution": 2.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*57",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "TSTLQEQIGW",
+  "peptide_seq_struct": "TSTLQEQIGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRMAPRAPWIEQEGPEYWDGETRNMKASAQTYRENLRIALRYYNQSEAGSHIIQVMYGCDVGPDGRLLRGHDQSAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5T70",
+  "release_date": "2017-03-01",
+  "split": "train",
+  "resolution": 2.1,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*57",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "TSNLQEQIGW",
+  "peptide_seq_struct": "TSNLQEQIGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "4"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRMAPRAPWIEQEGPEYWDGETRNMKASAQTYRENLRIALRYYNQSEAGSHIIQVMYGCDVGPDGRLLRGHDQSAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5TIL",
+  "release_date": "2017-11-01",
+  "split": "train",
+  "resolution": 2.83,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "KAPYNFATM",
+  "peptide_seq_struct": "KAPYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "5TJE",
+  "release_date": "2017-11-01",
+  "split": "train",
+  "resolution": 3.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "KAVYNFATM",
+  "peptide_seq_struct": "KAVYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5V5M",
+  "release_date": "2017-06-14",
+  "split": "train",
+  "resolution": 2.878,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*57",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "TSTLQEQIGW",
+  "peptide_seq_struct": "TSTLQEQIGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRMAPRAPWIEQEGPEYWDGETRNMKASAQTYRENLRIALRYYNQSEAGSHIIQVMYGCDVGPDGRLLRGHDQSAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPHH",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5VCL",
+  "release_date": "2017-10-25",
+  "split": "train",
+  "resolution": 2.05,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-T23",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "AMAPRTLLL",
+  "peptide_seq_struct": "AMAPRTLLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MSSHSLRYFHTAMSRPGLGEPRFIVVGYVDDTQFVSFDSDSENPKMEPRARWMEQEGPEYWERETWKARDMGRNFRVNLRTLLGYYNQSKDESHTLQWMYGCDVGPDGRLLRGYCQEAYDGQDYISLNEDLRSWTATDFASQISKHKSEMVDEAHQQRAYLQGPCVEWLHTYLRLGNKTLKRSDPPKAHVTHHPRSEDYVTLRCWALGFYPADITLTWQLNGEELTQDMEFVETRPAGDGNFQKWASVVVPLGKEQNYTCHVEHEGLPEPLTLRWEPP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "5W1V",
+  "release_date": "2017-10-04",
+  "split": "train",
+  "resolution": 3.31,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-E",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "VMAPRTLIL",
+  "peptide_seq_struct": "VMAPRTLIL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSLKYFHTSVSRPGRGEPRFISVGYVDDTQFVRFDNDAASPRMVPRAPWMEQEGSEYWDRETRSARDTAQIFRVNLRTLRGYYNQSEAGSHTLQWMHGCELGPDRRFLRGYEQFAYDGKDYLTLNEDLRSWTAVDTAAQISEQKSNDASEAEHQRAYLEDTCVEWLHKYLEKGKETLLHLEPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQQDGEGHTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPVTLRWKPAS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "5W67",
+  "release_date": "2017-08-23",
+  "split": "train",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-C*06",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "VRSRRALRL",
+  "peptide_seq_struct": "VRSRRALRL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "CSHSMRYFDTAVSRPGRGEPRFISVGYVDDTQFVRFDSDAASPRGEPRAPWVEQEGPEYWDRETQKYKRQAQADRVNLRKLRGYYNQSEDGSHTLQWMYGCDLGPDGRLLRGYDQSAYDGKDYIALNEDLRSWTAADTAAQITQRKWEAAREAEQWRAYLEGTCVEWLRRYLENGKETLQRAEHPKTHVTHHPVSDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6DKP",
+  "release_date": "2019-04-10",
+  "split": "train",
+  "resolution": 2.966,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6GH1",
+  "release_date": "2018-08-08",
+  "split": "train",
+  "resolution": 2.1,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-E",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RLPAKAPLL",
+  "peptide_seq_struct": "RLPAKAPLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSLKYFHTSVSRPGRGEPRFISVGYVDDTQFVRFDNDAASPRMVPRAPWMEQEGSEYWDRETRSARDTAQIFRVNLRTLRGYYNQSEAGSHTLQWMHGCELGPDGRFLRGYEQFAYDGKDYLTLNEDLRSWTAVDTAAQISEQKSNDASEAEHQRAYLEDTCVEWLHKYLEKGKETLLHLEPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQQDGEGHTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPVTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6ID4",
+  "release_date": "2019-02-06",
+  "split": "train",
+  "resolution": 2.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*11",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "AIFQSSMTK",
+  "peptide_seq_struct": "AIFQSSMTK",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "MGSHSMRYFYTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDQETRNVKAQSQTDRVDLGTLRGYYNQSEDGSHTIQIMYGCDVGPDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAAHAAEQQRAYLEGRCVEWLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6JTN",
+  "release_date": "2020-04-15",
+  "split": "train",
+  "resolution": 1.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-C*08",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "GADGVGKSAL",
+  "peptide_seq_struct": "GADGVGKSAL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "SHSMRYFYTAVSRPGRGEPRFIAVGYVDDTQFVQFDSDAASPRGEPRAPWVEQEGPEYWDRETQKYKRQAQTDRVSLRNLRGYYNQSEAGSHTLQRMYGCDLGPDGRLLRGYNQFAYDGKDYIALNEDLRSWTAADKAAQITQRKWEAAREAEQRRAYLEGTCVEWLRRYLENGKKTLQRAEHPKTHVTHHPVSDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6NPR",
+  "release_date": "2020-01-22",
+  "split": "train",
+  "resolution": 2.37,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Dd",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RGPGRAFVTI",
+  "peptide_seq_struct": "RGPGRAFVTI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "SHSLRYFVTAVSRPGFGEPRYMEVGYVDNTEFVRFDSDAENPRYEPRARWIEQEGPEYWERETRRAKGNEQSFRVDLRTALRCYNQSAGGSHTLQWMAGCDVESDGRLLRGYWQFAYDGSDYIALNEDLKTWTAADMCAQITRRKWEQAGAAERDRAYLEGECVEWLRRYLKNGNATLLRTDPPKAHVTHHRRPEGDVTLRCWALGFYPADITLTWQLNGEELTQEMELVETRPAGDGTFQKWASVVVPLGKEQKYTCHVEHEGLPEPLTLRWGKE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6Q3S",
+  "release_date": "2019-07-24",
+  "split": "train",
+  "resolution": 2.5,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGCYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMCAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6RP9",
+  "release_date": "2020-01-15",
+  "split": "train",
+  "resolution": 3.12,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6RPA",
+  "release_date": "2020-01-15",
+  "split": "train",
+  "resolution": 2.56,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6RPB",
+  "release_date": "2020-01-15",
+  "split": "train",
+  "resolution": 2.5,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6RSY",
+  "release_date": "2020-04-15",
+  "split": "train",
+  "resolution": 2.95,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "RMFPNAPYL",
+  "peptide_seq_struct": "RMFPNAPYL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6TMO",
+  "release_date": "2020-10-07",
+  "split": "train",
+  "resolution": 2.1,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "EAAGIGILTV",
+  "peptide_seq_struct": "EAAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6TRO",
+  "release_date": "2020-06-24",
+  "split": "train",
+  "resolution": 3.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "GVYDGREHTV",
+  "peptide_seq_struct": "GVYDGREHTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6ULK",
+  "release_date": "2020-05-27",
+  "split": "train",
+  "resolution": 1.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-C*08",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "GADGVGKSAL",
+  "peptide_seq_struct": "GADGVGKSAL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "CSHSMRYFYTAVSRPGRGEPRFIAVGYVDDTQFVQFDSDAASPRGEPRAPWVEQEGPEYWDRETQKYKRQAQTDRVSLRNLRGYYNQSEAGSHTLQRMYGCDLGPDGRLLRGYNQFAYDGKDYIALNEDLRSWTAADKAAQITQRKWEAAREAEQRRAYLEGTCVEWLRRYLENGKKTLQRAEHPKTHVTHHPVSDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6UON",
+  "release_date": "2020-05-27",
+  "split": "train",
+  "resolution": 3.5,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-C*08",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "GADGVGKSAL",
+  "peptide_seq_struct": "GADGVGKSAL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "3"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "CSHSMRYFYTAVSRPGRGEPRFIAVGYVDDTQFVQFDSDAASPRGEPRAPWVEQEGPEYWDRETQKYKRQAQTDRVSLRNLRGYYNQSEAGSHTLQRMYGCDLGPDGRLLRGYNQFAYDGKDYIALNEDLRSWTAADKAAQITQRKWEAAREAEQRRAYLEGTCVEWLRRYLENGKKTLQRAEHPKTHVTHHPVSDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6UZ1",
+  "release_date": "2020-10-28",
+  "split": "train",
+  "resolution": 3.14,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "LLFGYPVYV",
+  "peptide_seq_struct": "LLFGYPVYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6V2O",
+  "release_date": "2020-05-20",
+  "split": "train",
+  "resolution": 1.27,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*57",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "ASLNLPAVSW",
+  "peptide_seq_struct": "ASLNLPAVSW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRMAPRAPWIEQEGPEYWDGETRNMKASAQTYRENLRIALRYYNQSEAGSHIIQVMYGCDVGPDGRLLRGHDQSAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6V2P",
+  "release_date": "2020-05-20",
+  "split": "train",
+  "resolution": 1.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*57",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "ASLNLPAVSW",
+  "peptide_seq_struct": "ASLNLPAVSW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRMAPRAPWIEQEGPEYWDGETRNMKASAQTYRENLRIALRYYNQSEAGSHIIQVMYGCDVGPDGRLLRGHNQYAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGLCVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "6VQO",
+  "release_date": "2020-06-17",
+  "split": "train",
+  "resolution": 3.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "HMTEVVRHC",
+  "peptide_seq_struct": "HMTEVVRHC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEGGGLNDIFEAQKIEWHE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "6VR5",
+  "release_date": "2020-06-17",
+  "split": "train",
+  "resolution": 2.38,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "HMTEVVRHC",
+  "peptide_seq_struct": "HMTEVVRHC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEGGGLNDIFEAQKIEWHE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "6VRM",
+  "release_date": "2020-06-17",
+  "split": "train",
+  "resolution": 2.61,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "HMTEVVRHC",
+  "peptide_seq_struct": "HMTEVVRHC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEGGGLNDIFEAQKIEWHE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "6VRN",
+  "release_date": "2020-06-17",
+  "split": "train",
+  "resolution": 2.46,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "HMTEVVRHC",
+  "peptide_seq_struct": "HMTEVVRHC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEGGGLNDIFEAQKIEWHE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "6W51",
+  "release_date": "2021-03-17",
+  "split": "train",
+  "resolution": 3.53,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "HMTEVVRHC",
+  "peptide_seq_struct": "HMTEVVRHC",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEPGSGSGLNDIFEAQKIEWHE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "6ZKW",
+  "release_date": "2022-01-26",
+  "split": "validation",
+  "resolution": 2.26,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-E",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "RLPAKAPLL",
+  "peptide_seq_struct": "RLPAKAPLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSLKYFHTSVSRPGRGEPRFISVGYVDDTQFVRFDNDAASPRMVPRAPWMEQEGSEYWDRETRSARDTAQIFRVNLRTLRGYYNQSEAGSHTLQWMHGCELGPDGRFLRGYEQFAYDGKDYLTLNEDLRSWTAVDTAAQISEQKSNDASEAEHQRAYLEDTCVEWLHKYLEKGKETLLHLEPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQQDGEGHTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPVTLRWKP",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "6ZKZ",
+  "release_date": "2022-01-26",
+  "split": "validation",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-E",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "RLPAKAPLX",
+  "peptide_seq_struct": "RLPAKAPLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSLKYFHTSVSRPGRGEPRFISVGYVDDTQFVRFDNDAASPRMVPRAPWMEQEGSEYWDRETRSARDTAQIFRVNLRTLRGYYNQSEAGSHTLQWMHGCELGPDGRFLRGYEQCAYDGKDYLTLNEDLRSWTAVDTAAQISEQKSNDASEAEHQRAYLEDTCVEWLHKYLEKGKETLLHLEPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQQDGEGHTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPVTLRWKP",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7BBG",
+  "release_date": "2021-10-27",
+  "split": "validation",
+  "resolution": 2.64,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RMFPNAPYL",
+  "peptide_seq_struct": "RMFPNAPYL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEGGGGSGGGGSGSGLNDIFEAQKIEWHEHHHHHH",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7DZM",
+  "release_date": "2022-01-26",
+  "split": "validation",
+  "resolution": 2.25,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*81",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "TPQDLNTML",
+  "peptide_seq_struct": "TPQDLNTML",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GGSHSMRYFYTSVSRPGRGEPRFISVGYVDDTQFVRFDSDAASPREEPRAPWIEQEGPEYWDRNTQIYKAQAQTDRESLRNLRGYYNQSEAGSHTLQSMYGCDVGPDGRLLRGHNQYAYDGKDYIALNEDLRSWTAADTAAQISQRKLEAARVAEQLRAYLEGECVEWLRRYLENGKDKLERADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWTAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPS",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7EJL",
+  "release_date": "2022-01-26",
+  "split": "validation",
+  "resolution": 1.89,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "QYIKWPWYI",
+  "peptide_seq_struct": "QYIKWPWYI",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSSGSSGGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7F4W",
+  "release_date": "2021-08-25",
+  "split": "train",
+  "resolution": 2.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "NYNYLYRLF",
+  "peptide_seq_struct": "NYNYLYRLF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MNSVDGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPGSGLNDIFEAQKIEWHAAALEHHHHHH",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7JWI",
+  "release_date": "2021-07-07",
+  "split": "train",
+  "resolution": 3.02,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ASNENMETM",
+  "peptide_seq_struct": "ASNENMETM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGAMAPRTLLLLLAAALAPTQTRAGPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEPPPSTDSYMVIVAVLGVLGAMAIIGAVVAFVMKRRRNTGGKGGDYALAPGSQSSEMSLRDCKA",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7JWJ",
+  "release_date": "2021-07-07",
+  "split": "train",
+  "resolution": 3.251,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ASNENMETM",
+  "peptide_seq_struct": "ASNENMETM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGAMAPRTLLLLLAAALAPTQTRAGPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEPPPSTDSYMVIVAVLGVLGAMAIIGAVVAFVMKRRRNTGGKGGDYALAPGSQSSEMSLRDCKA",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7JYW",
+  "release_date": "2021-04-14",
+  "split": "train",
+  "resolution": 2.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "TYQWIIRNW",
+  "peptide_seq_struct": "TYQWIIRNW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7K80",
+  "release_date": "2020-12-09",
+  "split": "train",
+  "resolution": 2.4,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RYPLTFGW",
+  "peptide_seq_struct": "RYPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7K81",
+  "release_date": "2020-12-09",
+  "split": "train",
+  "resolution": 2.0,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RYPLTFGW",
+  "peptide_seq_struct": "RYPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7KGQ",
+  "release_date": "2021-01-20",
+  "split": "train",
+  "resolution": 1.34,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LLLDRLNQL",
+  "peptide_seq_struct": "LLLDRLNQL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWVAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7L1B",
+  "release_date": "2022-03-23",
+  "split": "validation",
+  "resolution": 2.04,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*03",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "AHHGGWTTK",
+  "peptide_seq_struct": "AHHGGWTTK",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDQETRNVKAQSQTDRVDLGTLRGYYNQSEAGSHTIQIMYGCDVGSDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAAHEAEQLRAYLDGTCVEWLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7L1C",
+  "release_date": "2022-03-23",
+  "split": "validation",
+  "resolution": 1.96,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*03",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "ALHGGWTTK",
+  "peptide_seq_struct": "ALHGGWTTK",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDQETRNVKAQSQTDRVDLGTLRGYYNQSEAGSHTIQIMYGCDVGSDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAAHEAEQLRAYLDGTCVEWLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7L1D",
+  "release_date": "2022-03-23",
+  "split": "validation",
+  "resolution": 3.11,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*03",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ALHGGWTTK",
+  "peptide_seq_struct": "ALHGGWTTK",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDQETRNVKAQSQTDRVDLGTLRGYYNQSEAGSHTIQIMYGCDVGSDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAAHEAEQLRAYLDGTCVEWLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7LG0",
+  "release_date": "2021-02-03",
+  "split": "train",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*07",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "SPRWYFYYL",
+  "peptide_seq_struct": "SPRWYFYYL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTSVSRPGRGEPRFISVGYVDDTQFVRFDSDAASPREEPRAPWIEQEGPEYWDRNTQIYKAQAQTDRESLRNLRGYYNQSEAGSHTLQSMYGCDVGPDGRLLRGHDQYAYDGKDYIALNEDLRSWTAADTAAQITQRKWEAAREAEQRRAYLEGECVEWLRRYLENGKDKLERADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7LGD",
+  "release_date": "2021-04-21",
+  "split": "train",
+  "resolution": 2.88,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*07",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "SPRWYFYYL",
+  "peptide_seq_struct": "SPRWYFYYL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTSVSRPGRGEPRFISVGYVDDTQFVRFDSDAASPREEPRAPWIEQEGPEYWDRNTQIYKAQAQTDRESLRNLRGYYNQSEAGSHTLQSMYGCDVGPDGRLLRGHDQYAYDGKDYIALNEDLRSWTAADTAAQITQRKWEAAREAEQRRAYLEGECVEWLRRYLENGKDKLERADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7MJA",
+  "release_date": "2021-08-18",
+  "split": "train",
+  "resolution": 1.69,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "QYNPIRTTF",
+  "peptide_seq_struct": "QYNPIRTTF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MASGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPSSQP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7MKB",
+  "release_date": "2021-05-26",
+  "split": "train",
+  "resolution": 1.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "YLQPRTFLL",
+  "peptide_seq_struct": "YLQPRTFLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "7N1A",
+  "release_date": "2021-07-28",
+  "split": "train",
+  "resolution": 2.065,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "YLQPRTFLL",
+  "peptide_seq_struct": "YLQPRTFLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "7N1B",
+  "release_date": "2021-07-28",
+  "split": "train",
+  "resolution": 2.81,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "RLQSLQTYV",
+  "peptide_seq_struct": "RLQSLQTYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7N1E",
+  "release_date": "2021-07-28",
+  "split": "train",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "RLQSLQTYV",
+  "peptide_seq_struct": "RLQSLQTYV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in test)"
+ },
+ {
+  "pdb_id": "7N1F",
+  "release_date": "2021-07-28",
+  "split": "train",
+  "resolution": 2.393,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "YLQPRTFLL",
+  "peptide_seq_struct": "YLQPRTFLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "3"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "7N2O",
+  "release_date": "2022-12-07",
+  "split": "validation",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*27",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "LRVMMLAPF",
+  "peptide_seq_struct": "LRVMMLAPF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "2"
+  ],
+  "peptide_entity_ids": [
+   "1"
+  ],
+  "mhc_seq": "GSHSMRYFHTSVSRPGRGEPRFITVGYVDDTLFVRFDSDAASPREEPRAPWIEQEGPEYWDRETQISKAKAQTDREDLRTLLRYYNQSEAGSHTLQNMYGCDVGPDGRLLRGYHQDAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGECVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7N2Q",
+  "release_date": "2022-12-07",
+  "split": "validation",
+  "resolution": 2.7,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*27",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "LRVMMLAPF",
+  "peptide_seq_struct": "LRVMMLAPF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "3"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "GSHSMRYFHTSVSRPGRGEPRFITVGYVDDTLFVRFDSDAASPREEPRAPWIEQEGPEYWDRETQISKAKAQTDREDLRTLLRYYNQSEAGSHTLQNMYGCDVGPDGRLLRGYHQDAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGECVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7N6D",
+  "release_date": "2021-07-28",
+  "split": "train",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "YLQPRTFLL",
+  "peptide_seq_struct": "YLQPRTFLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "7N6E",
+  "release_date": "2021-07-28",
+  "split": "train",
+  "resolution": 3.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "YLQPRTFLL",
+  "peptide_seq_struct": "YLQPRTFLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "7P0T",
+  "release_date": "2022-03-23",
+  "split": "validation",
+  "resolution": 2.605,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "H2-Db",
+  "mhc_species": "Mouse",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "KAVYNFATM",
+  "peptide_seq_struct": "KAVYNFATM",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GPHSMRYFETAVSRPGLEEPRYISVGYVDNKEFVRFDSDAENPRYEPRAPWMEQEGPEYWERETQKAKGQEQWFRVSLRNLLGYYNQSAGGSHTLQQMSGCDLGSDWRLLRGYLQFAYEGRDYIALNEDLKTWTAADMAAQITRRKWEQSGAAEHYKAYLEGECVEWLHRYLKNGNATLLRTDSPKAHVTHHPRSKGEVTLRCWALGFYPADITLTWQLNGEELTQDMELVETRPAGDGTFQKWASVVVPLGKEQNYTCRVYHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7P3D",
+  "release_date": "2021-07-28",
+  "split": "train",
+  "resolution": 1.67,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "YLQPRTFLL",
+  "peptide_seq_struct": "YLQPRTFLL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_train (pair kept in validation)"
+ },
+ {
+  "pdb_id": "7RRG",
+  "release_date": "2022-03-23",
+  "split": "validation",
+  "resolution": 2.12,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*03",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "ALHGGWTTK",
+  "peptide_seq_struct": "ALHGGWTTK",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDQETRNVKAQSQTDRVDLGTLRGYYNQSEAGSHTIQIMYGCDVGSDGRFLRGYRQDAYDGKDYIALNEDLRSWTAADMAAQITKRKWEAAHEAEQLRAYLDGTCVEWLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7TR4",
+  "release_date": "2022-11-23",
+  "split": "validation",
+  "resolution": 2.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "ELAGIGILTV",
+  "peptide_seq_struct": "ELAGIGILTV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7TUC",
+  "release_date": "2022-09-07",
+  "split": "validation",
+  "resolution": 1.25,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*44",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "EEFGRAFSF",
+  "peptide_seq_struct": "EEFGRAFSF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFYTAMSRPGRGEPRFITVGYVDDTLFVRFDSDATSPRKEPRAPWIEQEGPEYWDRETQISKTNTQCYRENLRTALRYYNQSEAGSHIIQRMYGCDVGPDGRLLRGYDQYAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQDRAYLEGLCVESLRRYLENGKETLQRADPPKTHVTHHPISDHEVTLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "7WJ2",
+  "release_date": "2022-06-22",
+  "split": "validation",
+  "resolution": 1.28,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-C*14",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "LYNTVATL",
+  "peptide_seq_struct": "LYNTVATL",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "AGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASPRGEPRAPWVEQEGPEYWDRETQKYKRQAQTDRVSLRNLRGYYNQSEAGSHTLQWMFGCDLGPDGRLLRGYDQSAYDGKDYIALNEDLRSWTAADTAAQITQRKWEAAREAEQRRAYLEGTCVEWLRRYLENGKETLQRAEHPKTHVTHHPVSDHEATLRCWALGFYPAEITLTWQWDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPEPLTLRWEP",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "8CX4",
+  "release_date": "2022-12-07",
+  "split": "validation",
+  "resolution": 2.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-B*27",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "LRVMMLAPF",
+  "peptide_seq_struct": "LRVMMLAPF",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "MGSHSMRYFHTSVSRPGRGEPRFITVGYVDDTLFVRFDSDAASPREEPRAPWIEQEGPEYWDRETQISKAKAQTDREDLRTLLRYYNQSEAGSHTLQNMYGCDVGPDGRLLRGYHQDAYDGKDYIALNEDLSSWTAADTAAQITQRKWEAARVAEQLRAYLEGECVEWLRRYLENGKETLQRADPPKTHVTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDRTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRWEPSS",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "8EB2",
+  "release_date": "2022-11-30",
+  "split": "validation",
+  "resolution": 2.9,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*02",
+  "mhc_species": "Human",
+  "tcr_bound": false,
+  "peptide_seq_tcr3d": "SLLMWITQV",
+  "peptide_seq_struct": "SLLMWITQV",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "1"
+  ],
+  "peptide_entity_ids": [
+   "3"
+  ],
+  "mhc_seq": "GSHSMRYFFTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDGETRKVKAHSQTHRVDLGTLRGYYNQSEAGSHTVQRMYGCDVGSDWRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQTTKHKWEAAHVAEQLRAYLEGTCVEWLRRYLENGKETLQRTDAPKTHMTHHAVSDHEATLRCWALSFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGQEQRYTCHVQHEGLPKPLTLRWE",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "8GVB",
+  "release_date": "2022-10-19",
+  "split": "validation",
+  "resolution": 3.2,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "RYPLTFGW",
+  "peptide_seq_struct": "RYPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "3"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "MGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ },
+ {
+  "pdb_id": "8GVI",
+  "release_date": "2022-10-19",
+  "split": "validation",
+  "resolution": 3.3,
+  "method": "X-RAY DIFFRACTION",
+  "mhc_allele": "HLA-A*24",
+  "mhc_species": "Human",
+  "tcr_bound": true,
+  "peptide_seq_tcr3d": "RYPLTFGW",
+  "peptide_seq_struct": "RYPLTFGW",
+  "n_mhc_entities": 1,
+  "n_peptide_entities": 1,
+  "mhc_entity_ids": [
+   "3"
+  ],
+  "peptide_entity_ids": [
+   "5"
+  ],
+  "mhc_seq": "MGSHSMRYFSTSVSRPGRGEPRFIAVGYVDDTQFVRFDSDAASQRMEPRAPWIEQEGPEYWDEETGKVKAHSQTDRENLRIALRYYNQSEAGSHTLQMMFGCDVGSDGRFLRGYHQYAYDGKDYIALKEDLRSWTAADMAAQITKRKWEAAHVAEQQRAYLEGTCVDGLRRYLENGKETLQRTDPPKTHMTHHPISDHEATLRCWALGFYPAEITLTWQRDGEDQTQDTELVETRPAGDGTFQKWAAVVVPSGEEQRYTCHVQHEGLPKPLTLRW",
+  "flags": [],
+  "leakage_action": "dropped_from_validation (pair kept in test)"
+ }
+]

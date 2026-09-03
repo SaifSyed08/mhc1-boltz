@@ -1,0 +1,6639 @@
+{
+ "boundaries": {
+  "train_end": "2021-09-30",
+  "validation_end": "2023-01-13"
+ },
+ "n_tcr3d_rows": 1515,
+ "n_rcsb_resolved": 1514,
+ "n_candidates": 1443,
+ "dropped_at_annotation": [
+  {
+   "pdb_id": "1C16",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "1HLA",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "1NEZ",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "1R3H",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "1YPZ",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "1ZS8",
+   "reason": "no_mhc_i_heavy_chain_identified"
+  },
+  {
+   "pdb_id": "2HLA",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "2QRS",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "2QRT",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "2QRI",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "3HLA",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "3NWM",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "3P77",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "3P73",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "4LCY",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "4NHU",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "5OQF",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "5OQG",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "5OQH",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "5OQI",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "5OPI",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "5WER",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "6APN",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "5YMW",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6D7G",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "6E1I",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "6ENY",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "6GL1",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6GB6",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "6LAH",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6LAM",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6LT6",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6LB2",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6MP0",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "6MP1",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "6TDP",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6TDQ",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "6TDS",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "6TDR",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "6TDO",
+   "reason": "no_separate_peptide_chain_in_structure"
+  },
+  {
+   "pdb_id": "7QNG",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "7QPD",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "7SQP",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7SR0",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7SR3",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7SR4",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7SR5",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7SRK",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7SSH",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7ST3",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7STG",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "7TUE",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "8ESA",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "8ESB",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "8FRT",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "8TNJ",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "9C3E",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "9C6V",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "9C6W",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "9C6X",
+   "reason": "single_chain_fusion_construct"
+  },
+  {
+   "pdb_id": "9EB2",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9EB5",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9K2T",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9K2U",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9K2S",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9EB6",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9EB4",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9EB3",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9DY8",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9RCV",
+   "reason": "tcr3d_reports_no_peptide"
+  },
+  {
+   "pdb_id": "9Z4R",
+   "reason": "no_mhc_i_heavy_chain_identified"
+  }
+ ],
+ "date_disagreements": [
+  {
+   "pdb_id": "1A1M",
+   "rcsb": "1998-04-08",
+   "tcr3d": "1998-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1A1N",
+   "rcsb": "1998-04-08",
+   "tcr3d": "1998-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1A1O",
+   "rcsb": "1998-04-08",
+   "tcr3d": "1998-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1A9B",
+   "rcsb": "1998-10-21",
+   "tcr3d": "1998-10-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1A9E",
+   "rcsb": "1998-10-21",
+   "tcr3d": "1998-10-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1AGB",
+   "rcsb": "1997-06-16",
+   "tcr3d": "1997-06-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1AGC",
+   "rcsb": "1997-06-16",
+   "tcr3d": "1997-06-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1AGD",
+   "rcsb": "1997-06-16",
+   "tcr3d": "1997-06-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1AGE",
+   "rcsb": "1997-06-16",
+   "tcr3d": "1997-06-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1AGF",
+   "rcsb": "1997-06-16",
+   "tcr3d": "1997-06-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1AKJ",
+   "rcsb": "1997-09-17",
+   "tcr3d": "1997-09-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1B0G",
+   "rcsb": "1998-11-18",
+   "tcr3d": "1998-11-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1B0R",
+   "rcsb": "1999-11-25",
+   "tcr3d": "1999-11-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1BII",
+   "rcsb": "1998-10-14",
+   "tcr3d": "1998-10-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1BQH",
+   "rcsb": "1998-08-19",
+   "tcr3d": "1998-08-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1BZ9",
+   "rcsb": "1999-05-24",
+   "tcr3d": "1999-05-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1CE6",
+   "rcsb": "1999-03-26",
+   "tcr3d": "1999-03-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1CG9",
+   "rcsb": "2003-11-18",
+   "tcr3d": "2003-11-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1DDH",
+   "rcsb": "1999-01-13",
+   "tcr3d": "1999-01-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1DUY",
+   "rcsb": "2000-02-04",
+   "tcr3d": "2000-02-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1DUZ",
+   "rcsb": "2000-02-04",
+   "tcr3d": "2000-02-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1E27",
+   "rcsb": "2000-09-12",
+   "tcr3d": "2000-09-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1E28",
+   "rcsb": "2000-09-12",
+   "tcr3d": "2000-09-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ED3",
+   "rcsb": "2001-02-28",
+   "tcr3d": "2001-02-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1EEY",
+   "rcsb": "2003-06-10",
+   "tcr3d": "2003-06-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1EEZ",
+   "rcsb": "2003-06-10",
+   "tcr3d": "2003-06-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1EFX",
+   "rcsb": "2000-06-14",
+   "tcr3d": "2000-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FFN",
+   "rcsb": "2002-12-11",
+   "tcr3d": "2002-12-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FFO",
+   "rcsb": "2002-12-11",
+   "tcr3d": "2002-12-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FFP",
+   "rcsb": "2002-12-11",
+   "tcr3d": "2002-12-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FG2",
+   "rcsb": "2000-10-04",
+   "tcr3d": "2000-10-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FZJ",
+   "rcsb": "2001-03-28",
+   "tcr3d": "2001-03-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FZK",
+   "rcsb": "2001-03-28",
+   "tcr3d": "2001-03-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FZM",
+   "rcsb": "2001-03-28",
+   "tcr3d": "2001-03-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1FZO",
+   "rcsb": "2001-03-28",
+   "tcr3d": "2001-03-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1G7P",
+   "rcsb": "2002-07-17",
+   "tcr3d": "2002-07-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1G7Q",
+   "rcsb": "2002-07-17",
+   "tcr3d": "2002-07-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HHG",
+   "rcsb": "1993-10-31",
+   "tcr3d": "1993-10-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HHH",
+   "rcsb": "1993-10-31",
+   "tcr3d": "1993-10-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HHI",
+   "rcsb": "1993-10-31",
+   "tcr3d": "1993-10-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HHJ",
+   "rcsb": "1993-10-31",
+   "tcr3d": "1993-10-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HHK",
+   "rcsb": "1993-10-31",
+   "tcr3d": "1993-10-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HOC",
+   "rcsb": "1994-04-30",
+   "tcr3d": "1994-04-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HSA",
+   "rcsb": "1992-10-15",
+   "tcr3d": "1992-10-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1HSB",
+   "rcsb": "1993-10-31",
+   "tcr3d": "1993-10-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1I1F",
+   "rcsb": "2000-01-12",
+   "tcr3d": "2000-01-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1I1Y",
+   "rcsb": "2000-01-21",
+   "tcr3d": "2000-01-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1I4F",
+   "rcsb": "2001-07-25",
+   "tcr3d": "2001-07-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1I7R",
+   "rcsb": "2001-10-24",
+   "tcr3d": "2001-10-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1I7T",
+   "rcsb": "2001-10-24",
+   "tcr3d": "2001-10-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1I7U",
+   "rcsb": "2001-10-24",
+   "tcr3d": "2001-10-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1IM3",
+   "rcsb": "2001-06-06",
+   "tcr3d": "2001-06-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1IM9",
+   "rcsb": "2001-05-30",
+   "tcr3d": "2001-05-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1INQ",
+   "rcsb": "2002-03-20",
+   "tcr3d": "2002-03-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1JF1",
+   "rcsb": "2001-09-14",
+   "tcr3d": "2001-09-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1JGD",
+   "rcsb": "2003-07-01",
+   "tcr3d": "2003-06-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1JGE",
+   "rcsb": "2002-10-30",
+   "tcr3d": "2002-10-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1JHT",
+   "rcsb": "2001-09-14",
+   "tcr3d": "2001-09-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1JPF",
+   "rcsb": "2001-10-24",
+   "tcr3d": "2001-10-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1JPG",
+   "rcsb": "2001-10-24",
+   "tcr3d": "2001-10-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1JUF",
+   "rcsb": "2002-03-20",
+   "tcr3d": "2002-03-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1K5N",
+   "rcsb": "2002-10-30",
+   "tcr3d": "2002-10-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1K8D",
+   "rcsb": "2001-12-19",
+   "tcr3d": "2001-12-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KBG",
+   "rcsb": "1999-02-09",
+   "tcr3d": "1999-02-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KJ3",
+   "rcsb": "2002-03-27",
+   "tcr3d": "2002-03-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KJM",
+   "rcsb": "2002-12-18",
+   "tcr3d": "2002-12-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KJV",
+   "rcsb": "2002-12-18",
+   "tcr3d": "2002-12-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KPR",
+   "rcsb": "2003-02-25",
+   "tcr3d": "2003-02-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KPU",
+   "rcsb": "2003-06-10",
+   "tcr3d": "2003-06-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KPV",
+   "rcsb": "2003-06-10",
+   "tcr3d": "2003-06-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1KTL",
+   "rcsb": "2003-02-25",
+   "tcr3d": "2003-02-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1LD9",
+   "rcsb": "1998-05-06",
+   "tcr3d": "1998-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1LDP",
+   "rcsb": "1998-06-17",
+   "tcr3d": "1998-06-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1LEG",
+   "rcsb": "2002-06-19",
+   "tcr3d": "2002-06-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1LEK",
+   "rcsb": "2002-06-26",
+   "tcr3d": "2002-06-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1LK2",
+   "rcsb": "2003-11-11",
+   "tcr3d": "2003-11-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1M05",
+   "rcsb": "2003-09-02",
+   "tcr3d": "2003-09-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1M6O",
+   "rcsb": "2003-09-02",
+   "tcr3d": "2003-09-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1MHC",
+   "rcsb": "1996-01-29",
+   "tcr3d": "1996-01-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1MHE",
+   "rcsb": "1999-03-23",
+   "tcr3d": "1999-03-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1N2R",
+   "rcsb": "2004-03-16",
+   "tcr3d": "2004-03-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1N3N",
+   "rcsb": "2003-05-27",
+   "tcr3d": "2003-05-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1N59",
+   "rcsb": "2003-01-07",
+   "tcr3d": "2003-01-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1N5A",
+   "rcsb": "2003-01-07",
+   "tcr3d": "2003-01-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1NAN",
+   "rcsb": "2003-03-11",
+   "tcr3d": "2003-03-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1OF2",
+   "rcsb": "2004-01-29",
+   "tcr3d": "2004-01-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1OGT",
+   "rcsb": "2004-01-29",
+   "tcr3d": "2004-01-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1OSZ",
+   "rcsb": "1999-01-13",
+   "tcr3d": "1999-01-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1P1Z",
+   "rcsb": "2003-11-11",
+   "tcr3d": "2003-11-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1P4L",
+   "rcsb": "2003-11-11",
+   "tcr3d": "2003-11-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1P7Q",
+   "rcsb": "2003-10-14",
+   "tcr3d": "2003-10-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1Q94",
+   "rcsb": "2004-06-01",
+   "tcr3d": "2004-05-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1QEW",
+   "rcsb": "2003-11-18",
+   "tcr3d": "2003-11-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1QLF",
+   "rcsb": "1999-09-01",
+   "tcr3d": "1999-08-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1QO3",
+   "rcsb": "2000-01-02",
+   "tcr3d": "2000-01-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1QQD",
+   "rcsb": "1999-12-08",
+   "tcr3d": "1999-12-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1QR1",
+   "rcsb": "2000-01-01",
+   "tcr3d": "1999-12-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1QVO",
+   "rcsb": "2004-06-01",
+   "tcr3d": "2004-05-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1RJY",
+   "rcsb": "2004-12-14",
+   "tcr3d": "2004-12-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1RJZ",
+   "rcsb": "2004-12-14",
+   "tcr3d": "2004-12-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1RK0",
+   "rcsb": "2004-12-14",
+   "tcr3d": "2004-12-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1RK1",
+   "rcsb": "2004-12-14",
+   "tcr3d": "2004-12-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7Q",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7R",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7S",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7T",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7U",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7V",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7W",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S7X",
+   "rcsb": "2004-05-04",
+   "tcr3d": "2004-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S8D",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S9W",
+   "rcsb": "2004-09-28",
+   "tcr3d": "2004-09-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S9X",
+   "rcsb": "2004-09-28",
+   "tcr3d": "2004-09-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1S9Y",
+   "rcsb": "2004-09-28",
+   "tcr3d": "2004-09-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1SYS",
+   "rcsb": "2004-10-19",
+   "tcr3d": "2004-10-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1SYV",
+   "rcsb": "2004-10-19",
+   "tcr3d": "2004-10-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T0M",
+   "rcsb": "2004-11-23",
+   "tcr3d": "2004-11-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T0N",
+   "rcsb": "2004-11-23",
+   "tcr3d": "2004-11-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T1W",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T1X",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T1Y",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T1Z",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T20",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T21",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1T22",
+   "rcsb": "2005-09-06",
+   "tcr3d": "2005-09-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1TMC",
+   "rcsb": "1995-03-31",
+   "tcr3d": "1995-03-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1TVB",
+   "rcsb": "2005-04-19",
+   "tcr3d": "2005-04-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1TVH",
+   "rcsb": "2005-04-19",
+   "tcr3d": "2005-04-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1UXS",
+   "rcsb": "2004-11-09",
+   "tcr3d": "2004-11-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1UXW",
+   "rcsb": "2004-11-09",
+   "tcr3d": "2004-11-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1VAC",
+   "rcsb": "1996-06-20",
+   "tcr3d": "1996-06-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1VAD",
+   "rcsb": "1996-06-20",
+   "tcr3d": "1996-06-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1VGK",
+   "rcsb": "2005-06-28",
+   "tcr3d": "2005-06-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1W0V",
+   "rcsb": "2005-03-07",
+   "tcr3d": "2005-03-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1W0W",
+   "rcsb": "2005-03-07",
+   "tcr3d": "2005-03-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1W72",
+   "rcsb": "2004-11-09",
+   "tcr3d": "2004-11-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1WBX",
+   "rcsb": "2005-01-19",
+   "tcr3d": "2005-01-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1WBY",
+   "rcsb": "2005-01-19",
+   "tcr3d": "2005-01-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1WBZ",
+   "rcsb": "2005-01-19",
+   "tcr3d": "2005-01-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1X7Q",
+   "rcsb": "2005-08-02",
+   "tcr3d": "2005-08-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1XH3",
+   "rcsb": "2004-11-23",
+   "tcr3d": "2004-11-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1XR8",
+   "rcsb": "2005-04-14",
+   "tcr3d": "2005-04-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1XR9",
+   "rcsb": "2005-04-14",
+   "tcr3d": "2005-04-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1YDP",
+   "rcsb": "2005-03-08",
+   "tcr3d": "2005-03-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1YN6",
+   "rcsb": "2005-06-28",
+   "tcr3d": "2005-06-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1YN7",
+   "rcsb": "2005-06-28",
+   "tcr3d": "2005-06-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ZHB",
+   "rcsb": "2005-06-14",
+   "tcr3d": "2005-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ZHK",
+   "rcsb": "2005-05-17",
+   "tcr3d": "2005-05-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ZHL",
+   "rcsb": "2005-05-17",
+   "tcr3d": "2005-05-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ZSD",
+   "rcsb": "2005-06-07",
+   "tcr3d": "2005-06-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ZT1",
+   "rcsb": "2005-10-18",
+   "tcr3d": "2005-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ZT7",
+   "rcsb": "2005-10-18",
+   "tcr3d": "2005-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "1ZVS",
+   "rcsb": "2006-06-13",
+   "tcr3d": "2006-06-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2A83",
+   "rcsb": "2005-12-27",
+   "tcr3d": "2005-12-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2AV1",
+   "rcsb": "2005-10-18",
+   "tcr3d": "2005-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2AV7",
+   "rcsb": "2005-10-18",
+   "tcr3d": "2005-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2AXF",
+   "rcsb": "2005-11-29",
+   "tcr3d": "2005-11-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2AXG",
+   "rcsb": "2005-11-29",
+   "tcr3d": "2005-11-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2BCK",
+   "rcsb": "2006-01-10",
+   "tcr3d": "2006-01-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2BSR",
+   "rcsb": "2005-05-24",
+   "tcr3d": "2005-05-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2BSS",
+   "rcsb": "2005-05-24",
+   "tcr3d": "2005-05-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2BST",
+   "rcsb": "2005-05-24",
+   "tcr3d": "2005-05-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2BVO",
+   "rcsb": "2005-09-13",
+   "tcr3d": "2005-09-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2BVP",
+   "rcsb": "2005-09-07",
+   "tcr3d": "2005-09-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2BVQ",
+   "rcsb": "2005-09-07",
+   "tcr3d": "2005-09-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2C7U",
+   "rcsb": "2006-03-08",
+   "tcr3d": "2006-03-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2CII",
+   "rcsb": "2006-03-29",
+   "tcr3d": "2006-03-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2CIK",
+   "rcsb": "2006-10-25",
+   "tcr3d": "2006-10-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2CLR",
+   "rcsb": "1995-03-31",
+   "tcr3d": "1995-03-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2CLV",
+   "rcsb": "2006-06-14",
+   "tcr3d": "2006-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2CLZ",
+   "rcsb": "2006-06-14",
+   "tcr3d": "2006-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2D31",
+   "rcsb": "2006-03-14",
+   "tcr3d": "2006-03-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2DYP",
+   "rcsb": "2006-11-07",
+   "tcr3d": "2006-11-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2F74",
+   "rcsb": "2006-02-14",
+   "tcr3d": "2006-02-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2FO4",
+   "rcsb": "2006-11-14",
+   "tcr3d": "2006-11-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2FWO",
+   "rcsb": "2006-02-21",
+   "tcr3d": "2006-02-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2FYY",
+   "rcsb": "2006-12-26",
+   "tcr3d": "2006-12-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2FZ3",
+   "rcsb": "2006-12-26",
+   "tcr3d": "2006-12-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2GIT",
+   "rcsb": "2006-10-03",
+   "tcr3d": "2006-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2GT9",
+   "rcsb": "2007-06-12",
+   "tcr3d": "2007-06-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2GTW",
+   "rcsb": "2007-06-12",
+   "tcr3d": "2007-06-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2GTZ",
+   "rcsb": "2007-06-12",
+   "tcr3d": "2007-06-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2GUO",
+   "rcsb": "2007-06-12",
+   "tcr3d": "2007-06-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2H6P",
+   "rcsb": "2006-09-19",
+   "tcr3d": "2006-09-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2HJK",
+   "rcsb": "2006-10-03",
+   "tcr3d": "2006-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2HJL",
+   "rcsb": "2006-10-03",
+   "tcr3d": "2006-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2HN7",
+   "rcsb": "2006-11-28",
+   "tcr3d": "2006-11-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2MHA",
+   "rcsb": "1993-10-31",
+   "tcr3d": "1993-10-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2NW3",
+   "rcsb": "2007-02-27",
+   "tcr3d": "2007-02-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2RFX",
+   "rcsb": "2008-07-08",
+   "tcr3d": "2008-07-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2V2W",
+   "rcsb": "2007-11-06",
+   "tcr3d": "2007-11-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2V2X",
+   "rcsb": "2007-11-06",
+   "tcr3d": "2007-11-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2VAA",
+   "rcsb": "1996-06-20",
+   "tcr3d": "1996-06-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2VAB",
+   "rcsb": "1996-06-20",
+   "tcr3d": "1996-06-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2VE6",
+   "rcsb": "2008-01-22",
+   "tcr3d": "2008-01-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2VLL",
+   "rcsb": "2008-01-22",
+   "tcr3d": "2008-01-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4N",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4O",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4P",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4Q",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4R",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4S",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4T",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X4U",
+   "rcsb": "2010-03-02",
+   "tcr3d": "2010-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2X70",
+   "rcsb": "2010-12-08",
+   "tcr3d": "2010-12-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2XFX",
+   "rcsb": "2010-10-27",
+   "tcr3d": "2010-10-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2XPG",
+   "rcsb": "2011-04-27",
+   "tcr3d": "2011-04-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2YEZ",
+   "rcsb": "2012-04-11",
+   "tcr3d": "2012-04-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2YPK",
+   "rcsb": "2012-11-28",
+   "tcr3d": "2012-11-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2ZOK",
+   "rcsb": "2008-06-10",
+   "tcr3d": "2008-06-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2ZOL",
+   "rcsb": "2008-06-10",
+   "tcr3d": "2008-06-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2ZSV",
+   "rcsb": "2008-11-04",
+   "tcr3d": "2008-11-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "2ZSW",
+   "rcsb": "2008-11-04",
+   "tcr3d": "2008-11-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3AM8",
+   "rcsb": "2011-08-24",
+   "tcr3d": "2011-08-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3B3I",
+   "rcsb": "2008-07-22",
+   "tcr3d": "2008-07-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3B6S",
+   "rcsb": "2008-07-22",
+   "tcr3d": "2008-07-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BEV",
+   "rcsb": "2008-01-01",
+   "tcr3d": "2007-12-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BEW",
+   "rcsb": "2008-01-01",
+   "tcr3d": "2007-12-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BGM",
+   "rcsb": "2008-10-21",
+   "tcr3d": "2008-10-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BH8",
+   "rcsb": "2008-10-21",
+   "tcr3d": "2008-10-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BH9",
+   "rcsb": "2008-10-21",
+   "tcr3d": "2008-10-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BHB",
+   "rcsb": "2008-10-21",
+   "tcr3d": "2008-10-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BO8",
+   "rcsb": "2008-12-23",
+   "tcr3d": "2008-12-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BP4",
+   "rcsb": "2008-12-23",
+   "tcr3d": "2008-12-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BP7",
+   "rcsb": "2008-12-23",
+   "tcr3d": "2008-12-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BUY",
+   "rcsb": "2008-03-25",
+   "tcr3d": "2008-03-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BVN",
+   "rcsb": "2009-02-03",
+   "tcr3d": "2009-02-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BW9",
+   "rcsb": "2008-04-22",
+   "tcr3d": "2008-04-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BWA",
+   "rcsb": "2008-04-22",
+   "tcr3d": "2008-04-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BXN",
+   "rcsb": "2009-02-03",
+   "tcr3d": "2009-02-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BZE",
+   "rcsb": "2008-04-29",
+   "tcr3d": "2008-04-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3BZF",
+   "rcsb": "2008-04-29",
+   "tcr3d": "2008-04-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3C8K",
+   "rcsb": "2008-04-15",
+   "tcr3d": "2008-04-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3C9N",
+   "rcsb": "2008-02-26",
+   "tcr3d": "2008-02-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CC5",
+   "rcsb": "2009-03-03",
+   "tcr3d": "2009-03-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CCH",
+   "rcsb": "2009-03-10",
+   "tcr3d": "2009-03-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CDG",
+   "rcsb": "2008-04-22",
+   "tcr3d": "2008-04-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CH1",
+   "rcsb": "2009-03-31",
+   "tcr3d": "2009-03-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CII",
+   "rcsb": "2008-05-13",
+   "tcr3d": "2008-05-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CPL",
+   "rcsb": "2008-11-18",
+   "tcr3d": "2008-11-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CVH",
+   "rcsb": "2008-09-23",
+   "tcr3d": "2008-09-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3CZF",
+   "rcsb": "2009-04-07",
+   "tcr3d": "2009-04-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3D18",
+   "rcsb": "2009-05-05",
+   "tcr3d": "2009-05-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3D25",
+   "rcsb": "2009-02-10",
+   "tcr3d": "2009-02-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3DMM",
+   "rcsb": "2009-07-14",
+   "tcr3d": "2009-07-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3DTX",
+   "rcsb": "2009-05-05",
+   "tcr3d": "2009-05-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3DX6",
+   "rcsb": "2009-01-27",
+   "tcr3d": "2009-01-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3DX7",
+   "rcsb": "2009-01-27",
+   "tcr3d": "2009-01-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3DX8",
+   "rcsb": "2009-01-27",
+   "tcr3d": "2009-01-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3E6F",
+   "rcsb": "2009-08-18",
+   "tcr3d": "2009-08-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3E6H",
+   "rcsb": "2009-08-18",
+   "tcr3d": "2009-08-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3ECB",
+   "rcsb": "2009-07-14",
+   "tcr3d": "2009-07-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3ERY",
+   "rcsb": "2008-11-25",
+   "tcr3d": "2008-11-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FOL",
+   "rcsb": "2010-01-12",
+   "tcr3d": "2010-01-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FOM",
+   "rcsb": "2010-01-12",
+   "tcr3d": "2010-01-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FON",
+   "rcsb": "2010-01-12",
+   "tcr3d": "2010-01-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FQN",
+   "rcsb": "2009-03-03",
+   "tcr3d": "2009-03-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FQR",
+   "rcsb": "2009-03-03",
+   "tcr3d": "2009-03-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FQT",
+   "rcsb": "2009-03-03",
+   "tcr3d": "2009-03-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FQU",
+   "rcsb": "2009-03-03",
+   "tcr3d": "2009-03-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FQW",
+   "rcsb": "2009-03-03",
+   "tcr3d": "2009-03-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FQX",
+   "rcsb": "2009-03-03",
+   "tcr3d": "2009-03-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FT2",
+   "rcsb": "2009-04-28",
+   "tcr3d": "2009-04-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FT3",
+   "rcsb": "2009-04-28",
+   "tcr3d": "2009-04-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FT4",
+   "rcsb": "2009-04-28",
+   "tcr3d": "2009-04-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3FTG",
+   "rcsb": "2009-12-29",
+   "tcr3d": "2009-12-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GIV",
+   "rcsb": "2009-06-30",
+   "tcr3d": "2009-06-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GJF",
+   "rcsb": "2009-04-28",
+   "tcr3d": "2009-04-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GSO",
+   "rcsb": "2009-08-04",
+   "tcr3d": "2009-08-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GSQ",
+   "rcsb": "2009-08-04",
+   "tcr3d": "2009-08-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GSR",
+   "rcsb": "2009-08-04",
+   "tcr3d": "2009-08-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GSU",
+   "rcsb": "2009-08-04",
+   "tcr3d": "2009-08-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GSV",
+   "rcsb": "2009-08-04",
+   "tcr3d": "2009-08-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GSW",
+   "rcsb": "2009-08-04",
+   "tcr3d": "2009-08-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3GSX",
+   "rcsb": "2009-08-04",
+   "tcr3d": "2009-08-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3H7B",
+   "rcsb": "2010-01-12",
+   "tcr3d": "2010-01-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3H9H",
+   "rcsb": "2010-01-12",
+   "tcr3d": "2010-01-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3HAE",
+   "rcsb": "2009-05-19",
+   "tcr3d": "2009-05-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3HCV",
+   "rcsb": "2009-06-09",
+   "tcr3d": "2009-06-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3HPJ",
+   "rcsb": "2010-06-23",
+   "tcr3d": "2010-06-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3I6G",
+   "rcsb": "2010-06-16",
+   "tcr3d": "2010-06-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3I6K",
+   "rcsb": "2010-06-16",
+   "tcr3d": "2010-06-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3I6L",
+   "rcsb": "2010-07-14",
+   "tcr3d": "2010-07-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3IXA",
+   "rcsb": "2010-01-12",
+   "tcr3d": "2010-01-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3JTS",
+   "rcsb": "2010-09-15",
+   "tcr3d": "2010-09-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3JTT",
+   "rcsb": "2010-09-15",
+   "tcr3d": "2010-09-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KLA",
+   "rcsb": "2010-02-16",
+   "tcr3d": "2010-02-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KPL",
+   "rcsb": "2009-12-22",
+   "tcr3d": "2009-12-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KPM",
+   "rcsb": "2009-12-22",
+   "tcr3d": "2009-12-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KPN",
+   "rcsb": "2009-12-22",
+   "tcr3d": "2009-12-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KPO",
+   "rcsb": "2009-12-22",
+   "tcr3d": "2009-12-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KPP",
+   "rcsb": "2009-12-22",
+   "tcr3d": "2009-12-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KPQ",
+   "rcsb": "2009-12-22",
+   "tcr3d": "2009-12-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KWW",
+   "rcsb": "2010-06-09",
+   "tcr3d": "2010-06-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KYN",
+   "rcsb": "2010-02-23",
+   "tcr3d": "2010-02-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3KYO",
+   "rcsb": "2010-02-23",
+   "tcr3d": "2010-02-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3L3D",
+   "rcsb": "2010-03-16",
+   "tcr3d": "2010-03-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3L3G",
+   "rcsb": "2010-03-16",
+   "tcr3d": "2010-03-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3L3H",
+   "rcsb": "2010-03-16",
+   "tcr3d": "2010-03-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3L3I",
+   "rcsb": "2010-03-16",
+   "tcr3d": "2010-03-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3L3J",
+   "rcsb": "2010-03-16",
+   "tcr3d": "2010-03-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3L3K",
+   "rcsb": "2010-03-16",
+   "tcr3d": "2010-03-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LKN",
+   "rcsb": "2010-07-07",
+   "tcr3d": "2010-07-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LKO",
+   "rcsb": "2010-07-07",
+   "tcr3d": "2010-07-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LKP",
+   "rcsb": "2010-07-07",
+   "tcr3d": "2010-07-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LKQ",
+   "rcsb": "2010-07-07",
+   "tcr3d": "2010-07-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LKR",
+   "rcsb": "2010-07-07",
+   "tcr3d": "2010-07-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LKS",
+   "rcsb": "2010-07-07",
+   "tcr3d": "2010-07-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LN4",
+   "rcsb": "2010-10-20",
+   "tcr3d": "2010-10-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LN5",
+   "rcsb": "2010-10-20",
+   "tcr3d": "2010-10-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3LV3",
+   "rcsb": "2010-11-24",
+   "tcr3d": "2010-11-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MGO",
+   "rcsb": "2010-05-19",
+   "tcr3d": "2010-05-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MGT",
+   "rcsb": "2010-05-19",
+   "tcr3d": "2010-05-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MR9",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRB",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRC",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRD",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRE",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRF",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRG",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRH",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRI",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRJ",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRK",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRL",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRM",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRN",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRO",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRP",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRQ",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MRR",
+   "rcsb": "2011-05-25",
+   "tcr3d": "2011-05-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3MYJ",
+   "rcsb": "2010-08-18",
+   "tcr3d": "2010-08-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3NFN",
+   "rcsb": "2011-07-13",
+   "tcr3d": "2011-07-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3O3A",
+   "rcsb": "2010-12-08",
+   "tcr3d": "2010-12-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3O3B",
+   "rcsb": "2010-12-08",
+   "tcr3d": "2010-12-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3O3D",
+   "rcsb": "2010-12-08",
+   "tcr3d": "2010-12-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3O3E",
+   "rcsb": "2010-12-08",
+   "tcr3d": "2010-12-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3OX8",
+   "rcsb": "2011-05-04",
+   "tcr3d": "2011-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3OXR",
+   "rcsb": "2011-05-04",
+   "tcr3d": "2011-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3OXS",
+   "rcsb": "2011-05-04",
+   "tcr3d": "2011-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3P4M",
+   "rcsb": "2011-10-12",
+   "tcr3d": "2011-10-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3P4N",
+   "rcsb": "2011-10-12",
+   "tcr3d": "2011-10-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3P4O",
+   "rcsb": "2011-10-12",
+   "tcr3d": "2011-10-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3P9L",
+   "rcsb": "2011-10-19",
+   "tcr3d": "2011-10-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3P9M",
+   "rcsb": "2011-10-19",
+   "tcr3d": "2011-10-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3PAB",
+   "rcsb": "2011-10-19",
+   "tcr3d": "2011-10-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3PWJ",
+   "rcsb": "2011-03-09",
+   "tcr3d": "2011-03-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3PWL",
+   "rcsb": "2011-03-09",
+   "tcr3d": "2011-03-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3PWN",
+   "rcsb": "2011-03-09",
+   "tcr3d": "2011-03-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3PWU",
+   "rcsb": "2011-08-24",
+   "tcr3d": "2011-08-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3PWV",
+   "rcsb": "2011-08-24",
+   "tcr3d": "2011-08-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3QFD",
+   "rcsb": "2011-09-28",
+   "tcr3d": "2011-09-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3QQ3",
+   "rcsb": "2011-12-28",
+   "tcr3d": "2011-12-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3QQ4",
+   "rcsb": "2011-12-28",
+   "tcr3d": "2011-12-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3QUK",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3QUL",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3QZW",
+   "rcsb": "2011-06-29",
+   "tcr3d": "2011-06-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3REW",
+   "rcsb": "2012-01-18",
+   "tcr3d": "2012-01-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RL1",
+   "rcsb": "2012-02-29",
+   "tcr3d": "2012-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RL2",
+   "rcsb": "2012-02-29",
+   "tcr3d": "2012-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3ROL",
+   "rcsb": "2012-04-04",
+   "tcr3d": "2012-04-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3ROO",
+   "rcsb": "2012-04-04",
+   "tcr3d": "2012-04-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWC",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWD",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWE",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWF",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWG",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWH",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWI",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3RWJ",
+   "rcsb": "2012-03-21",
+   "tcr3d": "2012-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3SKM",
+   "rcsb": "2012-02-29",
+   "tcr3d": "2012-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3SKO",
+   "rcsb": "2012-02-29",
+   "tcr3d": "2012-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3SPV",
+   "rcsb": "2012-07-04",
+   "tcr3d": "2012-07-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TBS",
+   "rcsb": "2012-08-08",
+   "tcr3d": "2012-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TBT",
+   "rcsb": "2012-08-08",
+   "tcr3d": "2012-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TBV",
+   "rcsb": "2012-08-08",
+   "tcr3d": "2012-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TBW",
+   "rcsb": "2012-08-08",
+   "tcr3d": "2012-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TBY",
+   "rcsb": "2012-08-08",
+   "tcr3d": "2012-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TID",
+   "rcsb": "2012-08-22",
+   "tcr3d": "2012-08-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TIE",
+   "rcsb": "2012-08-22",
+   "tcr3d": "2012-08-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3TO2",
+   "rcsb": "2012-08-29",
+   "tcr3d": "2012-08-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3UPR",
+   "rcsb": "2012-06-13",
+   "tcr3d": "2012-06-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3UTQ",
+   "rcsb": "2012-01-25",
+   "tcr3d": "2012-01-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3V5D",
+   "rcsb": "2012-12-05",
+   "tcr3d": "2012-12-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3V5H",
+   "rcsb": "2012-12-05",
+   "tcr3d": "2012-12-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3V5K",
+   "rcsb": "2012-12-19",
+   "tcr3d": "2012-12-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VCL",
+   "rcsb": "2012-11-21",
+   "tcr3d": "2012-11-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFM",
+   "rcsb": "2012-03-07",
+   "tcr3d": "2012-03-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFN",
+   "rcsb": "2012-03-07",
+   "tcr3d": "2012-03-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFO",
+   "rcsb": "2012-03-07",
+   "tcr3d": "2012-03-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFP",
+   "rcsb": "2012-03-07",
+   "tcr3d": "2012-03-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFR",
+   "rcsb": "2012-03-07",
+   "tcr3d": "2012-03-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFS",
+   "rcsb": "2012-02-22",
+   "tcr3d": "2012-02-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFT",
+   "rcsb": "2012-02-22",
+   "tcr3d": "2012-02-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFU",
+   "rcsb": "2012-02-22",
+   "tcr3d": "2012-02-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFV",
+   "rcsb": "2012-02-22",
+   "tcr3d": "2012-02-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VFW",
+   "rcsb": "2012-02-22",
+   "tcr3d": "2012-02-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VH8",
+   "rcsb": "2011-10-26",
+   "tcr3d": "2011-10-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VJ6",
+   "rcsb": "2012-03-14",
+   "tcr3d": "2012-03-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VRI",
+   "rcsb": "2012-05-30",
+   "tcr3d": "2012-05-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VRJ",
+   "rcsb": "2012-05-30",
+   "tcr3d": "2012-05-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VXN",
+   "rcsb": "2013-10-23",
+   "tcr3d": "2013-10-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VXO",
+   "rcsb": "2013-10-23",
+   "tcr3d": "2013-10-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3VXP",
+   "rcsb": "2013-10-23",
+   "tcr3d": "2013-10-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3W39",
+   "rcsb": "2013-02-13",
+   "tcr3d": "2013-02-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3WL9",
+   "rcsb": "2014-06-11",
+   "tcr3d": "2014-06-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3WLB",
+   "rcsb": "2014-06-11",
+   "tcr3d": "2014-06-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3WS3",
+   "rcsb": "2014-03-26",
+   "tcr3d": "2014-03-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3WS6",
+   "rcsb": "2014-03-26",
+   "tcr3d": "2014-03-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3WUW",
+   "rcsb": "2014-05-28",
+   "tcr3d": "2014-05-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3X11",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3X12",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3X13",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "3X14",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4CVX",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4CVZ",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4CW1",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4D0B",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4D0C",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4D0D",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4E0R",
+   "rcsb": "2012-11-21",
+   "tcr3d": "2012-11-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4E5X",
+   "rcsb": "2012-10-10",
+   "tcr3d": "2012-10-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4F7M",
+   "rcsb": "2012-10-10",
+   "tcr3d": "2012-10-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4F7P",
+   "rcsb": "2012-10-10",
+   "tcr3d": "2012-10-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4F7T",
+   "rcsb": "2012-10-10",
+   "tcr3d": "2012-10-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4G42",
+   "rcsb": "2012-11-21",
+   "tcr3d": "2012-11-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4G43",
+   "rcsb": "2012-11-21",
+   "tcr3d": "2012-11-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4G8I",
+   "rcsb": "2013-03-20",
+   "tcr3d": "2013-03-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4G9D",
+   "rcsb": "2013-03-20",
+   "tcr3d": "2013-03-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4GKN",
+   "rcsb": "2012-09-12",
+   "tcr3d": "2012-09-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4GKS",
+   "rcsb": "2012-09-12",
+   "tcr3d": "2012-09-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HKJ",
+   "rcsb": "2012-11-14",
+   "tcr3d": "2012-11-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HS3",
+   "rcsb": "2014-05-07",
+   "tcr3d": "2014-05-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HUU",
+   "rcsb": "2013-02-27",
+   "tcr3d": "2013-02-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HUV",
+   "rcsb": "2013-02-27",
+   "tcr3d": "2013-02-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HUW",
+   "rcsb": "2013-02-27",
+   "tcr3d": "2013-02-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HUX",
+   "rcsb": "2013-02-27",
+   "tcr3d": "2013-02-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HV8",
+   "rcsb": "2013-02-27",
+   "tcr3d": "2013-02-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HWZ",
+   "rcsb": "2013-10-16",
+   "tcr3d": "2013-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4HX1",
+   "rcsb": "2013-10-02",
+   "tcr3d": "2013-10-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4I48",
+   "rcsb": "2013-10-02",
+   "tcr3d": "2013-10-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4I4W",
+   "rcsb": "2013-01-02",
+   "tcr3d": "2013-01-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4IHO",
+   "rcsb": "2013-09-11",
+   "tcr3d": "2013-09-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4JFO",
+   "rcsb": "2013-05-29",
+   "tcr3d": "2013-05-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4JFP",
+   "rcsb": "2013-05-29",
+   "tcr3d": "2013-05-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4JFQ",
+   "rcsb": "2013-05-29",
+   "tcr3d": "2013-05-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4JQV",
+   "rcsb": "2013-06-26",
+   "tcr3d": "2013-06-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4JQX",
+   "rcsb": "2013-06-26",
+   "tcr3d": "2013-06-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4K7F",
+   "rcsb": "2013-06-05",
+   "tcr3d": "2013-06-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4L29",
+   "rcsb": "2013-12-25",
+   "tcr3d": "2013-12-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4L3C",
+   "rcsb": "2013-12-25",
+   "tcr3d": "2013-12-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4L8B",
+   "rcsb": "2013-10-16",
+   "tcr3d": "2013-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4L8C",
+   "rcsb": "2013-10-16",
+   "tcr3d": "2013-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4L8D",
+   "rcsb": "2013-10-16",
+   "tcr3d": "2013-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4LNR",
+   "rcsb": "2014-07-23",
+   "tcr3d": "2014-07-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4MJ5",
+   "rcsb": "2014-10-08",
+   "tcr3d": "2014-10-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4MJ6",
+   "rcsb": "2014-10-08",
+   "tcr3d": "2014-10-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4N8V",
+   "rcsb": "2014-02-05",
+   "tcr3d": "2014-02-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NNX",
+   "rcsb": "2014-11-19",
+   "tcr3d": "2014-11-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NNY",
+   "rcsb": "2014-11-19",
+   "tcr3d": "2014-11-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NO0",
+   "rcsb": "2014-11-19",
+   "tcr3d": "2014-11-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NO2",
+   "rcsb": "2014-11-19",
+   "tcr3d": "2014-11-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NO3",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NO5",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NQV",
+   "rcsb": "2013-12-25",
+   "tcr3d": "2013-12-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NQX",
+   "rcsb": "2013-12-25",
+   "tcr3d": "2013-12-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NSK",
+   "rcsb": "2014-01-01",
+   "tcr3d": "2013-12-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4NT6",
+   "rcsb": "2014-07-23",
+   "tcr3d": "2014-07-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4O2C",
+   "rcsb": "2014-07-23",
+   "tcr3d": "2014-07-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4O2E",
+   "rcsb": "2014-07-23",
+   "tcr3d": "2014-07-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4O2F",
+   "rcsb": "2014-07-23",
+   "tcr3d": "2014-07-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PG2",
+   "rcsb": "2014-09-10",
+   "tcr3d": "2014-09-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PG9",
+   "rcsb": "2015-01-07",
+   "tcr3d": "2015-01-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PGB",
+   "rcsb": "2015-01-07",
+   "tcr3d": "2015-01-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PGC",
+   "rcsb": "2015-01-07",
+   "tcr3d": "2015-01-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PGD",
+   "rcsb": "2015-01-07",
+   "tcr3d": "2015-01-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PGE",
+   "rcsb": "2015-01-07",
+   "tcr3d": "2015-01-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PR5",
+   "rcsb": "2014-04-16",
+   "tcr3d": "2014-04-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PRA",
+   "rcsb": "2014-04-16",
+   "tcr3d": "2014-04-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PRB",
+   "rcsb": "2014-04-16",
+   "tcr3d": "2014-04-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PRD",
+   "rcsb": "2014-04-16",
+   "tcr3d": "2014-04-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PRE",
+   "rcsb": "2014-04-16",
+   "tcr3d": "2014-04-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PRN",
+   "rcsb": "2014-04-16",
+   "tcr3d": "2014-04-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PV8",
+   "rcsb": "2014-04-23",
+   "tcr3d": "2014-04-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4PV9",
+   "rcsb": "2014-04-23",
+   "tcr3d": "2014-04-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4QRQ",
+   "rcsb": "2014-11-12",
+   "tcr3d": "2014-11-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4QRS",
+   "rcsb": "2014-12-10",
+   "tcr3d": "2014-12-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4QRT",
+   "rcsb": "2014-07-16",
+   "tcr3d": "2014-07-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4QRU",
+   "rcsb": "2015-02-04",
+   "tcr3d": "2015-02-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1H",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1I",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1J",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1K",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1L",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1M",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1N",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U1S",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U6X",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4U6Y",
+   "rcsb": "2014-12-24",
+   "tcr3d": "2014-12-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4UQ2",
+   "rcsb": "2014-09-17",
+   "tcr3d": "2014-09-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4UQ3",
+   "rcsb": "2014-09-17",
+   "tcr3d": "2014-09-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4WDI",
+   "rcsb": "2015-06-24",
+   "tcr3d": "2015-06-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4WJ5",
+   "rcsb": "2014-10-29",
+   "tcr3d": "2014-10-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4WU5",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4WU7",
+   "rcsb": "2015-05-06",
+   "tcr3d": "2015-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4WUU",
+   "rcsb": "2015-12-30",
+   "tcr3d": "2015-12-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4XXC",
+   "rcsb": "2015-04-08",
+   "tcr3d": "2015-04-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4Z76",
+   "rcsb": "2015-06-24",
+   "tcr3d": "2015-06-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4Z77",
+   "rcsb": "2015-06-24",
+   "tcr3d": "2015-06-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4Z78",
+   "rcsb": "2015-06-24",
+   "tcr3d": "2015-06-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4ZFZ",
+   "rcsb": "2016-01-13",
+   "tcr3d": "2016-01-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4ZUS",
+   "rcsb": "2016-04-06",
+   "tcr3d": "2016-04-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4ZUT",
+   "rcsb": "2016-04-06",
+   "tcr3d": "2016-04-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4ZUU",
+   "rcsb": "2016-04-06",
+   "tcr3d": "2016-04-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4ZUV",
+   "rcsb": "2016-04-06",
+   "tcr3d": "2016-04-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "4ZUW",
+   "rcsb": "2016-04-06",
+   "tcr3d": "2016-04-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5ACZ",
+   "rcsb": "2016-09-28",
+   "tcr3d": "2016-09-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5AD0",
+   "rcsb": "2016-09-28",
+   "tcr3d": "2016-09-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5B38",
+   "rcsb": "2016-03-30",
+   "tcr3d": "2016-03-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5B39",
+   "rcsb": "2016-03-30",
+   "tcr3d": "2016-03-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5C0D",
+   "rcsb": "2016-05-04",
+   "tcr3d": "2016-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5C0E",
+   "rcsb": "2016-05-04",
+   "tcr3d": "2016-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5C0F",
+   "rcsb": "2016-05-04",
+   "tcr3d": "2016-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5C0G",
+   "rcsb": "2016-05-04",
+   "tcr3d": "2016-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5C0I",
+   "rcsb": "2016-05-04",
+   "tcr3d": "2016-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5C0J",
+   "rcsb": "2016-05-04",
+   "tcr3d": "2016-05-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5D9S",
+   "rcsb": "2016-07-06",
+   "tcr3d": "2016-07-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5DDH",
+   "rcsb": "2016-07-27",
+   "tcr3d": "2016-07-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5DEF",
+   "rcsb": "2015-11-18",
+   "tcr3d": "2015-11-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5DEG",
+   "rcsb": "2015-11-18",
+   "tcr3d": "2015-11-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5E00",
+   "rcsb": "2017-01-18",
+   "tcr3d": "2017-01-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5E8N",
+   "rcsb": "2016-02-03",
+   "tcr3d": "2016-02-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5E8O",
+   "rcsb": "2016-02-03",
+   "tcr3d": "2016-02-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5E8P",
+   "rcsb": "2016-02-03",
+   "tcr3d": "2016-02-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5ENW",
+   "rcsb": "2016-11-09",
+   "tcr3d": "2016-11-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5EO0",
+   "rcsb": "2016-02-24",
+   "tcr3d": "2016-02-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5EO1",
+   "rcsb": "2016-02-24",
+   "tcr3d": "2016-02-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5EOT",
+   "rcsb": "2016-12-07",
+   "tcr3d": "2016-12-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5EU3",
+   "rcsb": "2016-03-02",
+   "tcr3d": "2016-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5EU4",
+   "rcsb": "2016-03-02",
+   "tcr3d": "2016-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5EU5",
+   "rcsb": "2016-03-02",
+   "tcr3d": "2016-03-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5F1I",
+   "rcsb": "2016-11-30",
+   "tcr3d": "2016-11-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5F1N",
+   "rcsb": "2016-11-30",
+   "tcr3d": "2016-11-29",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5F7D",
+   "rcsb": "2016-12-21",
+   "tcr3d": "2016-12-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5F9J",
+   "rcsb": "2016-12-21",
+   "tcr3d": "2016-12-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5FA3",
+   "rcsb": "2016-12-21",
+   "tcr3d": "2016-12-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5FA4",
+   "rcsb": "2016-12-21",
+   "tcr3d": "2016-12-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5FDW",
+   "rcsb": "2016-12-21",
+   "tcr3d": "2016-12-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GJX",
+   "rcsb": "2017-05-10",
+   "tcr3d": "2017-05-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GJY",
+   "rcsb": "2017-05-10",
+   "tcr3d": "2017-05-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GR7",
+   "rcsb": "2017-06-07",
+   "tcr3d": "2017-06-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GRD",
+   "rcsb": "2017-08-09",
+   "tcr3d": "2017-08-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GRG",
+   "rcsb": "2017-08-09",
+   "tcr3d": "2017-08-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GSB",
+   "rcsb": "2017-07-12",
+   "tcr3d": "2017-07-11",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GSD",
+   "rcsb": "2017-08-09",
+   "tcr3d": "2017-08-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GSR",
+   "rcsb": "2017-04-26",
+   "tcr3d": "2017-04-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GSV",
+   "rcsb": "2017-04-26",
+   "tcr3d": "2017-04-25",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5GSX",
+   "rcsb": "2017-06-07",
+   "tcr3d": "2017-06-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5H5Z",
+   "rcsb": "2017-11-22",
+   "tcr3d": "2017-11-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5H94",
+   "rcsb": "2016-05-18",
+   "tcr3d": "2016-05-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5HGA",
+   "rcsb": "2016-06-08",
+   "tcr3d": "2016-06-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5HGB",
+   "rcsb": "2016-06-08",
+   "tcr3d": "2016-06-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5HGD",
+   "rcsb": "2016-06-08",
+   "tcr3d": "2016-06-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5HGH",
+   "rcsb": "2016-06-08",
+   "tcr3d": "2016-06-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5HHN",
+   "rcsb": "2016-03-23",
+   "tcr3d": "2016-03-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5HHP",
+   "rcsb": "2016-03-23",
+   "tcr3d": "2016-03-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5HHQ",
+   "rcsb": "2016-03-23",
+   "tcr3d": "2016-03-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IB1",
+   "rcsb": "2017-02-01",
+   "tcr3d": "2017-01-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IB2",
+   "rcsb": "2017-02-01",
+   "tcr3d": "2017-01-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IB3",
+   "rcsb": "2017-02-01",
+   "tcr3d": "2017-01-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IB4",
+   "rcsb": "2017-02-01",
+   "tcr3d": "2017-01-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IB5",
+   "rcsb": "2017-02-01",
+   "tcr3d": "2017-01-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IEH",
+   "rcsb": "2016-12-07",
+   "tcr3d": "2016-12-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IEK",
+   "rcsb": "2016-12-07",
+   "tcr3d": "2016-12-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IM7",
+   "rcsb": "2016-10-05",
+   "tcr3d": "2016-10-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5INC",
+   "rcsb": "2016-10-05",
+   "tcr3d": "2016-10-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IND",
+   "rcsb": "2016-10-05",
+   "tcr3d": "2016-10-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IRO",
+   "rcsb": "2016-08-24",
+   "tcr3d": "2016-08-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5IUE",
+   "rcsb": "2017-06-14",
+   "tcr3d": "2017-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5J6G",
+   "rcsb": "2016-07-13",
+   "tcr3d": "2016-07-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5J6H",
+   "rcsb": "2016-07-13",
+   "tcr3d": "2016-07-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5JWD",
+   "rcsb": "2017-05-24",
+   "tcr3d": "2017-05-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5JWE",
+   "rcsb": "2017-05-24",
+   "tcr3d": "2017-05-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5KD4",
+   "rcsb": "2017-10-11",
+   "tcr3d": "2017-10-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5KD7",
+   "rcsb": "2017-10-11",
+   "tcr3d": "2017-10-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5KNM",
+   "rcsb": "2017-06-14",
+   "tcr3d": "2017-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5MEO",
+   "rcsb": "2016-12-07",
+   "tcr3d": "2016-12-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5MEP",
+   "rcsb": "2016-12-07",
+   "tcr3d": "2016-12-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5MEQ",
+   "rcsb": "2016-12-07",
+   "tcr3d": "2016-12-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5MER",
+   "rcsb": "2016-12-07",
+   "tcr3d": "2016-12-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5MZM",
+   "rcsb": "2018-03-21",
+   "tcr3d": "2018-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5N1Y",
+   "rcsb": "2017-02-15",
+   "tcr3d": "2017-02-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5N6B",
+   "rcsb": "2017-10-18",
+   "tcr3d": "2017-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5NMH",
+   "rcsb": "2017-11-15",
+   "tcr3d": "2017-11-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5NMK",
+   "rcsb": "2017-11-15",
+   "tcr3d": "2017-11-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5NPZ",
+   "rcsb": "2018-05-02",
+   "tcr3d": "2018-05-01",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5NQ0",
+   "rcsb": "2018-04-25",
+   "tcr3d": "2018-04-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5NQ1",
+   "rcsb": "2018-04-25",
+   "tcr3d": "2018-04-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5NQ2",
+   "rcsb": "2018-04-25",
+   "tcr3d": "2018-04-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5NQ3",
+   "rcsb": "2018-04-25",
+   "tcr3d": "2018-04-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5SWQ",
+   "rcsb": "2016-10-05",
+   "tcr3d": "2016-10-04",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5T6W",
+   "rcsb": "2017-03-01",
+   "tcr3d": "2017-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5T6X",
+   "rcsb": "2017-03-01",
+   "tcr3d": "2017-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5T6Y",
+   "rcsb": "2017-03-01",
+   "tcr3d": "2017-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5T6Z",
+   "rcsb": "2017-03-01",
+   "tcr3d": "2017-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5T70",
+   "rcsb": "2017-03-01",
+   "tcr3d": "2017-02-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5T7G",
+   "rcsb": "2017-10-11",
+   "tcr3d": "2017-10-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5TRZ",
+   "rcsb": "2018-05-09",
+   "tcr3d": "2018-05-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5TS1",
+   "rcsb": "2018-05-09",
+   "tcr3d": "2018-05-08",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5TXS",
+   "rcsb": "2017-11-29",
+   "tcr3d": "2017-11-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5U98",
+   "rcsb": "2017-07-19",
+   "tcr3d": "2017-07-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5V5L",
+   "rcsb": "2017-06-14",
+   "tcr3d": "2017-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5V5M",
+   "rcsb": "2017-06-14",
+   "tcr3d": "2017-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VCL",
+   "rcsb": "2017-10-25",
+   "tcr3d": "2017-10-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VGD",
+   "rcsb": "2017-05-31",
+   "tcr3d": "2017-05-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VGE",
+   "rcsb": "2017-06-07",
+   "tcr3d": "2017-06-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VUD",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VUE",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VUF",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VVP",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VWD",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VWF",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VWH",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VWJ",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5VZ5",
+   "rcsb": "2018-03-21",
+   "tcr3d": "2018-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5W67",
+   "rcsb": "2017-08-23",
+   "tcr3d": "2017-08-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5W69",
+   "rcsb": "2017-08-23",
+   "tcr3d": "2017-08-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5W6A",
+   "rcsb": "2017-08-23",
+   "tcr3d": "2017-08-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WES",
+   "rcsb": "2017-10-18",
+   "tcr3d": "2017-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WET",
+   "rcsb": "2017-10-18",
+   "tcr3d": "2017-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WEU",
+   "rcsb": "2017-10-18",
+   "tcr3d": "2017-10-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WJL",
+   "rcsb": "2017-09-20",
+   "tcr3d": "2017-09-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WJN",
+   "rcsb": "2017-09-20",
+   "tcr3d": "2017-09-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WLI",
+   "rcsb": "2017-11-15",
+   "tcr3d": "2017-11-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WMN",
+   "rcsb": "2018-06-06",
+   "tcr3d": "2018-06-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WMO",
+   "rcsb": "2018-06-06",
+   "tcr3d": "2018-06-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WMP",
+   "rcsb": "2018-06-06",
+   "tcr3d": "2018-06-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WMQ",
+   "rcsb": "2018-06-06",
+   "tcr3d": "2018-06-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WMR",
+   "rcsb": "2018-06-06",
+   "tcr3d": "2018-06-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WSH",
+   "rcsb": "2017-12-20",
+   "tcr3d": "2017-12-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WWI",
+   "rcsb": "2018-01-17",
+   "tcr3d": "2018-01-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WWJ",
+   "rcsb": "2018-01-17",
+   "tcr3d": "2018-01-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WWU",
+   "rcsb": "2018-01-17",
+   "tcr3d": "2018-01-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WXC",
+   "rcsb": "2018-01-17",
+   "tcr3d": "2018-01-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5WXD",
+   "rcsb": "2018-01-17",
+   "tcr3d": "2018-01-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5XMF",
+   "rcsb": "2017-12-13",
+   "tcr3d": "2017-12-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5XMM",
+   "rcsb": "2017-12-13",
+   "tcr3d": "2017-12-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5XOS",
+   "rcsb": "2017-06-14",
+   "tcr3d": "2017-06-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5XS3",
+   "rcsb": "2017-09-13",
+   "tcr3d": "2017-09-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5Y91",
+   "rcsb": "2017-09-20",
+   "tcr3d": "2017-09-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5YLX",
+   "rcsb": "2018-10-24",
+   "tcr3d": "2018-10-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "5YMV",
+   "rcsb": "2018-10-24",
+   "tcr3d": "2018-10-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6A2B",
+   "rcsb": "2019-10-23",
+   "tcr3d": "2019-10-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6A6H",
+   "rcsb": "2019-07-03",
+   "tcr3d": "2019-07-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6AEE",
+   "rcsb": "2019-07-31",
+   "tcr3d": "2019-07-30",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6AMT",
+   "rcsb": "2018-08-15",
+   "tcr3d": "2018-08-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6AT5",
+   "rcsb": "2018-02-28",
+   "tcr3d": "2018-02-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6AT9",
+   "rcsb": "2018-03-21",
+   "tcr3d": "2018-03-20",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6BXP",
+   "rcsb": "2018-03-14",
+   "tcr3d": "2018-03-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6BXQ",
+   "rcsb": "2018-02-28",
+   "tcr3d": "2018-02-27",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6D29",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6D2B",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6D2R",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6D2T",
+   "rcsb": "2018-10-03",
+   "tcr3d": "2018-10-02",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6EI2",
+   "rcsb": "2017-10-11",
+   "tcr3d": "2017-10-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6EWA",
+   "rcsb": "2018-11-07",
+   "tcr3d": "2018-11-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6EWC",
+   "rcsb": "2018-11-07",
+   "tcr3d": "2018-11-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6EWO",
+   "rcsb": "2018-11-07",
+   "tcr3d": "2018-11-06",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6G3J",
+   "rcsb": "2019-02-20",
+   "tcr3d": "2019-02-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6G3K",
+   "rcsb": "2019-09-04",
+   "tcr3d": "2019-09-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6G9R",
+   "rcsb": "2019-04-24",
+   "tcr3d": "2019-04-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6GB5",
+   "rcsb": "2019-03-06",
+   "tcr3d": "2019-03-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6GB7",
+   "rcsb": "2019-03-06",
+   "tcr3d": "2019-03-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6GGM",
+   "rcsb": "2018-08-08",
+   "tcr3d": "2018-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6GH1",
+   "rcsb": "2018-08-08",
+   "tcr3d": "2018-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6GH4",
+   "rcsb": "2018-08-08",
+   "tcr3d": "2018-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6GHN",
+   "rcsb": "2018-08-08",
+   "tcr3d": "2018-08-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6H6D",
+   "rcsb": "2019-08-14",
+   "tcr3d": "2019-08-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6H6H",
+   "rcsb": "2019-08-14",
+   "tcr3d": "2019-08-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6ID4",
+   "rcsb": "2019-02-06",
+   "tcr3d": "2019-02-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6IEX",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6ILC",
+   "rcsb": "2019-07-24",
+   "tcr3d": "2019-07-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6ILE",
+   "rcsb": "2019-07-24",
+   "tcr3d": "2019-07-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6ILF",
+   "rcsb": "2019-07-24",
+   "tcr3d": "2019-07-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6ILG",
+   "rcsb": "2019-07-24",
+   "tcr3d": "2019-07-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6IRL",
+   "rcsb": "2020-03-18",
+   "tcr3d": "2020-03-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6IWG",
+   "rcsb": "2019-08-14",
+   "tcr3d": "2019-08-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6IWH",
+   "rcsb": "2019-08-14",
+   "tcr3d": "2019-08-13",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J1V",
+   "rcsb": "2019-09-25",
+   "tcr3d": "2019-09-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J1W",
+   "rcsb": "2019-09-25",
+   "tcr3d": "2019-09-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J29",
+   "rcsb": "2019-09-25",
+   "tcr3d": "2019-09-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2A",
+   "rcsb": "2019-09-25",
+   "tcr3d": "2019-09-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2D",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2E",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2F",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2G",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2H",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2I",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6J2J",
+   "rcsb": "2019-09-18",
+   "tcr3d": "2019-09-17",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6JOZ",
+   "rcsb": "2020-01-29",
+   "tcr3d": "2020-01-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6JP3",
+   "rcsb": "2020-01-29",
+   "tcr3d": "2020-01-28",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6JQ2",
+   "rcsb": "2020-04-01",
+   "tcr3d": "2020-03-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6JQ3",
+   "rcsb": "2020-05-06",
+   "tcr3d": "2020-05-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6JTN",
+   "rcsb": "2020-04-15",
+   "tcr3d": "2020-04-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6JTO",
+   "rcsb": "2020-04-15",
+   "tcr3d": "2020-04-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6JTP",
+   "rcsb": "2020-04-15",
+   "tcr3d": "2020-04-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6K60",
+   "rcsb": "2019-11-27",
+   "tcr3d": "2019-11-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6K7T",
+   "rcsb": "2019-11-06",
+   "tcr3d": "2019-11-05",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6KX9",
+   "rcsb": "2020-04-01",
+   "tcr3d": "2020-03-31",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6M24",
+   "rcsb": "2020-07-08",
+   "tcr3d": "2020-07-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6M2J",
+   "rcsb": "2020-07-08",
+   "tcr3d": "2020-07-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6M2K",
+   "rcsb": "2020-07-08",
+   "tcr3d": "2020-07-07",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6MPP",
+   "rcsb": "2019-10-16",
+   "tcr3d": "2019-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6MT3",
+   "rcsb": "2019-02-13",
+   "tcr3d": "2019-02-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6MT4",
+   "rcsb": "2019-02-13",
+   "tcr3d": "2019-02-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6MT5",
+   "rcsb": "2019-02-13",
+   "tcr3d": "2019-02-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6MT6",
+   "rcsb": "2019-02-13",
+   "tcr3d": "2019-02-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6MTL",
+   "rcsb": "2019-02-13",
+   "tcr3d": "2019-02-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6NCA",
+   "rcsb": "2019-10-23",
+   "tcr3d": "2019-10-22",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6NF7",
+   "rcsb": "2019-12-25",
+   "tcr3d": "2019-12-24",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6NPR",
+   "rcsb": "2020-01-22",
+   "tcr3d": "2020-01-21",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6O4Y",
+   "rcsb": "2020-01-15",
+   "tcr3d": "2020-01-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6O4Z",
+   "rcsb": "2020-01-15",
+   "tcr3d": "2020-01-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6O51",
+   "rcsb": "2020-01-15",
+   "tcr3d": "2020-01-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6O53",
+   "rcsb": "2020-01-15",
+   "tcr3d": "2020-01-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6O9B",
+   "rcsb": "2019-11-13",
+   "tcr3d": "2019-11-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6O9C",
+   "rcsb": "2019-11-13",
+   "tcr3d": "2019-11-12",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6OPD",
+   "rcsb": "2019-09-04",
+   "tcr3d": "2019-09-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6P23",
+   "rcsb": "2019-10-16",
+   "tcr3d": "2019-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6P27",
+   "rcsb": "2019-10-16",
+   "tcr3d": "2019-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6P2C",
+   "rcsb": "2019-10-16",
+   "tcr3d": "2019-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6P2F",
+   "rcsb": "2019-10-16",
+   "tcr3d": "2019-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6P2S",
+   "rcsb": "2019-10-16",
+   "tcr3d": "2019-10-15",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PBH",
+   "rcsb": "2019-12-11",
+   "tcr3d": "2019-12-10",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PTB",
+   "rcsb": "2019-09-04",
+   "tcr3d": "2019-09-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PTE",
+   "rcsb": "2019-09-04",
+   "tcr3d": "2019-09-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PYJ",
+   "rcsb": "2019-12-04",
+   "tcr3d": "2019-12-03",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PYL",
+   "rcsb": "2019-11-27",
+   "tcr3d": "2019-11-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PYV",
+   "rcsb": "2019-11-27",
+   "tcr3d": "2019-11-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PYW",
+   "rcsb": "2019-11-27",
+   "tcr3d": "2019-11-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6PZ5",
+   "rcsb": "2019-11-27",
+   "tcr3d": "2019-11-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6Q3K",
+   "rcsb": "2019-07-24",
+   "tcr3d": "2019-07-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6SS7",
+   "rcsb": "2020-07-15",
+   "tcr3d": "2020-07-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6SS8",
+   "rcsb": "2020-07-15",
+   "tcr3d": "2020-07-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6SS9",
+   "rcsb": "2020-07-15",
+   "tcr3d": "2020-07-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6SSA",
+   "rcsb": "2020-07-15",
+   "tcr3d": "2020-07-14",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6TRN",
+   "rcsb": "2020-06-24",
+   "tcr3d": "2020-06-23",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6UJO",
+   "rcsb": "2020-08-19",
+   "tcr3d": "2020-08-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6UJQ",
+   "rcsb": "2020-08-19",
+   "tcr3d": "2020-08-18",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6ULI",
+   "rcsb": "2020-05-27",
+   "tcr3d": "2020-05-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6ULK",
+   "rcsb": "2020-05-27",
+   "tcr3d": "2020-05-26",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6V2O",
+   "rcsb": "2020-05-20",
+   "tcr3d": "2020-05-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6V2P",
+   "rcsb": "2020-05-20",
+   "tcr3d": "2020-05-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6V2Q",
+   "rcsb": "2020-05-20",
+   "tcr3d": "2020-05-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6V3J",
+   "rcsb": "2020-05-20",
+   "tcr3d": "2020-05-19",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6VR1",
+   "rcsb": "2020-06-10",
+   "tcr3d": "2020-06-09",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  },
+  {
+   "pdb_id": "6VR5",
+   "rcsb": "2020-06-17",
+   "tcr3d": "2020-06-16",
+   "rcsb_split": "train",
+   "tcr3d_split": "train"
+  }
+ ],
+ "split_before_leakage": {
+  "train": 1042,
+  "test": 283,
+  "validation": 118
+ },
+ "split_after_leakage": {
+  "train": 914,
+  "test": 283,
+  "validation": 99
+ },
+ "leakage_removed": [
+  {
+   "pdb_id": "1AO7",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "1BD2",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "1DUZ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "1HHK",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "1IM3",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "2AV1",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "2AV7",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "3IXA",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "4E5X",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "4FTV",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "5IRO",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "6UZ1",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLFGYPVYV"
+  },
+  {
+   "pdb_id": "1BII",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DD",
+   "peptide": "RGPGRAFVTI"
+  },
+  {
+   "pdb_id": "1DDH",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DD",
+   "peptide": "RGPGRAFVTI"
+  },
+  {
+   "pdb_id": "1QO3",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DD",
+   "peptide": "RGPGRAFVTI"
+  },
+  {
+   "pdb_id": "3DMM",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DD",
+   "peptide": "RGPGRAFVTI"
+  },
+  {
+   "pdb_id": "3ECB",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DD",
+   "peptide": "RGPGRAFVTI"
+  },
+  {
+   "pdb_id": "5IVX",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DD",
+   "peptide": "RGPGRAFVTI"
+  },
+  {
+   "pdb_id": "6NPR",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DD",
+   "peptide": "RGPGRAFVTI"
+  },
+  {
+   "pdb_id": "1FFN",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "KAVYNFATM"
+  },
+  {
+   "pdb_id": "1N5A",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "KAVYNFATM"
+  },
+  {
+   "pdb_id": "1S7U",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "KAVYNFATM"
+  },
+  {
+   "pdb_id": "2F74",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "KAVYNFATM"
+  },
+  {
+   "pdb_id": "5TJE",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "KAVYNFATM"
+  },
+  {
+   "pdb_id": "7P0T",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "KAVYNFATM"
+  },
+  {
+   "pdb_id": "1HHH",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "FLPSDFFPSV"
+  },
+  {
+   "pdb_id": "3OX8",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "FLPSDFFPSV"
+  },
+  {
+   "pdb_id": "3OXR",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "FLPSDFFPSV"
+  },
+  {
+   "pdb_id": "3OXS",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "FLPSDFFPSV"
+  },
+  {
+   "pdb_id": "1HOC",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "ASNENMETM"
+  },
+  {
+   "pdb_id": "4HUX",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "ASNENMETM"
+  },
+  {
+   "pdb_id": "5SWS",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "ASNENMETM"
+  },
+  {
+   "pdb_id": "5SWZ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "ASNENMETM"
+  },
+  {
+   "pdb_id": "7JWI",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "ASNENMETM"
+  },
+  {
+   "pdb_id": "7JWJ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-DB",
+   "peptide": "ASNENMETM"
+  },
+  {
+   "pdb_id": "1I4F",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "GVYDGREHTV"
+  },
+  {
+   "pdb_id": "6TRO",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "GVYDGREHTV"
+  },
+  {
+   "pdb_id": "1JF1",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "3HG1",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "3QDG",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "3QDM",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "4JFF",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "4L3E",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "5E9D",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "5NHT",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "5NQK",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "6DKP",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "7TR4",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "ELAGIGILTV"
+  },
+  {
+   "pdb_id": "1KPR",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-E",
+   "peptide": "VMAPRTVLL"
+  },
+  {
+   "pdb_id": "1MHE",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-E",
+   "peptide": "VMAPRTVLL"
+  },
+  {
+   "pdb_id": "1M6O",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*44",
+   "peptide": "EEFGRAFSF"
+  },
+  {
+   "pdb_id": "1N2R",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*44",
+   "peptide": "EEFGRAFSF"
+  },
+  {
+   "pdb_id": "1SYV",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*44",
+   "peptide": "EEFGRAFSF"
+  },
+  {
+   "pdb_id": "7TUC",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*44",
+   "peptide": "EEFGRAFSF"
+  },
+  {
+   "pdb_id": "1Q94",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*11",
+   "peptide": "AIFQSSMTK"
+  },
+  {
+   "pdb_id": "6ID4",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*11",
+   "peptide": "AIFQSSMTK"
+  },
+  {
+   "pdb_id": "1S9W",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQC"
+  },
+  {
+   "pdb_id": "2BNR",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQC"
+  },
+  {
+   "pdb_id": "2F53",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQC"
+  },
+  {
+   "pdb_id": "2F54",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQC"
+  },
+  {
+   "pdb_id": "2P5E",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQC"
+  },
+  {
+   "pdb_id": "2P5W",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQC"
+  },
+  {
+   "pdb_id": "2PYE",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQC"
+  },
+  {
+   "pdb_id": "1WBY",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "H2-DB",
+   "peptide": "SSLENFRAYV"
+  },
+  {
+   "pdb_id": "1YN6",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "H2-DB",
+   "peptide": "SSLENFRAYV"
+  },
+  {
+   "pdb_id": "3PQY",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "H2-DB",
+   "peptide": "SSLENFRAYV"
+  },
+  {
+   "pdb_id": "1X7Q",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*11",
+   "peptide": "KTFPPTEPK"
+  },
+  {
+   "pdb_id": "4U1I",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*81",
+   "peptide": "TPQDLNTML"
+  },
+  {
+   "pdb_id": "7DZM",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*81",
+   "peptide": "TPQDLNTML"
+  },
+  {
+   "pdb_id": "7F4W",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "NYNYLYRLF"
+  },
+  {
+   "pdb_id": "2BNQ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "3GJF",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "3HAE",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "6Q3S",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "6RP9",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "6RPA",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "6RPB",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "8EB2",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "SLLMWITQV"
+  },
+  {
+   "pdb_id": "2ESV",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-E",
+   "peptide": "VMAPRTLIL"
+  },
+  {
+   "pdb_id": "5W1V",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-E",
+   "peptide": "VMAPRTLIL"
+  },
+  {
+   "pdb_id": "2GT9",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "EAAGIGILTV"
+  },
+  {
+   "pdb_id": "4QOK",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "EAAGIGILTV"
+  },
+  {
+   "pdb_id": "6TMO",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "EAAGIGILTV"
+  },
+  {
+   "pdb_id": "3D25",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "VLHDDLLEA"
+  },
+  {
+   "pdb_id": "3FT3",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "VLHDDLLEA"
+  },
+  {
+   "pdb_id": "3HPJ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "RMFPNAPYL"
+  },
+  {
+   "pdb_id": "4WUU",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "RMFPNAPYL"
+  },
+  {
+   "pdb_id": "6RSY",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "RMFPNAPYL"
+  },
+  {
+   "pdb_id": "7BBG",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "RMFPNAPYL"
+  },
+  {
+   "pdb_id": "3LKP",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*35",
+   "peptide": "LPFDKSTIM"
+  },
+  {
+   "pdb_id": "3LKS",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*35",
+   "peptide": "LPFEKSTVM"
+  },
+  {
+   "pdb_id": "3MYJ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "YMFPNAPYL"
+  },
+  {
+   "pdb_id": "4F7T",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*24",
+   "peptide": "RYGFVANF"
+  },
+  {
+   "pdb_id": "4NSK",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "H2-DB",
+   "peptide": "KAPYNFATM"
+  },
+  {
+   "pdb_id": "5TIL",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "H2-DB",
+   "peptide": "KAPYNFATM"
+  },
+  {
+   "pdb_id": "4U1J",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-B*42",
+   "peptide": "TPQDLNTML"
+  },
+  {
+   "pdb_id": "4WU5",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "RYPLTFGW"
+  },
+  {
+   "pdb_id": "5HGB",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "RYPLTFGW"
+  },
+  {
+   "pdb_id": "7K80",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "RYPLTFGW"
+  },
+  {
+   "pdb_id": "7K81",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "RYPLTFGW"
+  },
+  {
+   "pdb_id": "8GVB",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "RYPLTFGW"
+  },
+  {
+   "pdb_id": "8GVI",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "RYPLTFGW"
+  },
+  {
+   "pdb_id": "4WU7",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*24",
+   "peptide": "RFPLTFGW"
+  },
+  {
+   "pdb_id": "5HGA",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*24",
+   "peptide": "RFPLTFGW"
+  },
+  {
+   "pdb_id": "5BRZ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*01",
+   "peptide": "EVDPIGHLY"
+  },
+  {
+   "pdb_id": "5EU6",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "YLEPGPVTV"
+  },
+  {
+   "pdb_id": "5N6B",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLWNGPMAV"
+  },
+  {
+   "pdb_id": "5T6Z",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*57",
+   "peptide": "TSTLQEQIGW"
+  },
+  {
+   "pdb_id": "5V5M",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*57",
+   "peptide": "TSTLQEQIGW"
+  },
+  {
+   "pdb_id": "5T70",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*57",
+   "peptide": "TSNLQEQIGW"
+  },
+  {
+   "pdb_id": "5VCL",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "H2-T23",
+   "peptide": "AMAPRTLLL"
+  },
+  {
+   "pdb_id": "5W67",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-C*06",
+   "peptide": "VRSRRALRL"
+  },
+  {
+   "pdb_id": "6GH1",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-E",
+   "peptide": "RLPAKAPLL"
+  },
+  {
+   "pdb_id": "6ZKW",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-E",
+   "peptide": "RLPAKAPLL"
+  },
+  {
+   "pdb_id": "6ZKZ",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-E",
+   "peptide": "RLPAKAPLL"
+  },
+  {
+   "pdb_id": "6JTN",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-C*08",
+   "peptide": "GADGVGKSAL"
+  },
+  {
+   "pdb_id": "6ULK",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-C*08",
+   "peptide": "GADGVGKSAL"
+  },
+  {
+   "pdb_id": "6UON",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-C*08",
+   "peptide": "GADGVGKSAL"
+  },
+  {
+   "pdb_id": "6V2O",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*57",
+   "peptide": "ASLNLPAVSW"
+  },
+  {
+   "pdb_id": "6V2P",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*57",
+   "peptide": "ASLNLPAVSW"
+  },
+  {
+   "pdb_id": "6VQO",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "HMTEVVRHC"
+  },
+  {
+   "pdb_id": "6VR5",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "HMTEVVRHC"
+  },
+  {
+   "pdb_id": "6VRM",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "HMTEVVRHC"
+  },
+  {
+   "pdb_id": "6VRN",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "HMTEVVRHC"
+  },
+  {
+   "pdb_id": "6W51",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "HMTEVVRHC"
+  },
+  {
+   "pdb_id": "7EJL",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "QYIKWPWYI"
+  },
+  {
+   "pdb_id": "7JYW",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "TYQWIIRNW"
+  },
+  {
+   "pdb_id": "7KGQ",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "LLLDRLNQL"
+  },
+  {
+   "pdb_id": "7L1B",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*03",
+   "peptide": "AHHGGWTTK"
+  },
+  {
+   "pdb_id": "7L1C",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*03",
+   "peptide": "ALHGGWTTK"
+  },
+  {
+   "pdb_id": "7L1D",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*03",
+   "peptide": "ALHGGWTTK"
+  },
+  {
+   "pdb_id": "7RRG",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*03",
+   "peptide": "ALHGGWTTK"
+  },
+  {
+   "pdb_id": "7LG0",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*07",
+   "peptide": "SPRWYFYYL"
+  },
+  {
+   "pdb_id": "7LGD",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*07",
+   "peptide": "SPRWYFYYL"
+  },
+  {
+   "pdb_id": "7MJA",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*24",
+   "peptide": "QYNPIRTTF"
+  },
+  {
+   "pdb_id": "7MKB",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "YLQPRTFLL"
+  },
+  {
+   "pdb_id": "7N1A",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "YLQPRTFLL"
+  },
+  {
+   "pdb_id": "7N1F",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "YLQPRTFLL"
+  },
+  {
+   "pdb_id": "7N6D",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "YLQPRTFLL"
+  },
+  {
+   "pdb_id": "7N6E",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "YLQPRTFLL"
+  },
+  {
+   "pdb_id": "7P3D",
+   "from_split": "train",
+   "pair_kept_in": "validation",
+   "allele": "HLA-A*02",
+   "peptide": "YLQPRTFLL"
+  },
+  {
+   "pdb_id": "7N1B",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "RLQSLQTYV"
+  },
+  {
+   "pdb_id": "7N1E",
+   "from_split": "train",
+   "pair_kept_in": "test",
+   "allele": "HLA-A*02",
+   "peptide": "RLQSLQTYV"
+  },
+  {
+   "pdb_id": "7N2O",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*27",
+   "peptide": "LRVMMLAPF"
+  },
+  {
+   "pdb_id": "7N2Q",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*27",
+   "peptide": "LRVMMLAPF"
+  },
+  {
+   "pdb_id": "8CX4",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-B*27",
+   "peptide": "LRVMMLAPF"
+  },
+  {
+   "pdb_id": "7WJ2",
+   "from_split": "validation",
+   "pair_kept_in": "test",
+   "allele": "HLA-C*14",
+   "peptide": "LYNTVATL"
+  }
+ ],
+ "n_duplicate_pair_groups": 232,
+ "n_cross_split_pair_groups": 50
+}
