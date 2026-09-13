@@ -11,9 +11,10 @@ GPU is required for any of it.
 
 ```
 src/          pipeline stages, run in order
-configs/      mhc1_finetune.yaml + mhc1_baseline.yaml (generated)
+configs/      mhc1_finetune.yaml + mhc1_baseline.yaml (generated) + _8gb/_t4 variants
 data/         inputs, intermediates and the processed dataset
 reports/      per-stage reports + MILESTONE_SUMMARY.md
+notebooks/    mhc1_boltz_t4.ipynb -- the Colab/Kaggle fine-tuning run
 boltz-src/    boltz v1.0.0 checkout (reference for the data format)
 .venv/        isolated env with mashumaro/numba so Boltz's own loader can run
 .venv-gpu/    training stack: torch+cu128, lightning, hydra, boltz --no-deps
@@ -224,15 +225,27 @@ the baseline and the fine-tune or the comparison stops meaning anything.
 
 ## Still outstanding
 
-* **Fine-tuning on this hardware is not possible.** The 8 GB RTX 4060 cannot hold
-  weights + gradients + Adam states + EMA for 453.6M fp32 parameters (9.06 GB
-  before any activation). `reports/GPU_REQUIREMENTS.md` has the arithmetic and
-  the four things that would change the answer. Per the brief this is documented
-  rather than worked around, since the fine-tuning strategy is meant to be agreed
-  first.
+* **Fine-tuning does not fit on this laptop, and the fix is a free cloud T4.**
+  The 8 GB RTX 4060 cannot hold weights + gradients + Adam states + EMA for
+  453.6M fp32 parameters (9.06 GB before any activation), and even with the trunk
+  frozen and EMA off it OOMs in triangular attention needing ~7.3 GB.
+  `reports/GPU_REQUIREMENTS.md` has that arithmetic.
+
+  TACC access did not materialise, so the run moves to a 16 GB T4 on Kaggle
+  (preferred) or Colab -- roughly 2x the headroom the frozen-trunk recipe needs.
+  See `reports/CLOUD_GPU.md` for the memory and wall-clock budgets, the full list
+  of recipe deviations, and how the run survives a 12 h session cap; then
+  `notebooks/mhc1_boltz_t4.ipynb`, which runs unchanged on either platform.
+  Stage the dataset with `src/make_cloud_bundle.py` first.
+
+  What that buys is a *frozen-trunk* fine-tune at effective batch 16, not a
+  faithful reproduction of the upstream recipe. A 40 GB A100 is still what
+  `configs/mhc1_finetune.yaml` as written needs.
 * **A full-size test set** still needs the 2024+ structures processed from mmCIF
   with Boltz's own `scripts/process/rcsb.py` (needs `ccd.rdb` + redis). Unchanged
   from before, and independent of everything above.
-* **The wandb entity** in `configs/mhc1_finetune.yaml`.
-* **This directory is not under version control.** For anything lab-facing that
-  should be fixed before more work lands on it.
+* **The wandb entity** in `configs/mhc1_finetune.yaml`. Not needed for the T4
+  config, which sets `wandb: null` and tails a log instead.
+* **Peptide templates** (Ernest's second suggestion) are untouched. That is a
+  data-pipeline question rather than a GPU one, so it can proceed on the laptop
+  in parallel with cloud runs rather than waiting on them.
