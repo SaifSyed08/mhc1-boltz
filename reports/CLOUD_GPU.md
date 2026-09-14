@@ -166,8 +166,19 @@ Recovery is: re-run notebook sections 1–5, then section 8.
 
 `src/make_cloud_bundle.py` packs the third row and prints a sha256. Upload it to
 Drive or make a Kaggle Dataset from it; every later session just untars it. The
-notebook asserts 1,084 structures after unpacking, so a truncated upload fails
+notebook asserts 1,084 structures after staging, so a truncated upload fails
 immediately instead of silently training on a subset.
+
+Two Kaggle-specific things the notebook handles, because both fail confusingly:
+
+* **Kaggle auto-extracts archives on dataset upload.** The dataset may therefore
+  contain `data/processed/` and `data/msa/` directly rather than the tarball. The
+  staging cell looks for both shapes, and symlinks the extracted tree out of the
+  read-only `/kaggle/input` rather than copying 570 MB into the working quota.
+* **Internet is off by default on Kaggle notebooks** and requires a phone-verified
+  account (right sidebar > Notebook options > Internet). Without it the GitHub
+  clone and the 3.8 GB asset download both fail. Cell 1 tests connectivity and
+  says exactly which toggle to flip.
 
 ## 7. The one real upside of leaving Windows: `trifast`
 
