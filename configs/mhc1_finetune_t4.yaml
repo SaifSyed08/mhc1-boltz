@@ -42,14 +42,25 @@
 #                                     of a peptide in a groove rather than
 #                                     representation learning.
 #
-#  3. `offload_to_cpu: false`      -- REVERSED from the 8 GB config. Offloading
-#                                     activations to host RAM is a good trade
-#                                     when VRAM is the binding constraint; on a
-#                                     free Colab box the host has only ~13 GB and
-#                                     2 vCPUs, so it moves the bottleneck rather
-#                                     than removing it. With 16 GB of VRAM the
-#                                     offload is not needed. Activation
-#                                     checkpointing stays on.
+#  3. `offload_to_cpu: true`       -- kept ON, reversing an earlier call that was
+#                                     wrong. The reasoning for turning it off was
+#                                     that a free Colab box has only ~13 GB of
+#                                     host RAM, so offloading relocates the
+#                                     bottleneck. That is true on Colab and false
+#                                     on Kaggle, which has ~30 GB -- and it was
+#                                     beside the point, because the offload is
+#                                     not optional here.
+#
+#                                     MEASURED on a T4: peak was 12.37 GiB of a
+#                                     14.56 GiB card, OOM. `checkpoint_wrapper`
+#                                     retains each block's INPUT, and the
+#                                     pairformer has 48 blocks each holding
+#                                     z[1,512,512,128] fp32 = 134 MB. That is
+#                                     ~6.4 GB of retained pair representations
+#                                     sitting in VRAM, which is most of the
+#                                     overshoot. Offloading moves them to host
+#                                     RAM. No numeric change -- it is the same
+#                                     tensors in a different place.
 #
 #  4. `accumulate_grad_batches: 16` -- was 128. THIS IS THE IMPORTANT ONE, and it
 #                                     is a wall-clock decision, not a memory one.
@@ -191,14 +202,14 @@ model:
     pairwise_head_width: 32
     pairwise_num_heads: 4
     activation_checkpointing: true
-    offload_to_cpu: false           # 16 GB: not needed, and host RAM is the scarcer resource
+    offload_to_cpu: true            # MEASURED: needed. See header note 3.
 
   pairformer_args:
     num_blocks: 48
     num_heads: 16
     dropout: 0.25
     activation_checkpointing: true
-    offload_to_cpu: false           # 16 GB: not needed, and host RAM is the scarcer resource
+    offload_to_cpu: true            # MEASURED: needed. See header note 3.
 
   score_model_args:
     sigma_data: 16
@@ -211,7 +222,7 @@ model:
     atom_decoder_heads: 4
     conditioning_transition_layers: 2
     activation_checkpointing: true
-    offload_to_cpu: false           # 16 GB: not needed, and host RAM is the scarcer resource
+    offload_to_cpu: true            # MEASURED: needed. See header note 3.
 
   confidence_prediction: false
   confidence_model_args:

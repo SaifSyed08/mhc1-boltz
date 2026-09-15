@@ -2,14 +2,19 @@
 
 `boltz-src/` is a clean checkout of
 [jwohlwend/boltz](https://github.com/jwohlwend/boltz) at tag `v1.0.0`
-(commit `34cf560`). Two defects there stop the documented training entry point
-from running at all. Both are recorded here so the delta from upstream is never
+(commit `34cf560`). Several defects there stop the documented training entry
+point from running at all, and one design choice makes fine-tuning OOM on any
+card short of an A100. All are recorded here so the delta from upstream is never
 implicit.
 
-Only the first is an edit to vendored source; it is kept as
-`patches/boltz-v1.0.0-training-path.patch` and can be reapplied to a fresh
-checkout with `git -C boltz-src apply ../patches/boltz-v1.0.0-training-path.patch`.
-The second is worked around in our own config and requires no source change.
+The source edits are kept as `patches/boltz-v1.0.0-training-path.patch` and
+reapply to a fresh checkout with
+`git -C boltz-src apply ../patches/boltz-v1.0.0-training-path.patch`. Item 2 is
+worked around in our own config and needs no source change.
+
+The patch touches five files: `scripts/train/train.py`,
+`data/feature/featurizer.py`, `model/modules/diffusion.py`,
+`model/modules/trunk.py` and `model/optim/scheduler.py`.
 
 ---
 
@@ -97,6 +102,88 @@ which is where it belongs anyway. Values mirror `boltz predict --no_potentials`
 inference-time search procedure rather than part of the model, and enabling it
 during validation would both change the metric and triple the diffusion batch
 via `num_particles: 3`.
+
+---
+
+## 3. `AlphaFoldLRScheduler` passes `verbose=` to a torch that removed it
+
+`optim/scheduler.py:75` calls
+
+```python
+super().__init__(optimizer, last_epoch=last_epoch, verbose=verbose)
+```
+
+torch deprecated `LRScheduler`'s `verbose` argument in 2.4 and has since removed
+it, so on a modern torch this is
+
+```
+TypeError: LRScheduler.__init__() got an unexpected keyword argument 'verbose'
+```
+
+Patched to try the upstream call and fall back without `verbose`. `self.verbose`
+is still assigned a few lines above, so `state_dict()` is unchanged.
+
+This fires only on the **training** path: `configure_optimizers()` is never
+called under `validation_only`, which is why the baseline reproduced fine and
+this only appeared on the first fine-tuning attempt.
+
+---
+
+## 4. `NameError: center_random_augmentation` in the training forward
+
+`modules/diffusion.py:716` calls `center_random_augmentation`, but the module
+never imports it. The function is right there in `modules/utils.py:61`; only the
+import line is missing.
+
+Inference never reaches line 716, which is why this shipped. It kills every
+training step immediately.
+
+One added import, no behaviour change.
+
+---
+
+## 5. Triangular-attention chunking is disabled during training
+
+Not a bug upstream -- a deliberate speed/memory trade -- but it is the single
+thing that makes fine-tuning not fit.
+
+`MSAModule.forward` and `PairformerModule.forward` both gate chunking on
+`not self.training`:
+
+```python
+if not self.training:
+    if z.shape[1] > const.chunk_size_threshold:   # 384
+        chunk_size_tri_attn = 128
+    ...
+else:
+    chunk_size_tri_attn = None                    # materialise everything
+```
+
+So training allocates the entire triangular-attention score tensor in one go. At
+our 512-token crop with 4 pairwise heads that is
+
+```
+1 x 4 x 512 x 512 x 512 x 4 bytes = 2.00 GiB
+```
+
+in a single allocation, 48 times over in the pairformer plus 4 more in the MSA
+module. Every OOM traceback in `reports/ft_*.log` and the first T4 failure all
+name the same 2.00 GiB request.
+
+Chunking is **numerically identical** -- the same math over slices of 128 -- so
+the only cost is speed. The patch adds an opt-in:
+
+```python
+chunk_in_training = os.environ.get("BOLTZ_CHUNK_IN_TRAINING") == "1"
+if (not self.training) or chunk_in_training:
+```
+
+Unset, behaviour is byte-identical to upstream. `BOLTZ_CHUNK_IN_TRAINING=1` is
+set on every training subprocess launched by `notebooks/mhc1_boltz_t4.ipynb`.
+
+Upstream would presumably take a config flag rather than an environment
+variable; the env var keeps the diff to two lines per call site and avoids
+threading a new argument through `Boltz1.__init__`.
 
 ---
 

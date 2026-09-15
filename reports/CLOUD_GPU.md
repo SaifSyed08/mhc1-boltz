@@ -69,15 +69,50 @@ So the frozen-trunk step wanted roughly **7.3 GB** at the moment it died, on a
 card with 8.00 GiB total and a desktop already holding some of it. It was not far
 over — it was *just* over, which is the most annoying place to be.
 
-A 16 GB T4 gives about 15.0 GiB usable after the CUDA context. Against ~7.3 GB of
-demand that is better than 2x headroom. This is not a close call, which is why
-the notebook probes it in a few steps rather than assuming it, but the arithmetic
-says it should pass comfortably.
+### That 7.3 GB figure was wrong, and the way it was wrong is the point
 
-One consequence: `offload_to_cpu` is **turned off** in the T4 config, reversed
-from `mhc1_finetune_8gb.yaml`. Pushing activations to host RAM is the right trade
-when VRAM is the binding constraint; on a free Colab box the host has ~13 GB and
-2 vCPUs, so it just relocates the bottleneck. Activation checkpointing stays on.
+The prediction here was ~7.3 GB of demand against ~15.0 GiB usable, so better
+than 2x headroom. **The first T4 run OOM'd at 12.37 GiB allocated of 14.56 GiB.**
+
+7.3 GB was never a measurement of demand. It was the point at which an 8 GB card
+happened to run out — a *lower bound*, read off a process that died early in the
+trunk forward and never got as far as the structure module. Quoting it as the
+requirement was the mistake. A card that dies tells you what it could not do, not
+what the job needs.
+
+What the 16 GB card revealed, by getting further:
+
+| | |
+|---|---|
+| persistent state (weights + grads + Adam) | 5.11 GB |
+| 48 pairformer block inputs retained by `checkpoint_wrapper`, `z[1,512,512,128]` fp32 @ 134 MB | **~6.4 GB** |
+| working set, one 2.00 GiB triangular-attention allocation on top | ~0.9 GB |
+| **total** | **~12.4 GB**, matching the 12.37 GiB reported |
+
+The 6.4 GB is the surprise, and it is nearly pure waste. `activation_checkpointing`
+retains each block's *input* so it can recompute the block during backward — but
+the trunk is **frozen**, so there is no backward through it and nothing to
+recompute. fairscale's wrapper stores the inputs anyway. 48 blocks x 134 MB of
+pair representations sit in VRAM to serve a backward pass that never runs.
+
+Two fixes, both of which change no numbers:
+
+* **`offload_to_cpu: true`**, reversing the call made earlier in this document.
+  The reasoning for turning it off — a free Colab box has ~13 GB of host RAM, so
+  offloading relocates the bottleneck — is true on Colab, false on Kaggle
+  (~30 GB), and beside the point either way, because the offload is not optional.
+  It moves those 6.4 GB of retained inputs to host RAM. Same tensors, different
+  place.
+* **`BOLTZ_CHUNK_IN_TRAINING=1`**, our patch. Upstream gates triangular-attention
+  chunking on `not self.training`, so training materialises the whole score
+  tensor: `1 x 4 x 512 x 512 x 512 x 4 bytes` = exactly 2.00 GiB per allocation.
+  That is the number in every OOM traceback in this repo, going back to the 8 GB
+  runs. Chunked into slices of 128 it is the same arithmetic at a quarter of the
+  peak. See `reports/UPSTREAM_PATCHES.md` section 5.
+
+Neither is a recipe deviation. Both were available all along; neither was applied
+because the 8 GB failure was misread as "needs a bigger card" when a good part of
+it was "needs the memory knobs upstream already has".
 
 ## 3. Wall clock: the constraint that replaced memory
 
@@ -123,10 +158,11 @@ through config comments.
 |---|---|---|---|
 | 1 | `ema: false` | saves 1.81 GB | real. Boltz-1 trained with EMA and its released weights are EMA weights |
 | 2 | trunk frozen | saves gradients, Adam moments and retained activations for 150.6 M params | a genuine strategy choice, endorsed by Ernest; not only a memory hack |
-| 3 | `offload_to_cpu: false` | host RAM is scarcer than VRAM here | none — pure win at 16 GB |
+| 3 | `offload_to_cpu: true` | 48 pairformer block inputs (~6.4 GB) are retained for a backward pass a frozen trunk never runs | none numerically; costs PCIe traffic per step |
 | 4 | `accumulate_grad_batches: 16` | 128 would mean ~1 optimizer step per epoch | effective batch 16, not 128. **Report this.** |
 | 5 | `save_top_k: 1` | a Lightning checkpoint here is ~4 GB (1.73 GB weights + 2.25 GB Adam); `-1` fills a 15 GB Drive in three epochs | keeps best + `last.ckpt`, which is what a resumable run needs |
 | 6 | `num_workers: 2` | free Colab has 2 vCPUs | possible dataloader stall; watch for it in the probe |
+| 7 | `BOLTZ_CHUNK_IN_TRAINING=1` | upstream disables triangular-attention chunking during training, forcing a 2.00 GiB allocation per call | none — identical math in slices of 128, at some speed cost |
 
 Deliberately **not** changed: `max_tokens: 512`, `diffusion_multiplicity: 16`,
 the crop settings, and everything under `validation_args`. Those alter the
