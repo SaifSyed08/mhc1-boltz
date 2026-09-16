@@ -101,6 +101,41 @@ index 8fd4379..876b9e5 100644
          if compute_constraint_features:
              residue_constraint_features = process_residue_constraint_features(data)
              chain_constraint_features = process_chain_feature_constraints(data)
+diff --git a/src/boltz/model/model.py b/src/boltz/model/model.py
+index 1e574fd..c3b67bc 100644
+--- a/src/boltz/model/model.py
++++ b/src/boltz/model/model.py
+@@ -456,7 +456,30 @@ class Boltz1(LightningModule):
+                     **self.diffusion_loss_args,
+                 )
+             except Exception as e:
++                # LOCAL PATCH (see reports/UPSTREAM_PATCHES.md): upstream prints
++                # only str(e), which for a CUDA OOM is a size and a total and no
++                # location. Four memory diagnoses on this project were made by
++                # inferring the location from that; three were wrong. The stack
++                # and the shapes cost nothing on a path that is already failing.
+                 print(f"Skipping batch {batch_idx} due to error: {e}")
++                import traceback
++
++                traceback.print_exc()
++                try:
++                    mult = self.training_args.diffusion_multiplicity
++                    n_atoms = out["denoised_atom_coords"].shape[1]
++                    print(
++                        f"[oom-context] diffusion_multiplicity={mult} "
++                        f"n_atoms={n_atoms} "
++                        f"add_smooth_lddt_loss="
++                        f"{self.diffusion_loss_args.get('add_smooth_lddt_loss')} "
++                        f"=> smooth_lddt pair tensor is "
++                        f"[{mult}, {n_atoms}, {n_atoms}] fp32 = "
++                        f"{mult * n_atoms * n_atoms * 4 / 2**30:.2f} GiB each, "
++                        f"and it builds several"
++                    )
++                except Exception:  # context is best-effort
++                    pass
+                 return None
+ 
+         else:
 diff --git a/src/boltz/model/modules/diffusion.py b/src/boltz/model/modules/diffusion.py
 index 7b38c4d..ba4b08b 100644
 --- a/src/boltz/model/modules/diffusion.py
