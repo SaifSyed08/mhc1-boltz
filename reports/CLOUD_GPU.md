@@ -139,6 +139,33 @@ allocator gave up. At multiplicity 16 the tensors are twice as large, so it fail
 died, treated as a measure of demand.** It only ever marks where that process ran
 out.
 
+### Confirmed, by traceback rather than inference
+
+The instrumentation added after the third wrong diagnosis produced this on the
+first run:
+
+```
+loss/diffusion.py:155 in smooth_lddt_loss
+    + F.sigmoid(1.0 - dist_diff)
+OutOfMemoryError: Tried to allocate 932.00 MiB
+
+[oom-context] diffusion_multiplicity=16 n_atoms=3904 add_smooth_lddt_loss=True
+  => [16, 3904, 3904] fp32 = 0.91 GiB each, and it builds several
+```
+
+`[16, 3904, 3904]` fp32 is **930 MiB**; the request was **932 MiB**. A file, a
+line, an expression — the second of four chained sigmoids — and a size matched to
+the byte. That is what the earlier one-line error string could never give, and
+it settled in one run what three rounds of reasoning got wrong.
+
+Two things it also confirmed: `max_atoms: 3904` worked exactly as predicted
+(1.27 GiB → 0.91 GiB per tensor, and the failure moved four expressions deeper),
+and `host_free` rose from ~9.1 to ~14.2 GiB once `offload_to_cpu` went off —
+the offload really had been spending host RAM for nothing.
+
+Multiplicity 16 still did not fit: peak 14.03 GiB on a 14.56 GiB card, needing
+another 932 MiB. Hence 8.
+
 ### What is actually being changed, and why
 
 | lever | effect | objective change? |
@@ -146,7 +173,7 @@ out.
 | `max_atoms: 4608 → 3904` | shrinks every atom tensor ~28%, including the `smooth_lddt` matrices | **none** -- valid-chain atoms max out at 3896, so nothing is cropped |
 | `offload_to_cpu: true → false` | removes a ~6.5 GB device-to-host copy per step that the full freeze made pointless | none |
 | full `freeze_trunk` list | no autograd graph through the trunk at all | it *is* the stated strategy |
-| `diffusion_multiplicity` (sweep) | scales `smooth_lddt_loss` linearly | raises gradient variance; see below |
+| `diffusion_multiplicity: 16 → 8` | halves the `smooth_lddt_loss` tensors; peak ~14.03 → ~9 GiB | **yes** — raises gradient variance; see below |
 | `add_smooth_lddt_loss: false` | removes the dominant tensor family outright | **yes** -- drops an auxiliary loss term |
 
 **Not** `max_tokens: 384`. Tokens max out at 494, so 512 crops nothing today;

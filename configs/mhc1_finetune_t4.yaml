@@ -282,7 +282,28 @@ model:
   training_args:
     recycling_steps: 3
     sampling_steps: 20
-    diffusion_multiplicity: 16
+    # MEASURED 2026-09-16, confirmed by traceback rather than inferred:
+    #   loss/diffusion.py:155, F.sigmoid(1.0 - dist_diff)
+    #   OutOfMemoryError: Tried to allocate 932.00 MiB
+    #   [16, 3904, 3904] fp32 = 930 MiB -- matched to the byte
+    #
+    # smooth_lddt_loss keeps ~10 of the 14.03 GiB peak and is linear in
+    # multiplicity, so 8 takes peak to roughly 9 GiB on a 14.56 GiB card.
+    #
+    # DEVIATION, and it must be reported: upstream Boltz-1 uses 16,
+    # AlphaFold-3 uses 48. At batch_size 1 this is a plain M-sample Monte-Carlo
+    # estimate of a fixed objective, so halving M raises gradient variance
+    # without changing what is being learned. Two caveats belong with that
+    # sentence: it holds ONLY at batch_size 1 (the view/repeat_interleave
+    # ordering in smooth_lddt_loss would otherwise average eps across different
+    # structures), and synchronize_sigmas: true means M averages noise vectors
+    # at a FIXED sigma rather than thinning the sigma schedule.
+    #
+    # Restoring 16 is possible without deviating -- chunk smooth_lddt_loss over
+    # the multiplicity dim under torch.utils.checkpoint, which is mathematically
+    # identical at batch_size 1. Not done: new code on the path that has broken
+    # most often, and it needs a numerical equivalence test first.
+    diffusion_multiplicity: 8
     diffusion_samples: 2
     confidence_loss_weight: 1e-4
     diffusion_loss_weight: 4.0
