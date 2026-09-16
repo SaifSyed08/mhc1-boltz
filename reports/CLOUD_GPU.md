@@ -69,129 +69,99 @@ So the frozen-trunk step wanted roughly **7.3 GB** at the moment it died, on a
 card with 8.00 GiB total and a desktop already holding some of it. It was not far
 over — it was *just* over, which is the most annoying place to be.
 
-### That 7.3 GB figure was wrong, and the way it was wrong is the point
+### Where the memory actually is
 
-The prediction here was ~7.3 GB of demand against ~15.0 GiB usable, so better
-than 2x headroom. **The first T4 run OOM'd at 12.37 GiB allocated of 14.56 GiB.**
+Four diagnoses were made here by reasoning from a traceback about what ought to
+be resident. Three were wrong. This section is the corrected account; the history
+is kept because the way it went wrong is the reusable lesson.
 
-7.3 GB was never a measurement of demand. It was the point at which an 8 GB card
-happened to run out — a *lower bound*, read off a process that died early in the
-trunk forward and never got as far as the structure module. Quoting it as the
-requirement was the mistake. A card that dies tells you what it could not do, not
-what the job needs.
+**The answer is `smooth_lddt_loss`** (`model/loss/diffusion.py:97`). It builds
+`[batch x multiplicity, n_atoms, n_atoms]` fp32 matrices. At multiplicity 16 and
+4608 atoms that is **1.27 GiB each** -- exactly the allocation in the traceback.
+About ten are built while constructing the mask, and about **ten stay live for
+the backward pass**: `pred_dists`, the `true - pred` difference, four sigmoid
+outputs, the broadcast `eps`, and `mask`. Call it ~10 GiB retained plus ~6 GiB
+transient, before the score model is counted at all.
 
-What the 16 GB card revealed, by getting further:
+It dominates for a structural reason: the loss works over 4608^2 **atom** pairs
+while the trunk works over 512^2 **token** pairs. An 81x larger pair dimension.
 
 | | |
 |---|---|
-| persistent state (weights + grads + Adam) | 5.11 GB |
-| 48 pairformer block inputs retained by `checkpoint_wrapper`, `z[1,512,512,128]` fp32 @ 134 MB | **~6.4 GB** |
-| working set, one 2.00 GiB triangular-attention allocation on top | ~0.9 GB |
-| **total** | **~12.4 GB**, matching the 12.37 GiB reported |
+| weights (432.21 M x 4 B) | 1.61 GiB |
+| gradients (280.07 M x 4 B) | 1.04 GiB |
+| Adam, from batch 16 (280.07 M x 8 B) | 2.09 GiB |
+| **`smooth_lddt_loss`, retained** | **~10 GiB** |
 
-The 6.4 GB is the surprise, and it is nearly pure waste. `activation_checkpointing`
-retains each block's *input* so it can recompute the block during backward — but
-the trunk is **frozen**, so there is no backward through it and nothing to
-recompute. fairscale's wrapper stores the inputs anyway. 48 blocks x 134 MB of
-pair representations sit in VRAM to serve a backward pass that never runs.
+(Units: this document previously mixed GB and GiB. It is GiB throughout now.
+1.73 GB and 1.61 GiB are the same quantity and were presented as two different
+measurements.)
 
-Two fixes, both of which change no numbers:
+### The three wrong diagnoses, and the single mistake behind them
 
-* **`offload_to_cpu: true`**, reversing the call made earlier in this document.
-  The reasoning for turning it off — a free Colab box has ~13 GB of host RAM, so
-  offloading relocates the bottleneck — is true on Colab, false on Kaggle
-  (~30 GB), and beside the point either way, because the offload is not optional.
-  It moves those 6.4 GB of retained inputs to host RAM. Same tensors, different
-  place.
-* **`BOLTZ_CHUNK_IN_TRAINING=1`**, our patch. Upstream gates triangular-attention
-  chunking on `not self.training`, so training materialises the whole score
-  tensor: `1 x 4 x 512 x 512 x 512 x 4 bytes` = exactly 2.00 GiB per allocation.
-  That is the number in every OOM traceback in this repo, going back to the 8 GB
-  runs. Chunked into slices of 128 it is the same arithmetic at a quarter of the
-  peak. See `reports/UPSTREAM_PATCHES.md` section 5.
+**"It needs ~7.3 GB."** Read off `ft_final.log`, where an 8 GB card ran out.
+That is a lower bound on demand, not a measure of it. Worse, the framing said the
+process "died early in the trunk forward and never got as far as the structure
+module" -- which is backwards. The `try/except` that prints `Skipping batch`
+wraps **only** `structure_module.compute_loss`; `out = self(...)` is outside it.
+Every "Skipping batch ... out of memory" line is a batch whose forward
+**completed**. The OOM was always in the loss.
 
-Neither is a recipe deviation. Both were available all along; neither was applied
-because the 8 GB failure was misread as "needs a bigger card" when a good part of
-it was "needs the memory knobs upstream already has".
+**"48 blocks retain 6.4 GB of pair representations."** This was *correct* for the
+configuration it described, and the retraction of it was wrong. fairscale's
+`checkpoint_wrapper` saves each block's inputs unconditionally
+(`checkpoint_activations.py:278`) but **detaches** the output when nothing
+upstream and no local parameter requires grad (`:297`, `:199`/`:210`), which
+releases them. Under the *partial* freeze, `z` was built by
+`z_init_*`/`rel_pos`/`token_bonds` from `input_embedder` -- all still trainable --
+so nothing detached and all 48 blocks retained `z[1,512,512,128]` = 134 MB each.
+Under the *full* freeze, they detach and nothing is retained.
 
-### And a third thing, which was the actual bug
+The `None of the inputs have requires_grad=True` warning, which this document
+quoted as proof the theory was wrong, fires under *exactly* the condition that
+triggers the release. It was proof the mechanism was real and had just been
+fixed.
 
-With both of the above applied the run reached batch 24 and then OOM'd at
-**13.09 GiB** — higher than before. The growth is explained: Adam allocates
-`exp_avg` and `exp_avg_sq` lazily on the *first optimizer step*, which with
-`accumulate_grad_batches: 16` is batch 16, not batch 0. That is ~2.25 GB
-appearing a third of the way into an epoch, and it is why a run can look healthy
-for twenty batches and then die.
+That has a consequence: with the full freeze, **`offload_to_cpu` buys nothing** --
+the tensors are released either way -- while still paying a device-to-host copy
+of ~6.5 GB per step. It is now off, and that is a plausible slice of the measured
+85 s/batch.
 
-But the underlying problem was the freeze itself. **Freezing a module does not
-stop its activations being retained.** Autograd keeps an activation if it is
-needed for *some* backward pass, not if the local module's weights happen to be
-trainable. `z` entering the pairformer is built by `z_init_1`, `z_init_2`,
-`rel_pos` and `token_bonds` from `input_embedder` output — all of which were
-still trainable. So gradients had to flow back through all 48 frozen blocks to
-reach them, and every block's activations were kept to make that possible.
+**"Memory does not scale with `diffusion_multiplicity`."** 13.61 GiB at 16 versus
+13.92 GiB at 8 looked like a refutation. It was not: both figures are
+`max_memory_allocated` on batches that **OOM'd**. `training_step` catches the
+OOM and returns `None`, no backward runs, and the high-water mark is wherever the
+allocator gave up. At multiplicity 16 the tensors are twice as large, so it fails
+*earlier*; at 8, more of the smaller tensors fit first, so the mark climbs
+*higher*. The inversion is the artefact. The code does scale linearly.
 
-`freeze_trunk: [msa_module, pairformer_module]` therefore saved the optimizer
-state for 150.6 M parameters and bought nothing at all on activations, which is
-where the memory actually was.
+**The single mistake, three times: a number read off a process that had already
+died, treated as a measure of demand.** It only ever marks where that process ran
+out.
 
-The fix is to freeze everything upstream of the structure module, so that
-`z.requires_grad` is False and no graph is built through the trunk in the first
-place. It costs 1.6 M more frozen parameters out of 432 M, and it is a closer
-match to the strategy as described to Ernest — *freeze the trunk, fine-tune the
-structure module*. The original list was a partial version of that, and the gap
-between "partial" and "complete" was about 6 GB.
+### What is actually being changed, and why
 
-### It was not enough, and the telemetry says why
+| lever | effect | objective change? |
+|---|---|---|
+| `max_atoms: 4608 → 3904` | shrinks every atom tensor ~28%, including the `smooth_lddt` matrices | **none** -- valid-chain atoms max out at 3896, so nothing is cropped |
+| `offload_to_cpu: true → false` | removes a ~6.5 GB device-to-host copy per step that the full freeze made pointless | none |
+| full `freeze_trunk` list | no autograd graph through the trunk at all | it *is* the stated strategy |
+| `diffusion_multiplicity` (sweep) | scales `smooth_lddt_loss` linearly | raises gradient variance; see below |
+| `add_smooth_lddt_loss: false` | removes the dominant tensor family outright | **yes** -- drops an auxiliary loss term |
 
-With the full freeze applied, peak went from 13.09 GB to **13.61 GB**. Up, not
-down. fairscale confirms the freeze took effect -- `None of the inputs have
-requires_grad=True` is exactly what a trunk outside the autograd graph looks
-like -- so the conclusion is unavoidable: **the trunk was never where the memory
-was**, and the retained-block-inputs theory above was wrong too.
+**Not** `max_tokens: 384`. Tokens max out at 494, so 512 crops nothing today;
+384 would crop **588 of 1013 records (58%)** silently. That was listed as a lever
+in an earlier version of this document and in the notebook's OOM hint. It was
+wrong and it is removed.
 
-What `mem.jsonl` rules out, from one batch:
-
-```
-[mem] start alloc=1.61 trainable=280.1M frozen=152.1M
-[mem] b=0 alloc=2.09 peak=13.61 resv=13.80 frag=0.19-at-peak host_free=9.5 91.8s
-```
-
-* **Not the trunk** -- provably outside the graph, peak did not fall.
-* **Not fragmentation** -- at the peak, reserved exceeded allocated by ~0.2 GB.
-  The job genuinely wants 13.6 GB. (`frag=11.72` in the printed line is measured
-  *after* the OOM unwound and freed everything; it is the allocator still holding
-  cache, not fragmentation during the batch.)
-* **Not the optimizer** -- weights 1.61 GB measured, gradients 1.12 GB, Adam
-  2.24 GB when it appears at batch 16. About 2.7 GB of 13.6.
-
-That leaves the structure module, the one thing still being trained, whose
-dominant scaling knob is `diffusion_multiplicity`. At 16 every tensor in the
-score model is `repeat_interleave`d 16x (`modules/diffusion.py:187-229`).
-
-Notebook section 7b measures that scaling rather than assuming it: 3 batches at
-each of 16 / 8 / 4 / 2, reading peak and s/batch back out of `mem.jsonl`. The
-choice of multiplicity is then made from a table.
-
-Lowering it raises gradient variance and does not change what the model is asked
-to learn, so it is a defensible choice under a compute constraint -- and a
-**deviation that has to be reported**, since upstream Boltz-1 uses 16 and
-AlphaFold-3 uses 48. It should also cut seconds-per-batch roughly in proportion,
-which matters at least as much: at 85 s/batch the wall clock is the binding
-constraint on this experiment, not VRAM.
-
-### A note on method
-
-Four memory diagnoses on this project were made by reasoning from a traceback
-about what should be resident. Three were wrong. Each was wrong the same way:
-a number read off a process that had already died was treated as a measure of
-demand, when it only ever marked where that process ran out.
-
-`src/mem_probe.py` exists so that stops happening. It records allocated, peak,
-reserved and host-free memory per batch to `<output>/mem.jsonl`, and
-`train.py` now prints which top-level modules are still trainable after the
-freeze rather than only a parameter count -- the count is what concealed the
-incomplete freeze for three runs.
+On lowering `diffusion_multiplicity`: at `batch_size: 1` the `eps` averaging in
+`smooth_lddt_loss` reduces exactly to the mean of the per-copy lDDTs, so the
+objective is a plain M-sample Monte-Carlo estimate of a fixed target -- lowering M
+raises variance without changing the estimand. Two caveats belong next to that
+when reporting it: it holds *only* at batch_size 1 (the `view`/`repeat_interleave`
+ordering would average across different structures otherwise), and
+`synchronize_sigmas: true` means M is averaging over noise vectors at a **fixed**
+sigma, not over the sigma schedule.
 
 ## 3. Wall clock: the constraint that replaced memory
 
@@ -266,20 +236,36 @@ through config comments.
 
 | # | change | why | cost |
 |---|---|---|---|
-| 1 | `ema: false` | saves 1.81 GB | real. Boltz-1 trained with EMA and its released weights are EMA weights |
+| 1 | `ema: false` | saves **1.61 GiB** (432.21 M x 4 B). The 1.81 GB figure used earlier was 453.6 M params — the checkpoint's state_dict minus `confidence_module`, not the model that is actually instantiated with `confidence_prediction: false` | real. Boltz-1 trained with EMA and its released weights are EMA weights |
 | 2 | everything upstream of `structure_module` frozen | 152.2 M params; keeps `z.requires_grad` False so no graph is built through the trunk at all | a genuine strategy choice, endorsed by Ernest; freezing only msa+pairformer was a partial version that saved optimizer state but no activations |
-| 3 | `offload_to_cpu: true` | 48 pairformer block inputs (~6.4 GB) are retained for a backward pass a frozen trunk never runs | none numerically; costs PCIe traffic per step |
+| 3 | `offload_to_cpu: false` | with the full freeze those block inputs are never retained, so the offload copies ~6.5 GB host-ward per step for nothing | none; removes a cost |
 | 4 | `accumulate_grad_batches: 16` | 128 would mean ~1 optimizer step per epoch | effective batch 16, not 128. **Report this.** |
 | 5 | `save_top_k: 1` | a Lightning checkpoint here is ~4 GB (1.73 GB weights + 2.25 GB Adam); `-1` fills a 15 GB Drive in three epochs | keeps best + `last.ckpt`, which is what a resumable run needs |
 | 6 | `num_workers: 2` | free Colab has 2 vCPUs | possible dataloader stall; watch for it in the probe |
-| 7 | `BOLTZ_CHUNK_IN_TRAINING=1` | upstream disables triangular-attention chunking during training, forcing a 2.00 GiB allocation per call | none — identical math in slices of 128, at some speed cost |
+| 7 | `BOLTZ_CHUNK_IN_TRAINING=1` | upstream disables triangular-attention chunking during training, forcing a 2.00 GiB allocation per call | none — mathematically identical in slices of 128, at some speed cost (not bitwise identical: different cuBLAS kernel and reduction order) |
+| 8 | `max_atoms: 3904` | 4608 is upstream's general-PDB size; valid-chain atoms here max out at 3896 | **none** — zero samples cropped, ~28% smaller atom tensors |
+| 9 | `max_time: "00:09:30:00"` | a committed Kaggle run that overruns 12 h has its output upload skipped on a best-effort basis | none — bounds the session, not the model |
+| 10 | `ckpt_every_minutes: 30` | an epoch is ~2.4 h plus validation; upstream saves once per epoch, so a session could end having written nothing | none |
+| 11 | `validation_args.diffusion_samples: 3` | **CORRECTION, not a deviation.** Was 5; the 0.8827 baseline was measured at 3, and `val/lddt` is best-of-N (`model.py:704`). Leaving it at 5 would have beaten the baseline with no model improvement | restores comparability |
 
-Deliberately **not** changed: `max_tokens: 512`, `diffusion_multiplicity: 16`,
-the crop settings, and everything under `validation_args`. Those alter the
-objective or the metric, and a number produced under a changed metric cannot be
-compared against the pretrained baseline in `reports/BASELINE.md`. If the probe
-comes back OOM they are the next levers, in that order, and each one would have
-to be declared.
+Deliberately **not** changed: `max_tokens: 512` (tokens max at 494, so it crops
+nothing — and 384 would crop 58% of the set), the crop settings, and the rest of
+`validation_args`.
+
+`diffusion_multiplicity` is the next lever and section 7b of the notebook picks
+it from measurement; `add_smooth_lddt_loss: false` is the one after that. Both
+must be declared with any result.
+
+### The comparability rule this project nearly broke
+
+`val/lddt` is **best-of-N** (`model.py:704`:
+`best_idx = all_lddt_dict[key].reshape(-1, n_samples).argmax(dim=1)`), so
+`validation_args.diffusion_samples` is part of the metric's *definition*, not a
+compute knob. The baseline for this project is
+`configs/mhc1_baseline_subset30.yaml` — the config that actually produced
+0.8827 — **not** `configs/mhc1_baseline.yaml`, which has never been run and uses
+5. Any change to `validation_args` has to be made in both files or the comparison
+is meaningless, and it will be meaningless in the flattering direction.
 
 ## 5. Surviving the 12 h cap
 

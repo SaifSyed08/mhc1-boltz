@@ -42,25 +42,37 @@
 #                                     of a peptide in a groove rather than
 #                                     representation learning.
 #
-#  3. `offload_to_cpu: true`       -- kept ON, reversing an earlier call that was
-#                                     wrong. The reasoning for turning it off was
-#                                     that a free Colab box has only ~13 GB of
-#                                     host RAM, so offloading relocates the
-#                                     bottleneck. That is true on Colab and false
-#                                     on Kaggle, which has ~30 GB -- and it was
-#                                     beside the point, because the offload is
-#                                     not optional here.
+#  3. `offload_to_cpu: false`      -- OFF, and the history here is worth keeping
+#                                     because it explains why the earlier
+#                                     reasoning kept missing.
 #
-#                                     MEASURED on a T4: peak was 12.37 GiB of a
-#                                     14.56 GiB card, OOM. `checkpoint_wrapper`
-#                                     retains each block's INPUT, and the
-#                                     pairformer has 48 blocks each holding
-#                                     z[1,512,512,128] fp32 = 134 MB. That is
-#                                     ~6.4 GB of retained pair representations
-#                                     sitting in VRAM, which is most of the
-#                                     overshoot. Offloading moves them to host
-#                                     RAM. No numeric change -- it is the same
-#                                     tensors in a different place.
+#                                     fairscale's checkpoint_wrapper saves each
+#                                     block's inputs unconditionally
+#                                     (checkpoint_activations.py:278) but then
+#                                     DETACHES the output when nothing upstream
+#                                     and no local parameter requires grad
+#                                     (:297, :199/:210) -- which releases those
+#                                     saved inputs immediately.
+#
+#                                     Under the OLD partial freeze
+#                                     (msa_module + pairformer_module only),
+#                                     z was built by z_init_*/rel_pos/token_bonds
+#                                     from input_embedder, all still trainable,
+#                                     so nothing detached and all 48 blocks
+#                                     retained z[1,512,512,128] = 134 MB each,
+#                                     about 6.5 GB. Offloading that to host RAM
+#                                     was a real win.
+#
+#                                     Under the FULL freeze below, nothing
+#                                     upstream requires grad, the outputs detach,
+#                                     and those tensors are never retained at all.
+#                                     Offload now buys nothing -- while still
+#                                     paying a device-to-host copy of the same
+#                                     ~6.5 GB every step. That is a plausible
+#                                     chunk of the measured 85 s/batch.
+#
+#                                     Activation checkpointing stays on; it is the
+#                                     offload that is redundant.
 #
 #  4. `accumulate_grad_batches: 16` -- was 128. THIS IS THE IMPORTANT ONE, and it
 #                                     is a wall-clock decision, not a memory one.
@@ -100,6 +112,14 @@ trainer:
   max_epochs: -1
   accumulate_grad_batches: 16       # DEVIATION: was 128. See header note 4.
 
+  # Kaggle kills a committed run at 12 h, and its output upload after an overrun
+  # is explicitly best-effort -- Kaggle staff: "Sometimes it will work, sometimes
+  # it will get skipped." With max_epochs: -1 every session is GUARANTEED to
+  # overrun, so every session was gambling its own checkpoint. Stop cleanly with
+  # hours to spare for the ~8 GB of checkpoints to upload inside the window.
+  # Colab's cap is also 12 h. Override for a shorter session.
+  max_time: "00:09:30:00"           # d:hh:mm:ss
+
 wandb: null                           # no run tracking; the notebook tails the log instead
 
 output: ../runs/finetune_t4         # override from the CLI to point at Drive
@@ -108,6 +128,14 @@ resume: null
 debug: false                        # false so num_workers is honoured; wandb is off via `wandb: null`
 disable_checkpoint: false
 matmul_precision: null              # no-op on Turing (no TF32); set to `high` on Ampere+
+# LOCAL: wall-clock checkpointing. An epoch is ~2.4 h of training plus an
+# expensive validation pass, against a 12 h session cap -- upstream's
+# once-per-epoch save can leave a whole session with nothing written, and
+# ModelCheckpoint has no on_train_end hook in PL 2.4 to catch it on the way out.
+# 30 min bounds what a kill costs. Mutually exclusive with every_n_epochs; the
+# patched train.py picks one.
+ckpt_every_minutes: 30
+
 save_top_k: 1                        # DEVIATION: was -1 (keep every epoch).
                                     # A Lightning checkpoint here is ~4 GB --
                                     # 1.73 GB of weights (432M x fp32) plus
@@ -151,7 +179,20 @@ data:
 
   symmetries: ../data/assets/symmetry.pkl
   max_tokens: 512
-  max_atoms: 4608
+  # MEASURED over all 1013 manifest records, valid chains only: atoms max out at
+  # 3896 (p50 3157, p99 3648). Upstream's 4608 is sized for general PDB complexes
+  # and leaves ~18% of every atom tensor as pad on this dataset. 3904 is the
+  # smallest legal value (featurizer.py:851 asserts max_atoms % 32 == 0) that
+  # still crops ZERO samples, so this is not an objective change -- it is the
+  # same data with less padding. It shrinks every atom-level tensor by ~28%,
+  # including the [batch*multiplicity, n_atoms, n_atoms] matrices in
+  # smooth_lddt_loss that the OOM lands in.
+  #
+  # Do NOT lower max_tokens the same way: tokens max out at 494, so 512 already
+  # crops nothing, and 384 would crop 588 of 1013 records (58%) -- a real
+  # objective change. Residue counts say 545; the crop unit is tokens, and
+  # non-standard residues tokenize per-atom.
+  max_atoms: 3904
   max_seqs: 2048
   pad_to_max_tokens: true
   pad_to_max_atoms: true
@@ -202,14 +243,14 @@ model:
     pairwise_head_width: 32
     pairwise_num_heads: 4
     activation_checkpointing: true
-    offload_to_cpu: true            # MEASURED: needed. See header note 3.
+    offload_to_cpu: false           # REVERSED AGAIN -- see header note 3.
 
   pairformer_args:
     num_blocks: 48
     num_heads: 16
     dropout: 0.25
     activation_checkpointing: true
-    offload_to_cpu: true            # MEASURED: needed. See header note 3.
+    offload_to_cpu: false           # REVERSED AGAIN -- see header note 3.
 
   score_model_args:
     sigma_data: 16
@@ -222,7 +263,7 @@ model:
     atom_decoder_heads: 4
     conditioning_transition_layers: 2
     activation_checkpointing: true
-    offload_to_cpu: true            # MEASURED: needed. See header note 3.
+    offload_to_cpu: false           # REVERSED AGAIN -- see header note 3.
 
   confidence_prediction: false
   confidence_model_args:
@@ -260,7 +301,23 @@ model:
   validation_args:
     recycling_steps: 3
     sampling_steps: 200
-    diffusion_samples: 5
+    # CORRECTED 2026-09-16. Was 5, inherited from mhc1_finetune_8gb.yaml, which
+    # descends from the full baseline config. But the 0.8827 number this run is
+    # measured against came from configs/mhc1_baseline_subset30.yaml, which uses
+    # 3 -- and val/lddt is a BEST-OF-N metric, not a mean:
+    #
+    #   model.py:704
+    #     best_idx = all_lddt_dict[key].reshape(-1, n_samples).argmax(dim=1)
+    #
+    # Best-of-5 >= best-of-3 in expectation, always. Leaving this at 5 would have
+    # produced a fine-tuned lDDT that beat the baseline with zero model
+    # improvement, and there would have been no way to tell that from a real
+    # result. It also costs 67% more validation compute per epoch.
+    #
+    # The baseline for this project is mhc1_baseline_subset30.yaml, NOT
+    # mhc1_baseline.yaml (which has never been run). Any change here must be
+    # mirrored there, or the comparison stops meaning anything.
+    diffusion_samples: 3
     symmetry_correction: true
     run_confidence_sequentially: false
 

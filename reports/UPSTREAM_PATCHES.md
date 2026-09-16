@@ -12,9 +12,13 @@ reapply to a fresh checkout with
 `git -C boltz-src apply ../patches/boltz-v1.0.0-training-path.patch`. Item 2 is
 worked around in our own config and needs no source change.
 
-The patch touches five files: `scripts/train/train.py`,
-`data/feature/featurizer.py`, `model/modules/diffusion.py`,
+The patch touches **six** files: `scripts/train/train.py`,
+`data/feature/featurizer.py`, `model/model.py`, `model/modules/diffusion.py`,
 `model/modules/trunk.py` and `model/optim/scheduler.py`.
+
+Line references below are against **pristine upstream**, which is right for
+describing an upstream defect but means a few are off by a handful of lines in
+the patched tree you actually have checked out.
 
 ---
 
@@ -160,18 +164,46 @@ else:
 ```
 
 So training allocates the entire triangular-attention score tensor in one go. At
-our 512-token crop with 4 pairwise heads that is
+our 512-token crop with 4 pairwise heads (`trunk.py:129` `pairwise_num_heads`)
+that is
 
 ```
-1 x 4 x 512 x 512 x 512 x 4 bytes = 2.00 GiB
+[1, 512, 4, 512, 512] fp32 = 536,870,912 elements x 4 B = exactly 2.00 GiB
 ```
 
-in a single allocation, 48 times over in the pairformer plus 4 more in the MSA
-module. Every OOM traceback in `reports/ft_*.log` and the first T4 failure all
-name the same 2.00 GiB request.
+and each call materialises **two** of them -- `a = matmul(q, k)`
+(`primitives.py:219`) and the softmax output (`primitives.py:203`).
 
-Chunking is **numerically identical** -- the same math over slices of 128 -- so
-the only cost is speed. The patch adds an opt-in:
+Every `PairformerLayer` calls `tri_att_start` *and* `tri_att_end`
+(`trunk.py:642, :650`), and every `MSALayer` does the same (`trunk.py:413, :421`),
+so a single trunk pass makes **96** such calls in the pairformer and **8** in the
+MSA module -- sequentially, not concurrently -- and the trunk runs
+`recycling_steps + 1` times.
+
+Two corrections to what an earlier version of this document claimed:
+
+* **It is the MSA module that actually dies, not the pairformer.** All four fatal
+  tracebacks in `reports/ft_*.log` go through `MSAModule.forward` → `MSALayer`,
+  and the pairformer never appears. The MSA module runs *first* in the trunk
+  (`model.py:304`) and carries `m [1, 2048, 512, 64]` on top of `z`, so it
+  exhausts the card before the pairformer is reached.
+* **The logs do not all name 2.00 GiB.** They name 730 MiB (`ft_final`),
+  1024 MiB (`ft_chunk`, an outer-product-mean tensor at
+  `outer_product_mean.py:92` -- a different tensor in a different layer),
+  2.00 GiB (`ft_msa256`, `ft_msa256_freeze`) and 864 MiB (`ft_mult`, inside the
+  *chunked* path). Chunking helps; it is not sufficient on an 8 GB card.
+
+One limit worth knowing: `chunk_layer` is not itself gradient-checkpointed, so
+when triangular attention runs with grad enabled -- during fairscale's backward
+recomputation -- all chunks' intermediates are live at once and chunking saves
+nothing. It helps the forward, and it helps unconditionally only when the trunk
+is fully frozen.
+
+Chunking is **mathematically identical** -- `chunk_layer`
+(`triangular_attention/utils.py:258`) partitions the row dimension and each slice
+does full-length attention, an exact partition rather than an online-softmax
+approximation. It is not guaranteed *bitwise* identical: 128 rows instead of 512
+can select a different cuBLAS kernel and reduction order. The patch adds an opt-in:
 
 ```python
 chunk_in_training = os.environ.get("BOLTZ_CHUNK_IN_TRAINING") == "1"
@@ -184,6 +216,28 @@ set on every training subprocess launched by `notebooks/mhc1_boltz_t4.ipynb`.
 Upstream would presumably take a config flag rather than an environment
 variable; the env var keeps the diff to two lines per call site and avoids
 threading a new argument through `Boltz1.__init__`.
+
+---
+
+## 6. The OOM handler discards the only useful information
+
+`model.py` wraps `structure_module.compute_loss` in `try/except Exception` and
+prints `f"Skipping batch {batch_idx} due to error: {e}"`. For a CUDA OOM that is
+a requested size and a total, with no location.
+
+That matters more than it looks, because of what the `try` does **not** cover.
+`out = self(...)` -- the input embedder, the MSA module, all 48 pairformer
+blocks, and the diffusion score model -- is outside it, as is `distogram_loss`.
+So any batch that prints "Skipping batch ... out of memory" is a batch whose
+**forward pass completed**. The OOM is in the diffusion loss, every time.
+
+Four memory diagnoses on this project were made by inferring a location from that
+one-line string. Three were wrong, and one of them inverted this exact fact,
+describing a `compute_loss` failure as having "died early in the trunk forward".
+
+The patch prints the traceback, the effective `diffusion_multiplicity`, the atom
+count, and the resulting `[mult, n_atoms, n_atoms]` tensor size. On a path that
+is already failing, that costs nothing.
 
 ---
 

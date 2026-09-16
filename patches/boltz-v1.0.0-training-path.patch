@@ -1,16 +1,23 @@
 diff --git a/scripts/train/train.py b/scripts/train/train.py
-index 7a6491d..6812236 100644
+index 7a6491d..5e729a1 100644
 --- a/scripts/train/train.py
 +++ b/scripts/train/train.py
-@@ -72,6 +72,7 @@ class TrainConfig:
+@@ -1,4 +1,5 @@
+ import os
++from datetime import timedelta
+ import string
+ import sys
+ from dataclasses import dataclass
+@@ -72,6 +73,8 @@ class TrainConfig:
      find_unused_parameters: Optional[bool] = False
      save_top_k: Optional[int] = 1
      validation_only: bool = False
 +    freeze_trunk: Optional[list] = None   # LOCAL PATCH: module names to freeze
++    ckpt_every_minutes: Optional[int] = None  # LOCAL PATCH: wall-clock checkpointing
      debug: bool = False
      strict_loading: bool = True
      load_confidence_from_trunk: Optional[bool] = False
-@@ -161,9 +162,60 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -161,18 +164,99 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          if cfg.load_confidence_from_trunk:
              os.remove(file_path)
  
@@ -69,13 +76,43 @@ index 7a6491d..6812236 100644
 +    except Exception as exc:  # never let telemetry break a run
 +        print(f"[mem_probe] disabled: {type(exc).__name__}: {exc}")
      if not cfg.disable_checkpoint:
-         mc = ModelCheckpoint(
+-        mc = ModelCheckpoint(
++        # LOCAL PATCH (see reports/UPSTREAM_PATCHES.md): two changes, both about
++        # surviving a session-limited run.
++        #
++        # 1. dirpath. Upstream passes no `dirpath`, so with no logger configured
++        #    (`wandb: null`) Lightning resolves it to
++        #    `default_root_dir / "checkpoints"` (model_checkpoint.py
++        #    __resolve_ckpt_dir). Checkpoints then land one directory deeper than
++        #    `output`, every doc and every resume path in this repo pointed at
++        #    `output/last.ckpt`, and resume silently never fired -- it printed
++        #    "fresh start from the pretrained checkpoint" and threw away the
++        #    previous session's optimizer state. Pinning dirpath makes the
++        #    documented layout the real one.
++        #
++        # 2. ckpt_every_minutes. Upstream saves once per epoch. An epoch here is
++        #    ~2.4 h of training plus an expensive validation pass, against a 12 h
++        #    session cap -- so a session can end having written NOTHING, and
++        #    ModelCheckpoint has no on_train_end/on_fit_end hook in PL 2.4 to
++        #    catch it on the way out. A wall-clock interval bounds the loss from
++        #    a kill to that interval. It is mutually exclusive with
++        #    every_n_epochs (MisconfigurationException), hence the branch.
++        ckpt_kwargs = dict(
              monitor="val/lddt",
-@@ -172,7 +224,10 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+             save_top_k=cfg.save_top_k,
+             save_last=True,
              mode="max",
-             every_n_epochs=1,
+-            every_n_epochs=1,
++            dirpath=dirpath,
          )
 -        callbacks = [mc]
++        every_min = getattr(cfg, "ckpt_every_minutes", None)
++        if every_min:
++            ckpt_kwargs["train_time_interval"] = timedelta(minutes=every_min)
++            print(f"[checkpoint] last.ckpt every {every_min} min -> {dirpath}")
++        else:
++            ckpt_kwargs["every_n_epochs"] = 1
++        mc = ModelCheckpoint(**ckpt_kwargs)
 +        # LOCAL PATCH: was `callbacks = [mc]`, which discards anything already
 +        # registered -- including the val_progress dump added above. Appending
 +        # keeps both.
