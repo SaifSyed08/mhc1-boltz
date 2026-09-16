@@ -289,6 +289,40 @@ The run will be interrupted. The design assumes it:
   in the run directory.
 * The run directory lives on Drive (Colab) or `/kaggle/working` (Kaggle), not on
   the session filesystem.
+
+### Kaggle's two storage limits, and why the layout changed
+
+`/kaggle/working` is capped at **20 GiB** and is simultaneously the staging area
+for a version's saved output. Putting the whole repo there — 3.8 GB of
+re-downloadable assets plus a `boltz-src` checkout — spent a fifth of that budget
+on files that get re-fetched anyway, and left them competing with ~8 GB of
+checkpoints (`best` + `last`, ~4 GB each).
+
+So the repo now goes to `/kaggle/tmp` (~60 GiB, not persisted, exactly right for
+things that can be fetched again) and only `runs/t4` stays in `/kaggle/working`.
+
+### Resuming on Kaggle is a manual chain, not a re-run
+
+This is the part that genuinely differs from Colab and is easy to get wrong.
+`/kaggle/working` starts **empty in every session**. It is not shared storage; it
+is one version's output staging area. `last.ckpt` from a finished 12 h run is not
+sitting there waiting for the next one.
+
+Continuing a run means:
+
+1. Confirm `runs/t4/last.ckpt` is in the finished version's **Output** (requires
+   "Always save output" on the version).
+2. In the next version, **+ Add Input → Your Work → Notebooks**, attaching the
+   previous notebook's output. It mounts read-only under `/kaggle/input`.
+3. Run normally — section 8 searches `/kaggle/input/**/last.ckpt` and picks it up.
+
+Each 12 h session is one link in a chain and the chain is hand-assembled. At
+~32 optimizer steps per session, a week of this is a handful of manual
+reattachments, which is worth knowing before planning around it.
+
+Also: **Save & Run All executes every cell from the top**, so an unpinned
+committed run repeats the ~20 minute sweep in 7b before it starts training.
+`MULTIPLICITY_OVERRIDE` in that cell exists to skip it.
 * The notebook's section 8 detects `last.ckpt` and passes it as `resume=`. When
   `resume` is set, `pretrained` is correctly ignored
   (`scripts/train/train.py:130`) — you want the optimizer state back, not a fresh
