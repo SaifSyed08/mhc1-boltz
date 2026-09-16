@@ -142,12 +142,56 @@ match to the strategy as described to Ernest — *freeze the trunk, fine-tune th
 structure module*. The original list was a partial version of that, and the gap
 between "partial" and "complete" was about 6 GB.
 
-Whether that is enough is now a question for `mem.jsonl` rather than for
-arithmetic. Three OOMs on this project were diagnosed by reasoning about what
-should be resident and two of those diagnoses were wrong, both times by reading a
-number off a process that had already died and treating it as demand.
-`src/mem_probe.py` records allocated, peak, reserved and host-free memory per
-batch, so the next one is answered from a file.
+### It was not enough, and the telemetry says why
+
+With the full freeze applied, peak went from 13.09 GB to **13.61 GB**. Up, not
+down. fairscale confirms the freeze took effect -- `None of the inputs have
+requires_grad=True` is exactly what a trunk outside the autograd graph looks
+like -- so the conclusion is unavoidable: **the trunk was never where the memory
+was**, and the retained-block-inputs theory above was wrong too.
+
+What `mem.jsonl` rules out, from one batch:
+
+```
+[mem] start alloc=1.61 trainable=280.1M frozen=152.1M
+[mem] b=0 alloc=2.09 peak=13.61 resv=13.80 frag=0.19-at-peak host_free=9.5 91.8s
+```
+
+* **Not the trunk** -- provably outside the graph, peak did not fall.
+* **Not fragmentation** -- at the peak, reserved exceeded allocated by ~0.2 GB.
+  The job genuinely wants 13.6 GB. (`frag=11.72` in the printed line is measured
+  *after* the OOM unwound and freed everything; it is the allocator still holding
+  cache, not fragmentation during the batch.)
+* **Not the optimizer** -- weights 1.61 GB measured, gradients 1.12 GB, Adam
+  2.24 GB when it appears at batch 16. About 2.7 GB of 13.6.
+
+That leaves the structure module, the one thing still being trained, whose
+dominant scaling knob is `diffusion_multiplicity`. At 16 every tensor in the
+score model is `repeat_interleave`d 16x (`modules/diffusion.py:187-229`).
+
+Notebook section 7b measures that scaling rather than assuming it: 3 batches at
+each of 16 / 8 / 4 / 2, reading peak and s/batch back out of `mem.jsonl`. The
+choice of multiplicity is then made from a table.
+
+Lowering it raises gradient variance and does not change what the model is asked
+to learn, so it is a defensible choice under a compute constraint -- and a
+**deviation that has to be reported**, since upstream Boltz-1 uses 16 and
+AlphaFold-3 uses 48. It should also cut seconds-per-batch roughly in proportion,
+which matters at least as much: at 85 s/batch the wall clock is the binding
+constraint on this experiment, not VRAM.
+
+### A note on method
+
+Four memory diagnoses on this project were made by reasoning from a traceback
+about what should be resident. Three were wrong. Each was wrong the same way:
+a number read off a process that had already died was treated as a measure of
+demand, when it only ever marked where that process ran out.
+
+`src/mem_probe.py` exists so that stops happening. It records allocated, peak,
+reserved and host-free memory per batch to `<output>/mem.jsonl`, and
+`train.py` now prints which top-level modules are still trainable after the
+freeze rather than only a parameter count -- the count is what concealed the
+incomplete freeze for three runs.
 
 ## 3. Wall clock: the constraint that replaced memory
 
