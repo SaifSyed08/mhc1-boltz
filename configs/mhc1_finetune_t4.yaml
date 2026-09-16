@@ -304,6 +304,33 @@ model:
     guidance_update: false
     num_gd_steps: 16
 
+# MEASURED (2026-09-15): freezing only msa_module + pairformer_module does NOT
+# stop their activations being retained. Autograd retains activations based on
+# whether a tensor is needed for SOME backward pass, not on whether the local
+# module's weights are trainable. z entering the pairformer is built by
+# z_init_1/z_init_2/rel_pos/token_bonds from input_embedder output -- all still
+# trainable -- so gradients must flow back THROUGH all 48 frozen blocks to reach
+# them, and every block's activations are kept to make that possible.
+#
+# Result: 13.09 GiB on a 14.56 GiB card, OOM at batch 24. The freeze saved the
+# optimizer state and bought nothing on activations.
+#
+# Freezing everything upstream of the structure module makes z.requires_grad
+# False, so no graph is built through the trunk at all and the activations are
+# simply never kept. Cost: 1.6M more frozen params out of 432M. What stays
+# trainable is structure_module (280M) + distogram_module (8.3K), which IS the
+# strategy as described to Ernest -- "freeze the trunk and fine-tune only the
+# structure module". The earlier list was a partial version of that.
 freeze_trunk:                         # DEVIATION: see header note 2.
+  - input_embedder
+  - s_init
+  - z_init_1
+  - z_init_2
+  - token_bonds
+  - rel_pos
+  - s_norm
+  - z_norm
+  - s_recycle
+  - z_recycle
   - msa_module
   - pairformer_module

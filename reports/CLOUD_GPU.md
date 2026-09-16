@@ -114,6 +114,41 @@ Neither is a recipe deviation. Both were available all along; neither was applie
 because the 8 GB failure was misread as "needs a bigger card" when a good part of
 it was "needs the memory knobs upstream already has".
 
+### And a third thing, which was the actual bug
+
+With both of the above applied the run reached batch 24 and then OOM'd at
+**13.09 GiB** — higher than before. The growth is explained: Adam allocates
+`exp_avg` and `exp_avg_sq` lazily on the *first optimizer step*, which with
+`accumulate_grad_batches: 16` is batch 16, not batch 0. That is ~2.25 GB
+appearing a third of the way into an epoch, and it is why a run can look healthy
+for twenty batches and then die.
+
+But the underlying problem was the freeze itself. **Freezing a module does not
+stop its activations being retained.** Autograd keeps an activation if it is
+needed for *some* backward pass, not if the local module's weights happen to be
+trainable. `z` entering the pairformer is built by `z_init_1`, `z_init_2`,
+`rel_pos` and `token_bonds` from `input_embedder` output — all of which were
+still trainable. So gradients had to flow back through all 48 frozen blocks to
+reach them, and every block's activations were kept to make that possible.
+
+`freeze_trunk: [msa_module, pairformer_module]` therefore saved the optimizer
+state for 150.6 M parameters and bought nothing at all on activations, which is
+where the memory actually was.
+
+The fix is to freeze everything upstream of the structure module, so that
+`z.requires_grad` is False and no graph is built through the trunk in the first
+place. It costs 1.6 M more frozen parameters out of 432 M, and it is a closer
+match to the strategy as described to Ernest — *freeze the trunk, fine-tune the
+structure module*. The original list was a partial version of that, and the gap
+between "partial" and "complete" was about 6 GB.
+
+Whether that is enough is now a question for `mem.jsonl` rather than for
+arithmetic. Three OOMs on this project were diagnosed by reasoning about what
+should be resident and two of those diagnoses were wrong, both times by reading a
+number off a process that had already died and treating it as demand.
+`src/mem_probe.py` records allocated, peak, reserved and host-free memory per
+batch, so the next one is answered from a file.
+
 ## 3. Wall clock: the constraint that replaced memory
 
 Memory stops being the problem on a T4. Time becomes it, and it is worth being
@@ -121,10 +156,41 @@ blunt about the size of the change.
 
 A T4 is Turing. It has **no bf16 and no TF32** — the two cheap precision wins
 available on anything Ampere or newer simply do not exist on this card, so
-`precision: 32` runs on plain CUDA cores at ~8.1 TFLOPS. The laptop 4060 is Ada
-at ~11.6 TFLOPS fp32. Expect the T4 to be roughly **1.4x slower per batch** than
-the 4060 was, before considering that the 4060 never completed a clean batch to
-measure.
+`precision: 32` runs on plain CUDA cores at ~8.1 TFLOPS.
+
+### Measured, 2026-09-15
+
+The first run to get past the trunk did 24 clean batches in 34m06s:
+
+**85 s per training batch**, with chunked triangular attention and the trunk
+frozen. Everything below follows from that one number.
+
+| | |
+|---|---|
+| per optimizer step (`accumulate_grad_batches: 16`) | 22.7 min |
+| per epoch (`samples_per_epoch: 100`) | 2.4 h |
+| one 12 h Kaggle session | ~5 epochs, **~32 optimizer steps** |
+| a 30 h Kaggle week | ~12.7 epochs, **~79 optimizer steps** |
+
+Validation is not in those figures and is expensive on top.
+
+Thirty-two optimizer steps per session is thin, and it is worth saying plainly
+what it does and does not support. It is enough to move a structure module that
+starts from good pretrained weights, and to see whether validation lDDT moves in
+the right direction. It is not enough to train anything to convergence, and any
+plot of it will be a short one. The alternative to a thin fine-tune here is no
+fine-tune, so it is still worth running — but the sample size belongs in the
+writeup next to the result.
+
+### One failure mode to watch for
+
+`train.py` catches a CUDA OOM per batch and prints `Skipping batch N due to
+error`, then continues. That is good for robustness and bad for interpretability:
+a skipped batch contributes nothing to the accumulation, so a run that limps
+through with intermittent skips has a silently varying effective batch size.
+
+If `mem.jsonl` shows skips, the run is not describable as "effective batch 16"
+and the right move is to fix the memory rather than let it ride.
 
 fp16 AMP is available on a T4 and is not used. AlphaFold3-style triangular
 attention is softmax over large additive biases, which is the canonical way to
@@ -157,7 +223,7 @@ through config comments.
 | # | change | why | cost |
 |---|---|---|---|
 | 1 | `ema: false` | saves 1.81 GB | real. Boltz-1 trained with EMA and its released weights are EMA weights |
-| 2 | trunk frozen | saves gradients, Adam moments and retained activations for 150.6 M params | a genuine strategy choice, endorsed by Ernest; not only a memory hack |
+| 2 | everything upstream of `structure_module` frozen | 152.2 M params; keeps `z.requires_grad` False so no graph is built through the trunk at all | a genuine strategy choice, endorsed by Ernest; freezing only msa+pairformer was a partial version that saved optimizer state but no activations |
 | 3 | `offload_to_cpu: true` | 48 pairformer block inputs (~6.4 GB) are retained for a backward pass a frozen trunk never runs | none numerically; costs PCIe traffic per step |
 | 4 | `accumulate_grad_batches: 16` | 128 would mean ~1 optimizer step per epoch | effective batch 16, not 128. **Report this.** |
 | 5 | `save_top_k: 1` | a Lightning checkpoint here is ~4 GB (1.73 GB weights + 2.25 GB Adam); `-1` fills a 15 GB Drive in three epochs | keeps best + `last.ckpt`, which is what a resumable run needs |

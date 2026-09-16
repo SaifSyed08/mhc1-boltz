@@ -1,5 +1,5 @@
 diff --git a/scripts/train/train.py b/scripts/train/train.py
-index 7a6491d..8541898 100644
+index 7a6491d..6812236 100644
 --- a/scripts/train/train.py
 +++ b/scripts/train/train.py
 @@ -72,6 +72,7 @@ class TrainConfig:
@@ -10,7 +10,7 @@ index 7a6491d..8541898 100644
      debug: bool = False
      strict_loading: bool = True
      load_confidence_from_trunk: Optional[bool] = False
-@@ -161,9 +162,39 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -161,9 +162,60 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          if cfg.load_confidence_from_trunk:
              os.remove(file_path)
  
@@ -33,6 +33,17 @@ index 7a6491d..8541898 100644
 +        print(f"[freeze_trunk] froze {freeze}: {frozen/1e6:.1f}M frozen, "
 +              f"{trainable/1e6:.1f}M trainable")
 +
++        # Name what is STILL trainable, not just the count. Freezing a module
++        # does not stop its activations being retained: autograd keeps them if
++        # anything upstream still needs a gradient, so a single trainable module
++        # feeding the trunk forces every frozen block's activations to be kept
++        # for the backward pass that reaches it. That cost 13 GiB and an OOM
++        # here before anyone noticed input_embedder and z_init_* were still in
++        # the graph. The count alone hid it; the names make it obvious.
++        still = sorted({n.split(".")[0] for n, q in model_module.named_parameters()
++                        if q.requires_grad})
++        print(f"[freeze_trunk] still trainable: {still}")
++
      # Create checkpoint callback
      callbacks = []
      dirpath = cfg.output
@@ -47,10 +58,20 @@ index 7a6491d..8541898 100644
 +        callbacks.append(ValProgressDump(Path(cfg.output) / "val_state.json"))
 +    except Exception as exc:  # never let telemetry break a run
 +        print(f"[val_progress] disabled: {type(exc).__name__}: {exc}")
++
++    # LOCAL PATCH: per-batch GPU memory telemetry. Peak VRAM is the number this
++    # project keeps getting wrong by inferring it from a dead process, so record
++    # it live. See src/mem_probe.py.
++    try:
++        from mem_probe import MemProbe
++
++        callbacks.append(MemProbe(Path(cfg.output) / "mem.jsonl"))
++    except Exception as exc:  # never let telemetry break a run
++        print(f"[mem_probe] disabled: {type(exc).__name__}: {exc}")
      if not cfg.disable_checkpoint:
          mc = ModelCheckpoint(
              monitor="val/lddt",
-@@ -172,7 +203,10 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -172,7 +224,10 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
              mode="max",
              every_n_epochs=1,
          )
