@@ -10,9 +10,8 @@ TACC requires multi-factor authentication on every login: a TACC password plus a
 and the first login is the thing that would place one. So job submission is
 something you run; these scripts exist so it is copy-paste rather than authoring.
 
-If you want later steps automatable, set up an SSH key on your first login (see
-step 2) — after that, `ssh ls6` works without the token prompt and a script can
-drive it.
+And it should stay that way: see step 2 for why setting up SSH keys to automate
+this is a bad trade on LS6 specifically.
 
 ## Step 1 — find your allocation name
 
@@ -28,22 +27,42 @@ failure; the unfriendly one is an indented `#SBATCH` line silently truncating th
 directive block so `-A` never gets read at all (see the note at the top of
 `scripts/ls6_smoke.slurm`).
 
-## Step 2 — optional, but do it now if you want automation later
+## Step 2 — do NOT set up SSH keys the usual way
 
-From the laptop:
+An earlier version of this document said to run `ssh-keygen` locally and then
+`ssh-copy-id` to LS6. **Do not do that.** From the Lonestar6 user guide:
+
+> Do not run the `ssh-keygen` command on Lonestar6. This command will create and
+> configure a key pair that will interfere with the execution of job scripts in
+> the batch system.
+
+LS6 auto-generates a key pair in `~/.ssh` that the **batch system itself uses**.
+`ssh-copy-id` writes into that same directory. It does not run `ssh-keygen`
+remotely, so it is not the exact thing the warning names — but it modifies the
+one directory TACC tells you to leave alone, and the failure mode is job scripts
+breaking for reasons unrelated to your code, which is a miserable thing to debug.
+
+Not worth it here. Submitting a job is a handful of commands a few times a day;
+the convenience does not justify touching that directory.
+
+**If you have already broken it**, TACC documents the recovery:
 
 ```
-ssh-keygen -t ed25519 -C "mhc1-ls6"
-ssh-copy-id <username>@ls6.tacc.utexas.edu     # asks for password + token once
+mv .ssh dot.ssh.old        # on LS6
+# log out, then log back in -- the system regenerates a correct key pair
 ```
 
-Then add to `~/.ssh/config`:
+### Other connection notes from the user guide
 
 ```
-Host ls6
-    HostName ls6.tacc.utexas.edu
-    User <username>
+ssh username@ls6.tacc.utexas.edu               # rotates across login1-3
+ssh username@login2.ls6.tacc.utexas.edu        # pin a specific login node
+ssh -X username@ls6.tacc.utexas.edu            # X11, for GUI applications
+ssh -vvv username@ls6.tacc.utexas.edu          # verbose, for a help ticket
 ```
+
+Pinning a login node is worth knowing: if you stage 3.8 GB of assets in a
+`screen`/`tmux` session on login2, you need login2 again to get back to it.
 
 ## Step 3 — the smoke test
 
