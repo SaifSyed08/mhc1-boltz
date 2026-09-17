@@ -118,7 +118,17 @@ trainer:
   # overrun, so every session was gambling its own checkpoint. Stop cleanly with
   # hours to spare for the ~8 GB of checkpoints to upload inside the window.
   # Colab's cap is also 12 h. Override for a shorter session.
+  # NOTE: the notebook OVERRIDES this from the command line with whatever is
+  # actually left in the session. This value is only the fallback for running
+  # train.py by hand. Counted from TRAINER start, not session start -- the two
+  # are not the same once asset downloads, probes and a sweep have run first.
   max_time: "00:09:30:00"           # d:hh:mm:ss
+
+  # Validation is 30 samples at ~130 s each = ~65 min, against ~2 h of training
+  # per epoch. Over a third of every session goes to measurement. Validating
+  # every other epoch does not change the metric at all -- same 30 samples, same
+  # validation_args -- it just measures half as often.
+  check_val_every_n_epoch: 2
 
 wandb: null                           # no run tracking; the notebook tails the log instead
 
