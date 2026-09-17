@@ -13,19 +13,47 @@ something you run; these scripts exist so it is copy-paste rather than authoring
 And it should stay that way: see step 2 for why setting up SSH keys to automate
 this is a bad trade on LS6 specifically.
 
-## Step 1 — find your allocation name
-
-On a login node:
+## Step 1 — the allocation
 
 ```
-/usr/local/etc/taccinfo
+user     saifsyed
+project  MCB26003        (Kozakov group startup allocation, unix group G-828624)
+compute  161,020 SUs, 49% used  ->  ~82,120 remaining
+storage  20,480 GB, 0% used
 ```
 
-It prints a table with a **Project** column. That string goes in `-A` in every
-job script. Without it the job is rejected at submit time, which is the friendly
-failure; the unfriendly one is an indented `#SBATCH` line silently truncating the
-directive block so `-A` never gets read at all (see the note at the top of
-`scripts/ls6_smoke.slurm`).
+`MCB26003` is already set as `-A` in `scripts/ls6_smoke.slurm`. Re-check the
+balance any time with `/usr/local/etc/taccinfo`.
+
+### Compute is no longer the constraint
+
+GPU nodes bill **4x SU/hour**, so ~82,120 SUs is about **20,500 GPU node-hours**.
+Against the arithmetic in `reports/CLOUD_GPU.md` — ~27 GPU-hours for 100 optimizer
+steps on a T4 — and an A100 somewhere between 2.4x and 10x a T4 depending on
+whether TF32 is enabled:
+
+| | A100 fp32 (conservative) | A100 + TF32 |
+|---|---|---|
+| 100 optimizer steps | ~45 SU | ~15 SU |
+| **1000 optimizer steps** | **~450 SU** | **~155 SU** |
+| as a share of the balance | 0.55% | 0.19% |
+
+A thousand optimizer steps — roughly 30x what the entire Kaggle effort produced —
+costs well under one percent of the remaining allocation. **The thing that has
+shaped every decision in this project for two weeks has stopped being a
+constraint.** Plan the experiment you actually want, not the one that fits.
+
+Two caveats that do still apply:
+
+* **This is a shared group allocation, not a personal one.** It is 49% used
+  already and the other 51% is not all yours. A few hundred SUs is noise; a
+  runaway job that sits in a loop for 48 hours on a GPU node is 768 SU. Set
+  `-t` deliberately on every job.
+* **`precision: 32` leaves most of an A100 on the table.** TF32 and bf16 are both
+  available on Ampere and neither existed on the T4. `matmul_precision: high`
+  enables TF32 for fp32 matmuls and is close to free; `precision: bf16-mixed` is a
+  bigger win and a bigger change. Neither should be turned on in the same run as a
+  recipe change — see the "one thing at a time" note below.
 
 ## Step 2 — do NOT set up SSH keys the usual way
 
@@ -75,7 +103,6 @@ ssh ls6
 cd $WORK
 git clone https://github.com/SaifSyed08/mhc1-boltz.git
 cd mhc1-boltz
-sed -i 's/SET_YOUR_ALLOCATION_HERE/<your-project>/' scripts/ls6_smoke.slurm
 sbatch scripts/ls6_smoke.slurm
 squeue -u $USER
 ```

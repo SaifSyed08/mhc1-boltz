@@ -33,7 +33,7 @@
 #SBATCH -N 1                           # one node
 #SBATCH -n 1                           # one task
 #SBATCH -t 00:10:00                    # 10 min; billing rounds up to 15 anyway
-#SBATCH -A SET_YOUR_ALLOCATION_HERE    # <-- required, see above
+#SBATCH -A MCB26003                    # Kozakov group startup allocation
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=saif.s@utexas.edu
 
