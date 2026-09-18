@@ -80,6 +80,55 @@ mv .ssh dot.ssh.old        # on LS6
 # log out, then log back in -- the system regenerates a correct key pair
 ```
 
+### Windows: "Corrupted MAC on input" on the first connect
+
+Symptom, from PowerShell, immediately after accepting the host key:
+
+```
+Corrupted MAC on input.
+ssh_dispatch_run_fatal: Connection to 129.114.62.202 port 22:
+    message authentication code incorrect
+```
+
+This is a **Windows OpenSSH bug**, not a TACC problem and not an attack. The
+Windows client negotiates `umac-128-etm@openssh.com` incorrectly because of the
+outdated OpenSSL it ships with. Force a different MAC:
+
+```
+ssh -m hmac-sha2-512 saifsyed@ls6.tacc.utexas.edu
+```
+
+Fallbacks: `-m hmac-sha2-256-etm@openssh.com`, or one of the Windows clients the
+TACC guide recommends (Bitvise, PuTTY, SecureCRT).
+
+Worth understanding rather than just working around, because it *looks* alarming:
+the host key verified fine — a MAC failure happens afterwards, on an individual
+encrypted packet. An attacker cannot forge those, which is exactly why the client
+aborts instead of continuing. This error is the integrity check working.
+
+### Verifying the host key on first connect
+
+There is no fingerprint published anywhere findable, so verify out of band. As of
+2026-09-17 the ED25519 key is:
+
+```
+256 SHA256:6NlyjFyyGSDXrIeyKa1S6f01Y4T7CUfWfbqUGxn+Euw  ls6.tacc.utexas.edu
+```
+
+obtainable without logging in via `ssh-keyscan -t ed25519 ls6.tacc.utexas.edu |
+ssh-keygen -lf -`. That is only a second look down the same network path, so it
+confirms you read the prompt correctly rather than proving there is no
+man-in-the-middle. Stronger: run `ssh-keygen -lf
+/etc/ssh/ssh_host_ed25519_key.pub` from a portal shell, which reaches you over
+HTTPS and is genuinely independent.
+
+### A note on where commands run
+
+The submit commands in this document are for the **LS6 shell**, which is bash.
+Running them in local PowerShell fails — Windows PowerShell 5.1 has no `&&`
+operator, so the whole line fails to parse. That is a lucky failure (nothing
+executes) but an easy one to misread as a TACC problem.
+
 ### Other connection notes from the user guide
 
 ```
