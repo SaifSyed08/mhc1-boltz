@@ -20,13 +20,25 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO"
 mkdir -p logs
 
-BASE=$(sbatch --parsable scripts/ls6_baseline.slurm)
+# TACC's sbatch wrapper prints a "Welcome to the Lonestar6 Supercomputer" banner
+# and a list of pre-submit checks TO STDOUT, so --parsable does NOT give a bare
+# job id -- $(sbatch --parsable ...) captures the whole banner with the number on
+# the end. Feeding that to --dependency=afterok: fails with the unhelpful
+# "Job dependency problem". Take the last all-digits line instead.
+submit() {
+    sbatch --parsable "$@" | grep -oE '^[0-9]+$' | tail -1
+}
+
+BASE=$(submit scripts/ls6_baseline.slurm)
+[ -n "$BASE" ] || { echo "  !! baseline did not submit"; exit 1; }
 echo "  [1] baseline          job $BASE"
 
-FT1=$(sbatch --parsable --dependency=afterok:"$BASE" scripts/ls6_finetune.slurm)
+FT1=$(submit --dependency=afterok:"$BASE" scripts/ls6_finetune.slurm)
+[ -n "$FT1" ] || { echo "  !! fine-tune did not submit"; exit 1; }
 echo "  [2] fine-tune         job $FT1   (starts only if the baseline reproduces)"
 
-FT2=$(sbatch --parsable --dependency=afterany:"$FT1" scripts/ls6_finetune.slurm)
+FT2=$(submit --dependency=afterany:"$FT1" scripts/ls6_finetune.slurm)
+[ -n "$FT2" ] || { echo "  !! resume job did not submit"; exit 1; }
 echo "  [3] fine-tune resume  job $FT2   (continues from last.ckpt)"
 
 cat <<MSG
