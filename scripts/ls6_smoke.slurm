@@ -8,7 +8,13 @@
 # much easier to debug apart.
 #
 # SUBMIT FROM A LOGIN NODE:
+#   mkdir -p logs                       # REQUIRED FIRST -- see below
 #   sbatch scripts/ls6_smoke.slurm
+#
+# The logs/ directory must exist BEFORE submitting. Slurm opens the -o and -e
+# files when the job launches, which is before the script body runs, so a
+# `mkdir -p logs` inside the script is too late -- the job fails immediately with
+# no output, and the absence of output is the only symptom.
 #
 # BEFORE FIRST USE, set -A below to your allocation name. Find it with:
 #   /usr/local/etc/taccinfo
@@ -38,7 +44,7 @@
 #SBATCH --mail-user=saif.s@utexas.edu
 
 set -euo pipefail
-mkdir -p logs
+mkdir -p logs   # harmless; the real one runs before sbatch
 
 echo "=================== node ==================="
 hostname
