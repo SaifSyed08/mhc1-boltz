@@ -3,6 +3,14 @@
 #   cd $WORK/mhc1-boltz && git pull && bash scripts/ls6_report.sh
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+echo "=================== prerequisites =========="
+for x in .venv-ls6/bin/activate boltz-src/scripts/train/train.py          data/assets/boltz1_conf.ckpt data/processed/structures data/msa; do
+    [ -e "$x" ] && echo "  OK      $x" || echo "  MISSING $x"
+done
+n=$(ls data/processed/structures/*.npz 2>/dev/null | wc -l)
+echo "  structures: $n (want 1084)"
+
+echo
 echo "=================== jobs ==================="
 sacct --starttime now-7days --format=JobID%14,JobName%14,State%12,ExitCode%8,Elapsed%11,Partition%16 2>/dev/null | head -25
 
@@ -13,7 +21,15 @@ squeue -u "$USER" 2>/dev/null || true
 echo
 echo "=================== baseline ==============="
 b=$(ls -t logs/baseline.*.out 2>/dev/null | head -1)
-if [ -n "$b" ]; then echo "($b)"; tail -25 "$b"; else echo "no baseline log"; fi
+if [ -n "$b" ]; then
+    echo "($b)"; tail -25 "$b"
+    # stderr is where a job that dies during setup actually says why -- stdout
+    # just stops. Omitting this made a failed baseline look like a silent one.
+    e="${b%.out}.err"
+    if [ -s "$e" ]; then echo "--- stderr ($e) ---"; tail -25 "$e"; fi
+else
+    echo "no baseline log"
+fi
 
 echo
 echo "=================== finetune ==============="
@@ -23,6 +39,8 @@ if [ -n "$f" ]; then
     grep -E "freeze_trunk|RESUMING|fresh start|^gpu|^started|^finished|Skipping batch|oom-context|Error|Traceback" "$f" | tail -20
     echo "--- last lines ---"
     tail -12 "$f"
+    e="${f%.out}.err"
+    if [ -s "$e" ]; then echo "--- stderr ($e) ---"; tail -25 "$e"; fi
 else
     echo "no finetune log yet"
 fi
