@@ -65,27 +65,9 @@ bash scripts/ls6_setup.sh
 # 3. Submit the baseline
 #----------------------------------------------------------------------------
 echo
-echo "[3/4] submitting the baseline reproduction ..."
+echo "[3/4] submitting the pipeline ..."
 mkdir -p logs
-JOB=$(sbatch --parsable scripts/ls6_baseline.slurm)
-echo "  job $JOB submitted"
+bash scripts/ls6_pipeline.sh
 
-#----------------------------------------------------------------------------
-# 4. Where things stand
-#----------------------------------------------------------------------------
+
 echo
-echo "[4/4] queue:"
-squeue -u "$USER" | sed 's/^/  /'
-
-cat <<EOF
-
-Nothing more to do. TACC will email saif.s@utexas.edu when job $JOB ends.
-
-When it does:
-
-    ssh ls6
-    cd \$WORK/mhc1-boltz && cat logs/baseline.$JOB.out
-
-The number to look for is val/lddt_protein_protein against the laptop's 0.8827.
-The script prints that comparison itself at the end.
-EOF

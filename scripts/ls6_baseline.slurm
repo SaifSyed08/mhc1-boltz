@@ -90,10 +90,30 @@ if not p.exists():
     raise SystemExit
 m = json.load(p.open())["metrics"]
 base = {"lddt.protein_protein": 0.8827, "lddt.intra_protein": 0.9248}
+TOL = 0.02          # generous: fp arithmetic differs across architectures, but a
+                    # genuine environment problem moves lDDT far more than this
 print(f"  {'metric':<28}{'this run':>10}{'laptop':>10}{'delta':>10}")
+bad = []
 for k, b in base.items():
     v = m.get(k, {})
-    if v.get("weight"):
-        got = v["mean_value"] / v["weight"]
-        print(f"  {k:<28}{got:>10.4f}{b:>10.4f}{got-b:>+10.4f}")
+    if not v.get("weight"):
+        bad.append(f"{k}: missing from val_state.json")
+        continue
+    got = v["mean_value"] / v["weight"]
+    print(f"  {k:<28}{got:>10.4f}{b:>10.4f}{got-b:>+10.4f}")
+    if abs(got - b) > TOL:
+        bad.append(f"{k}: {got:.4f} vs {b:.4f}, |delta| > {TOL}")
+
+if bad:
+    print()
+    print("  !! BASELINE DID NOT REPRODUCE")
+    for line in bad:
+        print(f"  !!   {line}")
+    print("  !! Exiting nonzero so the dependent fine-tuning job does NOT run.")
+    print("  !! A fine-tuned number measured in an environment whose baseline")
+    print("  !! does not match is not comparable to anything.")
+    raise SystemExit(1)
+
+print()
+print("  baseline reproduced within tolerance -- the dependent job will start")
 PYEOF
