@@ -23,8 +23,10 @@ set -euo pipefail
 REPO="$WORK/mhc1-boltz"
 cd "$REPO"
 
-module load cuda/12.8 2>/dev/null || module load cuda/12.2 || true
+# Environment prep (module hygiene, PYTHONPATH, user-site). See scripts/ls6_env.sh.
+source "$REPO/scripts/ls6_env.sh"
 source "$REPO/.venv-ls6/bin/activate"
+ls6_env_report
 
 RUN_DIR="$REPO/runs/ls6_finetune"
 mkdir -p "$RUN_DIR"

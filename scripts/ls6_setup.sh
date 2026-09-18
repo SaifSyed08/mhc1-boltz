@@ -33,10 +33,8 @@ fi
 #----------------------------------------------------------------------------
 echo
 echo "=== modules ==="
-module load cuda/12.8 2>/dev/null || module load cuda/12.2 || true
-module load python/3.12.11 2>/dev/null || true
-module list 2>&1 | sed 's/^/  /'
-echo "  python: $(python3 --version 2>&1)"
+source "$REPO/scripts/ls6_env.sh"
+module list 2>&1 | sed 's/^/  /' 
 
 #----------------------------------------------------------------------------
 # 2. Virtualenv
@@ -54,6 +52,7 @@ else
 fi
 # shellcheck disable=SC1091
 source "$VENV/bin/activate"
+ls6_env_report
 python -m pip install -q --upgrade pip
 
 #----------------------------------------------------------------------------
