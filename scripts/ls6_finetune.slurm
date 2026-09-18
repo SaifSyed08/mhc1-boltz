@@ -11,7 +11,7 @@
 #SBATCH -J mhc1-ft
 #SBATCH -o logs/finetune.%j.out
 #SBATCH -e logs/finetune.%j.err
-#SBATCH -p gpu-a100-small
+#SBATCH -p gpu-a100
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH -t 48:00:00
@@ -41,6 +41,13 @@ echo "node   : $(hostname)"
 echo "job    : ${SLURM_JOB_ID:-?}"
 echo "gpu    : $(nvidia-smi --query-gpu=name,memory.total --format=csv,noheader | head -1)"
 echo "started: $(date)"
+# gpu-a100-small hands out VIRTUAL nodes (v-prefixed hostnames) whose CPU
+# flags do not include what the login-node-built numpy wheel needs:
+#   NumPy was built with baseline optimizations (X86_V2) but your machine
+#   doesn't support (X86_V2)
+# Real compute nodes (c-prefixed) are fine. Print the flags either way.
+echo "cpu    : $(lscpu | grep -i '^model name' | head -1 | cut -d: -f2- | xargs)"
+echo "x86-v2 : $(grep -qE 'sse4_2' /proc/cpuinfo && echo yes || echo NO)"
 
 ARGS=("output=$RUN_DIR")
 # Resume from the newest checkpoint if there is one. train.py ignores

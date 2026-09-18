@@ -28,7 +28,7 @@
 #SBATCH -J mhc1-baseline
 #SBATCH -o logs/baseline.%j.out
 #SBATCH -e logs/baseline.%j.err
-#SBATCH -p gpu-a100-small
+#SBATCH -p gpu-a100
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH -t 03:00:00
@@ -53,6 +53,8 @@ echo "node    : $(hostname)"
 echo "job     : ${SLURM_JOB_ID:-?}"
 echo "gpu     : $(nvidia-smi --query-gpu=name,memory.total --format=csv,noheader | head -1)"
 echo "started : $(date)"
+echo "cpu     : $(lscpu | grep -i '^model name' | head -1 | cut -d: -f2- | xargs)"
+echo "x86-v2  : $(grep -qE 'sse4_2' /proc/cpuinfo && echo yes || echo NO)"
 echo
 
 # Lightning sees all three GPUs on a full node and the config says devices: 1,

@@ -2,7 +2,22 @@
 #----------------------------------------------------------------------------
 # Shared environment preparation for every LS6 script. Source it, do not run it.
 #
-# Fixes the failure that killed baseline job 3452729:
+# NOTE ON NODE TYPE, which cost two failed baselines before it was understood:
+# the `gpu-a100-small` queue hands out VIRTUAL nodes (hostnames starting `v`,
+# e.g. v330-019) whose exposed CPU flags are narrower than the login node's. A
+# numpy wheel pip-installed on the login node is built for an x86-64-v2 baseline
+# and then refuses to load there:
+#
+#   RuntimeError: NumPy was built with baseline optimizations: (X86_V2) but your
+#   machine doesn't support: (X86_V2)
+#
+# Python retries the import and the SECOND failure is the one that surfaces --
+# "ImportError: cannot load module more than once per process" -- which points at
+# duplicate sys.path entries and sends you chasing PYTHONPATH. It is not that.
+# Use `gpu-a100` (real `c`-prefixed nodes) instead.
+#
+# The module hygiene below is still correct and worth keeping, it just was not
+# the cause:
 #
 #   ImportError: cannot load module more than once per process
 #     numpy/_core/multiarray.py -> _multiarray_umath
