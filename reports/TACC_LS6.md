@@ -25,35 +25,70 @@ storage  20,480 GB, 0% used
 `MCB26003` is already set as `-A` in `scripts/ls6_smoke.slurm`. Re-check the
 balance any time with `/usr/local/etc/taccinfo`.
 
-### Compute is no longer the constraint
+### Queues, and the neighbourly choice
 
-GPU nodes bill **4x SU/hour**, so ~82,120 SUs is about **20,500 GPU node-hours**.
-Against the arithmetic in `reports/CLOUD_GPU.md` — ~27 GPU-hours for 100 optimizer
-steps on a T4 — and an A100 somewhere between 2.4x and 10x a T4 depending on
-whether TF32 is enabled:
+From the LS6 queue table:
+
+| queue | max nodes | max time | charge |
+|---|---|---|---|
+| `gpu-a100` | 8 | 48 h | 3.0 SU/node-hour |
+| **`gpu-a100-small`** | 1 | 48 h | **1.5 SU/node-hour** |
+| `gpu-a100-dev` | 2 | 2 h | 3.0 SU/node-hour |
+| `gpu-h100` | 1 | 48 h | 6.0 SU/node-hour |
+
+An LS6 A100 node has **three** A100s, and `gpu-a100` gives you the whole node.
+This project uses **one** GPU (`trainer.devices: 1`), so `gpu-a100` would bill
+double and idle two GPUs other people are queued for. `gpu-a100-small` is both
+half the price and the right size. Our scripts use it.
+
+(Earlier drafts of this document said 4 SU/hour. That was wrong — it is 3.0 for
+`gpu-a100` and 1.5 for `gpu-a100-small`, so everything is cheaper than the first
+estimate, not more expensive.)
+
+**Set `-t` tightly, and not only out of politeness.** Slurm backfills: a
+10-minute job can be slotted into a gap that a 48-hour reservation cannot fit
+into. Padding the time limit "just in case" delays your own start, and at ~97%
+utilisation with 125 jobs queued that matters.
+
+### Compute is not the constraint
+
+~78,584 SUs remain, expiring **2027-01-08** (unused SUs do not roll over). At
+1.5 SU/node-hour on `gpu-a100-small` that is **~52,000 GPU-hours**.
+
+Against `reports/CLOUD_GPU.md` — ~27 GPU-hours per 100 optimizer steps on a T4,
+with an A100 somewhere between 2.4x and 10x faster:
 
 | | A100 fp32 (conservative) | A100 + TF32 |
 |---|---|---|
-| 100 optimizer steps | ~45 SU | ~15 SU |
-| **1000 optimizer steps** | **~450 SU** | **~155 SU** |
-| as a share of the balance | 0.55% | 0.19% |
+| 100 optimizer steps | ~17 SU | ~6 SU |
+| **1000 optimizer steps** | **~170 SU** | **~58 SU** |
+| share of the balance | 0.22% | 0.07% |
 
-A thousand optimizer steps — roughly 30x what the entire Kaggle effort produced —
-costs well under one percent of the remaining allocation. **The thing that has
-shaped every decision in this project for two weeks has stopped being a
-constraint.** Plan the experiment you actually want, not the one that fits.
+A thousand optimizer steps — about 30x everything the Kaggle effort produced —
+costs a fifth of one percent. **The constraint that shaped every decision in this
+project for two weeks is gone.** Plan the experiment worth running.
 
-Two caveats that do still apply:
+Two things that still apply:
 
-* **This is a shared group allocation, not a personal one.** It is 49% used
-  already and the other 51% is not all yours. A few hundred SUs is noise; a
-  runaway job that sits in a loop for 48 hours on a GPU node is 768 SU. Set
-  `-t` deliberately on every job.
-* **`precision: 32` leaves most of an A100 on the table.** TF32 and bf16 are both
-  available on Ampere and neither existed on the T4. `matmul_precision: high`
-  enables TF32 for fp32 matmuls and is close to free; `precision: bf16-mixed` is a
-  bigger win and a bigger change. Neither should be turned on in the same run as a
-  recipe change — see the "one thing at a time" note below.
+* **Shared group allocation, and it expires.** The balance is not all yours, and
+  what is left on 2027-01-08 evaporates. A few hundred SU is noise; a runaway
+  48-hour job on `gpu-a100` is 144 SU for nothing.
+* **`precision: 32` wastes most of an A100.** TF32 and bf16 both exist on Ampere
+  and neither did on the T4. `matmul_precision: high` enables TF32 and is close
+  to free; `precision: bf16-mixed` is a larger win and a larger change. Neither
+  belongs in the same run as a recipe change.
+
+### Disk quotas, from the first login
+
+```
+/home1      10 GB      <- too small for assets; never clone here
+/work    1,024 GB      <- everything goes here
+/scratch  (purged periodically)
+```
+
+The portal's 20,480 GB storage figure is the **project** allocation. The personal
+`/work` quota is 1 TB, which is ample — assets are 3.8 GB and checkpoints ~4 GB
+each — but not unlimited if every checkpoint of every run is kept.
 
 ## Step 2 — do NOT set up SSH keys the usual way
 

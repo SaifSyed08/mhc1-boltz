@@ -20,9 +20,25 @@
 #   /usr/local/etc/taccinfo
 # It prints a "Project" column; that string is what -A wants.
 #
-# COST: GPU nodes are charged 4x SU/hour and every job is charged a minimum of
-# 15 minutes regardless of runtime. So this costs ~1 SU. That is the cheapest
-# possible way to find out your account works.
+# QUEUE CHOICE: gpu-a100-small, not gpu-a100. Per the LS6 queue table:
+#
+#   gpu-a100         8 nodes max   48 h   3.0 SU/node-hour
+#   gpu-a100-small   1 node max    48 h   1.5 SU/node-hour   <- this one
+#   gpu-a100-dev     2 nodes max    2 h   3.0 SU/node-hour
+#   gpu-h100         1 node max    48 h   6.0 SU/node-hour
+#
+# gpu-a100 hands you a whole node; an LS6 A100 node has THREE A100s. This job,
+# and the training config (trainer.devices: 1), use exactly one GPU. Taking a
+# full node would bill double and idle two GPUs someone else is queuing for --
+# and the cluster is currently ~97% utilised with 125 jobs waiting. The -small
+# queue is both cheaper and the neighbourly choice.
+#
+# COST: 1.5 SU/node-hour with a 15-minute minimum charge => well under 1 SU.
+#
+# A tight -t also helps YOU at high load: Slurm's backfill scheduler can slot a
+# 10-minute job into gaps that a 48-hour reservation cannot fit into, so a short
+# job often starts sooner than the queue depth suggests. Never pad -t "just in
+# case" -- it delays your own start.
 #----------------------------------------------------------------------------
 
 #SBATCH -J mhc1-smoke                  # job name
@@ -33,9 +49,7 @@
 # line that is not a comment or blank, so an indented continuation can silently
 # drop everything below it -- including -A, which would make the job unchargeable.
 #
-# gpu-a100 as advised. gpu-a100-dev schedules faster for short tests if your
-# allocation covers it.
-#SBATCH -p gpu-a100
+#SBATCH -p gpu-a100-small
 #SBATCH -N 1                           # one node
 #SBATCH -n 1                           # one task
 #SBATCH -t 00:10:00                    # 10 min; billing rounds up to 15 anyway
