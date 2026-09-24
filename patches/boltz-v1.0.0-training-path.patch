@@ -1,5 +1,5 @@
 diff --git a/scripts/train/train.py b/scripts/train/train.py
-index 7a6491d..5e729a1 100644
+index 7a6491d..9e13598 100644
 --- a/scripts/train/train.py
 +++ b/scripts/train/train.py
 @@ -1,4 +1,5 @@
@@ -17,7 +17,7 @@ index 7a6491d..5e729a1 100644
      debug: bool = False
      strict_loading: bool = True
      load_confidence_from_trunk: Optional[bool] = False
-@@ -161,18 +164,99 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -161,18 +164,123 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          if cfg.load_confidence_from_trunk:
              os.remove(file_path)
  
@@ -113,6 +113,30 @@ index 7a6491d..5e729a1 100644
 +        else:
 +            ckpt_kwargs["every_n_epochs"] = 1
 +        mc = ModelCheckpoint(**ckpt_kwargs)
++
++        # LOCAL PATCH: when ckpt_every_minutes is set, the callback above runs on
++        # train_time_interval -- i.e. on TRAINING batch boundaries, where only
++        # train/* metrics exist. monitor="val/lddt" therefore never matches and
++        # Lightning warns "could not find the monitored key". That callback is
++        # doing the job it is there for (a resumable last.ckpt on a wall clock),
++        # but it cannot select a best model.
++        #
++        # So add a second callback that fires at epoch end, after validation,
++        # where val/lddt does exist. Without it a run that improves and then
++        # degrades leaves only last.ckpt -- the final, worse weights.
++        if every_min:
++            callbacks.append(
++                ModelCheckpoint(
++                    monitor="val/lddt",
++                    save_top_k=1,
++                    save_last=False,      # last.ckpt belongs to the timer callback
++                    mode="max",
++                    dirpath=dirpath,
++                    filename="best-{epoch:02d}-{step}",
++                    every_n_epochs=1,
++                )
++            )
++            print("[checkpoint] best-by-val/lddt saved at epoch end")
 +        # LOCAL PATCH: was `callbacks = [mc]`, which discards anything already
 +        # registered -- including the val_progress dump added above. Appending
 +        # keeps both.

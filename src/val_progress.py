@@ -73,3 +73,18 @@ class ValProgressDump(Callback):
         # after the module's own hook runs only if registered last, so write
         # defensively here too.
         self._write(pl_module)
+
+        # ALSO keep a per-epoch copy. self.path is a fixed filename, so without
+        # this each epoch silently overwrites the last and a multi-epoch run
+        # yields a single final number instead of a curve -- which is exactly
+        # what you need to tell "it never learned" apart from "it learned and
+        # then overfit".
+        try:
+            ep = int(getattr(trainer, "current_epoch", -1))
+            snap = self.path.with_name(f"{self.path.stem}_epoch{ep:03d}.json")
+            snap.write_text(self.path.read_text())
+        except Exception as exc:      # telemetry must never break a run
+            print(f"[val_progress] per-epoch snapshot failed: "
+                  f"{type(exc).__name__}: {exc}")
+
+        self.n_batches = 0            # reset so the count is per-epoch

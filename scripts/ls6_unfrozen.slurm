@@ -55,8 +55,22 @@ ARGS=("output=$RUN_DIR")
 # state back, not a fresh load of the pretrained weights.
 CKPT=$(ls -t "$RUN_DIR"/last.ckpt "$RUN_DIR"/checkpoints/last.ckpt 2>/dev/null | head -1 || true)
 if [ -n "$CKPT" ]; then
-    echo "RESUMING from $CKPT"
-    ARGS+=("resume=$CKPT")
+    # A checkpoint carries its optimizer AND LR-SCHEDULER state. Resuming into a
+    # config whose learning rate has changed silently restores the OLD schedule
+    # and the new max_lr/warmup never take effect -- the run looks like it used
+    # the new settings and did not. That is unfalsifiable from the logs, so
+    # require it to be asked for explicitly.
+    if [ "${ALLOW_RESUME:-0}" = "1" ]; then
+        echo "RESUMING from $CKPT (ALLOW_RESUME=1)"
+        ARGS+=("resume=$CKPT")
+    else
+        echo "!! A checkpoint exists at $CKPT but ALLOW_RESUME is not set."
+        echo "!! Resuming would restore that checkpoint's LR scheduler state and"
+        echo "!! silently override the max_lr/lr_warmup_no_steps in the config."
+        echo "!! Either:  rm -rf $RUN_DIR      (start clean, what you usually want)"
+        echo "!!     or:  sbatch --export=ALL,ALLOW_RESUME=1 \$0   (continue it)"
+        exit 1
+    fi
 else
     echo "fresh start from the pretrained checkpoint"
 fi

@@ -63,6 +63,28 @@ for k, b in base.items():
     if v.get("weight"):
         got = v["mean_value"] / v["weight"]
         print(f"    {k:<24}{got:>9.4f}   laptop {b:<8}  delta {got-b:+.4f}")
+# Coverage. model.py catches an OOM during validation and skips the sample
+# SILENTLY, so a number computed over 22 of 30 structures looks identical to one
+# computed over all of them. lDDT weights should be 30, rmsd 90 (30 x 3 samples).
+want = {"lddt.protein_protein": 30, "lddt.intra_protein": 30, "rmsd": 90, "best_rmsd": 30}
+bad = [f"{k}={m.get(k,{}).get('weight')} (want {w})"
+       for k, w in want.items() if m.get(k, {}).get("weight") not in (w, None)]
+print("    coverage: " + ("OK, all 30 samples" if not bad else "!! INCOMPLETE -> " + ", ".join(bad)))
+PY
+done
+
+echo
+echo "=================== val curve ==============="
+for d in runs/ls6_finetune runs/ls6_unfrozen; do
+    [ -d "$d" ] || continue
+    echo "  $d:"
+    python3 - "$d" <<'PY'
+import json, sys, pathlib
+for p in sorted(pathlib.Path(sys.argv[1]).glob("val_state_epoch*.json")):
+    m = json.load(p.open())["metrics"]
+    v = m.get("lddt.protein_protein", {})
+    if v.get("weight"):
+        print(f"    {p.stem:<26} lddt_pp {v['mean_value']/v['weight']:.4f}  (n={v['weight']:.0f})")
 PY
 done
 

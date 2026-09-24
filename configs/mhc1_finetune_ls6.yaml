@@ -265,8 +265,28 @@ model:
     adam_eps: 0.00000001
     lr_scheduler: af3
     base_lr: 0.0
-    max_lr: 0.0018
-    lr_warmup_no_steps: 1000
+    # ---- LEARNING RATE: CHANGED FROM UPSTREAM, and this is the important one ----
+    #
+    # Upstream warms the LR linearly from 0 to max_lr over lr_warmup_no_steps:
+    #
+    #   scheduler.py:104   lr = base_lr + (step_no / warmup_no_steps) * max_lr
+    #
+    # With warmup 1000 and 10 optimizer steps per epoch, that schedule is built
+    # for a run of thousands of steps. Run 1 (job 3454273) managed ~80, so its LR
+    # ended at 80/1000 * 0.0018 = 1.44e-4 and AVERAGED about 7e-5 -- roughly 4%
+    # of the intended rate, ramping the whole time and never reaching a plateau.
+    #
+    # That makes run 1's flat lDDT uninterpretable. It does not show that the
+    # frozen trunk fails; it shows a model that barely trained. Any run short
+    # enough to fit in a 47 h job needs a warmup measured in steps, not thousands.
+    #
+    # 1e-4 is a conventional fine-tuning rate for a pretrained model -- 18x below
+    # upstream's 1.8e-3, which is a from-scratch figure. Erring low on purpose:
+    # too high a rate on pretrained weights destroys them, and that failure is
+    # much harder to tell apart from "fine-tuning does not help" than too low is.
+    lr_warmup_no_steps: 10
+    max_lr: 0.0001
+
     lr_start_decay_after_n_steps: 50000
     lr_decay_every_n_steps: 50000
     lr_decay_factor: 0.95
