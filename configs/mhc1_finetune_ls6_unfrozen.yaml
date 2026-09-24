@@ -22,12 +22,31 @@
 #     depth 1 (reports/MSA_ANALYSIS.md), so what the model knows about a 9-mer in
 #     a groove lives in the pairformer's learned priors -- the frozen part.
 #
-# MEMORY. Projected ~28.5 GiB of 40, extrapolated from the measured 11.88 GiB
-# peak at multiplicity 4 on a T4. Unfreezing adds gradients and Adam state for
-# the extra 152.1 M parameters plus the trunk activations autograd must now
-# retain. That projection is an extrapolation and extrapolations on this project
-# have been wrong before, so the job prints peak memory per batch and the first
-# OOM will name its own tensor (reports/UPSTREAM_PATCHES.md section 6).
+# MEMORY, re-anchored on the MEASURED frozen peak of 23.45 GiB (run 1's
+# mem.jsonl) rather than on an extrapolation from a T4:
+#
+#   persistent state, frozen        6.35 GiB   (w + grad + adam + ema)
+#   activations + transient        17.10
+#   ------------------------------------
+#   measured                       23.45
+#
+#   persistent state, unfrozen      8.05       (+1.70: grad and adam now cover
+#                                               all 432.21 M, not 280.07 M)
+#   + retained trunk activations    6.50
+#   ------------------------------------
+#   projected                      31.65 GiB of 40
+#
+# ~8 GiB of headroom, and my frozen projection was 3 GiB LOW, so treat it as ~5.
+#
+# Hence offload_to_cpu: true here, where the frozen config has it false. That is
+# not inconsistency, it is the same reasoning giving opposite answers because the
+# premise flipped. fairscale's checkpoint_wrapper saves each block's inputs and
+# then DETACHES the output when nothing upstream requires grad, which releases
+# them (checkpoint_activations.py:297, :199/:210). Frozen, that detach fires and
+# offloading copies ~6.5 GiB to the host for nothing. Unfrozen, gradients flow
+# through the trunk, the outputs are not detached, the inputs really are held for
+# the backward pass -- and moving them off the GPU is worth the PCIe traffic. LS6
+# nodes have 256 GB of RAM; the card has 40.
 
 trainer:
   accelerator: gpu
@@ -178,14 +197,14 @@ model:
     pairwise_head_width: 32
     pairwise_num_heads: 4
     activation_checkpointing: true
-    offload_to_cpu: false           # REVERSED AGAIN -- see header note 3.
+    offload_to_cpu: true            # ON for the unfrozen case -- see header.
 
   pairformer_args:
     num_blocks: 48
     num_heads: 16
     dropout: 0.25
     activation_checkpointing: true
-    offload_to_cpu: false           # REVERSED AGAIN -- see header note 3.
+    offload_to_cpu: true            # ON for the unfrozen case -- see header.
 
   score_model_args:
     sigma_data: 16
@@ -198,7 +217,7 @@ model:
     atom_decoder_heads: 4
     conditioning_transition_layers: 2
     activation_checkpointing: true
-    offload_to_cpu: false           # REVERSED AGAIN -- see header note 3.
+    offload_to_cpu: true            # ON for the unfrozen case -- see header.
 
   confidence_prediction: false
   confidence_model_args:
