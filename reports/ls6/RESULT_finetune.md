@@ -23,9 +23,48 @@ through the model, roughly 100x the Kaggle run — with EMA on and
 `diffusion_multiplicity` at the upstream 16. The only remaining deviation is the
 frozen trunk.
 
-So, stated plainly: **fine-tuning only the structure module, at this scale, does
-not improve interface lDDT on this dataset.** That is a legitimate negative
-result and it is worth reporting as one.
+So, stated plainly: **freezing the trunk and fine-tuning only the structure
+module does not improve interface lDDT on this dataset at this scale.**
+
+### What this result is NOT
+
+It is not evidence that fine-tuning Boltz-1 on pMHC-I fails. That has not been
+tested. Read the scope carefully, because it is easy to overstate:
+
+* **The frozen trunk was never a scientific choice.** It entered this project as
+  a memory workaround — from the 2026-09-03 email, *"I was also considering
+  freezing the trunk and only fine-tuning the structure module since that fits
+  much more comfortably"* — and Ernest endorsed it as a reasonable idea, not as a
+  validated strategy. The brief (`reports/ASSIGNMENT_TASKS.md` §8) specifies
+  "compare against pretrained baseline" and says nothing about freezing anything.
+* **The constraint that forced it is gone.** It existed because an 8 GB card
+  could not hold gradients and Adam state for 432 M parameters. An A100 40 GB
+  can: the projection from measured peaks is ~28.5 GiB for the fully unfrozen
+  recipe, leaving ~11 GiB spare.
+
+So what has actually been shown is that *one* strategy — the cheap one, chosen
+under a hardware constraint — does not work. The obvious experiment has not been
+run yet.
+
+### Why freezing the trunk is a plausible reason for the flat result
+
+There is a mechanism, not just an absence of one.
+
+The trunk (MSA module + 48 pairformer blocks) is where the pair representation
+`z` of the complex is built. The structure module is a diffusion decoder
+*conditioned on* that representation. Freezing the trunk means the conditioning
+signal for a given pMHC complex is **identical before and after fine-tuning** —
+the decoder can only rearrange geometry within what it is told, and cannot learn
+that this family of complexes should be represented differently.
+
+That matters more here than it would for most targets, because of what
+`reports/MSA_ANALYSIS.md` measured: **every peptide MSA in this dataset has depth
+1.** The peptide contributes no evolutionary signal at all, so whatever the model
+knows about where a 9-mer sits in a groove lives in the pairformer's learned
+priors — exactly the part that was frozen.
+
+**Next experiment: unfreeze and rerun.** `configs/mhc1_finetune_ls6_unfrozen.yaml`
+and `scripts/ls6_unfrozen.slurm`.
 
 ## Result 2: the RMSD improvement is probably an artifact
 
