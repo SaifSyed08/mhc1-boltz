@@ -32,6 +32,10 @@ else
 fi
 
 echo
+echo "=================== logs ==================="
+ls -lt logs/*.out 2>/dev/null | head -8 | sed 's/^/  /'
+
+echo
 echo "=================== finetune ==============="
 f=$(ls -t logs/finetune.*.out 2>/dev/null | head -1)
 if [ -n "$f" ]; then
@@ -47,7 +51,7 @@ fi
 
 echo
 echo "=================== metrics ================"
-for d in runs/ls6_baseline runs/ls6_finetune; do
+for d in $(ls -d runs/*/ 2>/dev/null | sed "s#/\$##"); do
     python3 - "$d" <<'PY'
 import json, sys, pathlib
 d = pathlib.Path(sys.argv[1])
@@ -75,7 +79,7 @@ done
 
 echo
 echo "=================== val curve ==============="
-for d in runs/ls6_finetune runs/ls6_unfrozen; do
+for d in $(ls -d runs/*/ 2>/dev/null | sed "s#/\$##"); do
     [ -d "$d" ] || continue
     echo "  $d:"
     python3 - "$d" <<'PY'
