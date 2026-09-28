@@ -50,11 +50,20 @@
 
 trainer:
   accelerator: gpu
-  devices: 1
+  # THREE GPUs. gpu-a100 allocates a whole node -- 3x A100-40GB -- and bills for
+  # all of it at 3.0 SU/node-hour. Running devices: 1 left two of them idle for
+  # the entire 47 h of the first unfrozen run. train.py:311 already switches to
+  # DDPStrategy when devices > 1, so this costs nothing extra and is roughly 3x
+  # the throughput.
+  #
+  # With DDP the effective batch is devices x batch_size x accumulate, so
+  # accumulate drops 128 -> 43 to hold it near upstream's 128 (3 x 43 = 129, a
+  # 0.8% difference forced by 3-way sharding not dividing 128).
+  devices: 3
   precision: 32
   gradient_clip_val: 10.0
   max_epochs: -1
-  accumulate_grad_batches: 128      # upstream
+  accumulate_grad_batches: 43        # x3 GPUs = effective batch 129
 
   # Kaggle kills a committed run at 12 h, and its output upload after an overrun
   # is explicitly best-effort -- Kaggle staff: "Sometimes it will work, sometimes
@@ -151,9 +160,9 @@ data:
   pad_to_max_tokens: true
   pad_to_max_atoms: true
   pad_to_max_seqs: true
-  samples_per_epoch: 1280           # >= accumulate_grad_batches, see header
+  samples_per_epoch: 1290           # 3 x 43 x 10 -> 10 optimizer steps/epoch
   batch_size: 1
-  num_workers: 8                    # LS6 nodes have plenty of cores
+  num_workers: 8                    # per rank; 24 total, node has 128 cores
   random_seed: 42
   pin_memory: true
   overfit: null

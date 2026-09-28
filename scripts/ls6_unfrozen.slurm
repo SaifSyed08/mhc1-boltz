@@ -31,7 +31,10 @@ ls6_env_report
 RUN_DIR="$REPO/runs/ls6_unfrozen"
 mkdir -p "$RUN_DIR"
 
-export CUDA_VISIBLE_DEVICES=0
+# NOT pinning CUDA_VISIBLE_DEVICES here: this run uses all three GPUs on the
+# node via DDP (trainer.devices: 3), and pinning to 0 would hide the other two
+# and silently drop throughput back to 1x while the config claimed otherwise.
+export NCCL_DEBUG=WARN
 export PYTHONUNBUFFERED=1
 export BOLTZ_CHUNK_IN_TRAINING=1
 export PYTORCH_ALLOC_CONF=expandable_segments:True
@@ -39,7 +42,7 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 echo "node   : $(hostname)"
 echo "job    : ${SLURM_JOB_ID:-?}"
-echo "gpu    : $(nvidia-smi --query-gpu=name,memory.total --format=csv,noheader | head -1)"
+echo "gpus   : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name,memory.total --format=csv,noheader | head -1)"
 echo "started: $(date)"
 # gpu-a100-small hands out VIRTUAL nodes (v-prefixed hostnames) whose CPU
 # flags do not include what the login-node-built numpy wheel needs:

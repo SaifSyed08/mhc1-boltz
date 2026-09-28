@@ -28,25 +28,14 @@ import os
 import pathlib
 
 from pytorch_lightning.callbacks import Callback
-from torchmetrics import MeanMetric
 
 
-def _snapshot(pl_module):
-    """Every MeanMetric on the module, as {name: {mean_value, weight}}."""
-    out = {}
-    for name, mod in pl_module.named_modules():
-        if isinstance(mod, MeanMetric):
-            try:
-                out[name] = {
-                    "mean_value": float(mod.mean_value),
-                    "weight": float(mod.weight),
-                }
-            except Exception:
-                # A metric that has never been updated holds NaN; record it as
-                # absent rather than poisoning the merge with a NaN.
-                continue
-    return out
-
+def _is_rank_zero() -> bool:
+    """Under DDP there is one process per GPU. Without this guard all three
+    ranks write the same telemetry file and interleave into nonsense."""
+    import os
+    return (int(os.environ.get("LOCAL_RANK", 0)) == 0
+            and int(os.environ.get("NODE_RANK", 0)) == 0)
 
 class ValProgressDump(Callback):
     def __init__(self, path):
@@ -55,6 +44,8 @@ class ValProgressDump(Callback):
         self.n_batches = 0
 
     def _write(self, pl_module):
+        if not _is_rank_zero():
+            return
         payload = {
             "n_batches_completed": self.n_batches,
             "metrics": _snapshot(pl_module),

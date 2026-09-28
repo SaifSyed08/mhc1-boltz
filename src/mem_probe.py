@@ -34,6 +34,15 @@ from pathlib import Path
 import torch
 from pytorch_lightning.callbacks import Callback
 
+
+def _is_rank_zero() -> bool:
+    """Under DDP there is one process per GPU. Without this guard all three
+    ranks write the same telemetry file and interleave into nonsense."""
+    import os
+    return (int(os.environ.get("LOCAL_RANK", 0)) == 0
+            and int(os.environ.get("NODE_RANK", 0)) == 0)
+
+
 GB = 1024**3
 
 
@@ -67,8 +76,11 @@ class MemProbe(Callback):
         self._peak_seen = 0.0
 
     def _open(self):
+        if not _is_rank_zero():
+            return None
         if self._fh is None:
-            self._fh = self.path.open("a", buffering=1)  # line-buffered: survives a kill
+            # line-buffered: survives a kill
+            self._fh = self.path.open("a", buffering=1)
         return self._fh
 
     def on_train_start(self, trainer, pl_module) -> None:  # noqa: ANN001
@@ -89,8 +101,11 @@ class MemProbe(Callback):
                 sum(p.numel() for p in pl_module.parameters() if not p.requires_grad) / 1e6, 1
             ),
         }
-        self._open().write(json.dumps(rec) + "\n")
-        print(f"[mem] start {rec}")
+        fh = self._open()          # None on ranks > 0
+        if fh is not None:
+            fh.write(json.dumps(rec) + "\n")
+        if _is_rank_zero():
+            print(f"[mem] start {rec}")
 
     def on_train_batch_start(self, trainer, pl_module, batch, batch_idx) -> None:  # noqa: ANN001
         self._t0 = time.time()
@@ -112,13 +127,15 @@ class MemProbe(Callback):
             "host_free_gb": round(_host_free_gb(), 1),
             "secs": round(time.time() - self._t0, 1) if self._t0 else None,
         }
-        self._open().write(json.dumps(rec) + "\n")
+        fh = self._open()          # None on ranks > 0
+        if fh is not None:
+            fh.write(json.dumps(rec) + "\n")
 
         # Always announce a new high-water mark -- that is the line you want when
         # reading back a log that ends in an OOM.
         new_peak = peak > self._peak_seen + 0.05
         self._peak_seen = max(self._peak_seen, peak)
-        if new_peak or batch_idx % self.print_every == 0:
+        if (new_peak or batch_idx % self.print_every == 0) and _is_rank_zero():
             print(
                 f"[mem] b={batch_idx} alloc={alloc:.2f} peak={peak:.2f} "
                 f"resv={resv:.2f} frag={resv - alloc:.2f} "
