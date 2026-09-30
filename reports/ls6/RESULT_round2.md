@@ -1,5 +1,10 @@
 # Round 2 — the control, the resumed frozen run, and the unfrozen run
 
+> **Corrected by `RESULT_round3.md`.** The unfrozen row is that run's epoch 0 only,
+> written while the job was ~15 h in. Its −0.0067 was gone by step 20, and the run
+> finished flat at 40 steps. "One epoch in 47 hours / 132 s/batch" is wrong: the log
+> shows 31.5 s/batch, 11 h per epoch. Sections 3–5 below rest on one or both.
+
 Three jobs, and between them they close the RMSD question, kill a tempting false
 positive, and produce the first result that is outside the noise band.
 
