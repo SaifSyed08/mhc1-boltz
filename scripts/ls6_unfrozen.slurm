@@ -28,7 +28,10 @@ source "$REPO/scripts/ls6_env.sh"
 source "$REPO/.venv-ls6/bin/activate"
 ls6_env_report
 
-RUN_DIR="$REPO/runs/ls6_unfrozen"
+# Both overridable so scripts/ls6_ddp_smoke.slurm can run this exact launch
+# path against a scratch directory with a few batches.
+RUN_DIR="${RUN_DIR:-$REPO/runs/ls6_unfrozen}"
+read -r -a EXTRA <<< "${EXTRA_ARGS:-}"
 mkdir -p "$RUN_DIR"
 
 # NOT pinning CUDA_VISIBLE_DEVICES here: this run uses all three GPUs on the
@@ -52,7 +55,7 @@ echo "started: $(date)"
 echo "cpu    : $(lscpu | grep -i '^model name' | head -1 | cut -d: -f2- | xargs)"
 echo "x86-v2 : $(grep -qE 'sse4_2' /proc/cpuinfo && echo yes || echo NO)"
 
-ARGS=("output=$RUN_DIR")
+ARGS=("output=$RUN_DIR" ${EXTRA[@]+"${EXTRA[@]}"})   # bash<4.4-safe empty expansion
 # Resume from the newest checkpoint if there is one. train.py ignores
 # `pretrained` when `resume` is set, which is correct -- we want the optimizer
 # state back, not a fresh load of the pretrained weights.
@@ -67,11 +70,16 @@ if [ -n "$CKPT" ]; then
         echo "RESUMING from $CKPT (ALLOW_RESUME=1)"
         ARGS+=("resume=$CKPT")
     else
+        # Was "rm -rf $RUN_DIR (start clean, what you usually want)", which would
+        # have deleted the finished 47 h unfrozen run. Starting clean is
+        # right only when the LR settings changed; when only parallelism or
+        # memory settings did, resuming is. Never suggest deleting results.
         echo "!! A checkpoint exists at $CKPT but ALLOW_RESUME is not set."
-        echo "!! Resuming would restore that checkpoint's LR scheduler state and"
-        echo "!! silently override the max_lr/lr_warmup_no_steps in the config."
-        echo "!! Either:  rm -rf $RUN_DIR      (start clean, what you usually want)"
-        echo "!!     or:  sbatch --export=ALL,ALLOW_RESUME=1 \$0   (continue it)"
+        echo "!! Resuming restores that checkpoint's LR scheduler state, overriding"
+        echo "!! max_lr/lr_warmup_no_steps in the config. If those did NOT change:"
+        echo "!!     sbatch --export=ALL,ALLOW_RESUME=1 scripts/ls6_unfrozen.slurm"
+        echo "!! If they did, move the old run aside (do not delete it):"
+        echo "!!     mv $RUN_DIR ${RUN_DIR}_\$(date +%m%d)"
         exit 1
     fi
 else
@@ -79,5 +87,21 @@ else
 fi
 
 cd boltz-src
-python scripts/train/train.py ../configs/mhc1_finetune_ls6_unfrozen.yaml "${ARGS[@]}"
+CONFIG=../configs/mhc1_finetune_ls6_unfrozen.yaml
+NGPU=$(awk '$1 == "devices:" { print $2; exit }' "$CONFIG")
+case "$NGPU" in ''|*[!0-9]*) echo "!! cannot read trainer.devices from $CONFIG"; exit 1 ;; esac
+
+# Launch through torchrun, NOT plain python. Inside a Slurm job Lightning sees
+# SLURM_NTASKS, picks SLURMEnvironment, and assumes srun already started one
+# process per GPU (creates_processes_externally=True; world_size=SLURM_NTASKS).
+# With `-n 1` that is ONE process: `devices: 3` then trains on GPU 0 alone at a
+# third of the effective batch, and nothing errors
+# (lightning_fabric/plugins/environments/slurm.py, PL 2.4). torchrun is checked
+# BEFORE Slurm (TorchElasticEnvironment has priority) and starts the processes.
+# torchrun would otherwise force OMP_NUM_THREADS=1 per process; 16 x 3 ranks
+# stays well inside the node's 128 cores.
+export OMP_NUM_THREADS=16
+echo "launch : torchrun --nproc_per_node=$NGPU"
+torchrun --standalone --nnodes=1 --nproc_per_node="$NGPU" \
+    scripts/train/train.py "$CONFIG" "${ARGS[@]}"
 echo "finished: $(date)"
