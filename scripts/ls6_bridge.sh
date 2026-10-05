@@ -51,6 +51,14 @@ open)
       exec tail -n +1 -f "$B/log" ) &
     watcher=$!
 
+    # Heartbeat. LS6 reset the first bridge ("Connection reset by peer") ~30 min
+    # after its last command, with ServerAlive packets flowing the whole time --
+    # so whatever cut it counts data on the channel, not packets on the wire.
+    # A no-op through the command feed every few minutes is channel data. It
+    # prints nothing, so it cannot leak into a `run`'s output.
+    ( while sleep "${LS6_HEARTBEAT:-240}"; do printf ':\n' >> "$B/in"; done ) &
+    beat=$!
+
     exec 3< <(tail -n +1 -f "$B/in")
     feeder=$!
     # Password/token prompts go to /dev/tty, so they appear here even though
@@ -59,7 +67,7 @@ open)
     echo $$ > "$B/pid"
     ssh ls6 'exec bash -l' <&3 >> "$B/out" 2> >(tee -a "$B/out" >&2)
     rc=$?
-    kill "$feeder" "$watcher" 2>/dev/null
+    kill "$feeder" "$watcher" "$beat" 2>/dev/null
     rm -f "$B/pid"
     echo
     echo "bridge closed ($(date), ssh exit $rc)."
