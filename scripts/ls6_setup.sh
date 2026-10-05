@@ -107,6 +107,18 @@ done
 [ "$missing" -eq 0 ] && echo "  patch verified: ${#SENTINEL[@]}/${#SENTINEL[@]} sentinels present" \
                      || { echo "  Delete boltz-src/ and re-run."; exit 1; }
 
+# Sentinels prove A patch applied, not that it is the CURRENT one. boltz-src is
+# only patched when first cloned, so LS6 trained for two weeks without the
+# best-checkpoint hunk that landed in the patch after setup. Compare the whole
+# diff; scripts/ls6_unfrozen.slurm refuses to train on a mismatch too.
+if ! diff -q <(git -C boltz-src diff | grep -v '^index ') \
+             <(grep -v '^index ' patches/boltz-v1.0.0-training-path.patch) >/dev/null; then
+    echo "  !! boltz-src does not match patches/boltz-v1.0.0-training-path.patch. Sync with:"
+    echo "     git -C boltz-src checkout -- . && git -C boltz-src apply ../patches/boltz-v1.0.0-training-path.patch"
+    exit 1
+fi
+echo "  boltz-src matches the current patch exactly"
+
 python -m pip install -q --no-deps -e boltz-src
 
 #----------------------------------------------------------------------------

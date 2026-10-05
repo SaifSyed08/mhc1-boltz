@@ -28,6 +28,16 @@ source "$REPO/scripts/ls6_env.sh"
 source "$REPO/.venv-ls6/bin/activate"
 ls6_env_report
 
+# boltz-src is patched once, at clone time, so a later patch update never reaches
+# it by itself: LS6 trained for two weeks on a train.py missing a hunk. Refuse to
+# spend a 48 h allocation on code that is not what the repo says it is.
+if ! diff -q <(git -C boltz-src diff | grep -v '^index ') \
+             <(grep -v '^index ' patches/boltz-v1.0.0-training-path.patch) >/dev/null; then
+    echo "!! boltz-src does not match patches/boltz-v1.0.0-training-path.patch. Sync with:"
+    echo "!!   git -C boltz-src checkout -- . && git -C boltz-src apply ../patches/boltz-v1.0.0-training-path.patch"
+    exit 1
+fi
+
 # Both overridable so scripts/ls6_ddp_smoke.slurm can run this exact launch
 # path against a scratch directory with a few batches.
 RUN_DIR="${RUN_DIR:-$REPO/runs/ls6_unfrozen}"
