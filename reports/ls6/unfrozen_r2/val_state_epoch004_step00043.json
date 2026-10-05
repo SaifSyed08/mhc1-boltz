@@ -1,0 +1,167 @@
+{
+ "n_batches_completed": 30,
+ "scope": "all",
+ "world_size": 3,
+ "global_step": 43,
+ "metrics": {
+  "lddt.dna_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.rna_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.ligand_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.dna_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.rna_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.intra_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.intra_dna": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.intra_rna": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "lddt.intra_protein": {
+   "mean_value": 27.776901245117188,
+   "weight": 30.0
+  },
+  "lddt.protein_protein": {
+   "mean_value": 26.499801635742188,
+   "weight": 30.0
+  },
+  "lddt.pocket_ligand_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.dna_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.rna_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.ligand_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.dna_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.rna_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.intra_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.intra_dna": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.intra_rna": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "disto_lddt.intra_protein": {
+   "mean_value": 28.937095642089844,
+   "weight": 30.0
+  },
+  "disto_lddt.protein_protein": {
+   "mean_value": 27.202041625976562,
+   "weight": 30.0
+  },
+  "disto_lddt.pocket_ligand_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.dna_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.rna_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.ligand_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.dna_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.rna_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.intra_ligand": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.intra_dna": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.intra_rna": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "complex_lddt.intra_protein": {
+   "mean_value": 27.7474365234375,
+   "weight": 30.0
+  },
+  "complex_lddt.protein_protein": {
+   "mean_value": 26.484878540039062,
+   "weight": 30.0
+  },
+  "complex_lddt.pocket_ligand_protein": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "rmsd": {
+   "mean_value": 275.2882080078125,
+   "weight": 90.0
+  },
+  "best_rmsd": {
+   "mean_value": 89.42163848876953,
+   "weight": 30.0
+  },
+  "train_confidence_loss_logger": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "train_confidence_loss_dict_logger.plddt_loss": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "train_confidence_loss_dict_logger.resolved_loss": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "train_confidence_loss_dict_logger.pde_loss": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  },
+  "train_confidence_loss_dict_logger.pae_loss": {
+   "mean_value": 0.0,
+   "weight": 0.0
+  }
+ }

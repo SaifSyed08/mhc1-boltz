@@ -1,5 +1,5 @@
 diff --git a/scripts/train/train.py b/scripts/train/train.py
-index 7a6491d..9e13598 100644
+index 7a6491d..a8f4e79 100644
 --- a/scripts/train/train.py
 +++ b/scripts/train/train.py
 @@ -1,4 +1,5 @@
@@ -8,7 +8,15 @@ index 7a6491d..9e13598 100644
  import string
  import sys
  from dataclasses import dataclass
-@@ -72,6 +73,8 @@ class TrainConfig:
+@@ -13,6 +14,7 @@ import torch
+ import torch.multiprocessing
+ from omegaconf import OmegaConf, listconfig
+ from pytorch_lightning import LightningModule
++from pytorch_lightning.callbacks import Timer
+ from pytorch_lightning.callbacks.model_checkpoint import ModelCheckpoint
+ from pytorch_lightning.loggers import WandbLogger
+ from pytorch_lightning.strategies import DDPStrategy
+@@ -72,6 +74,8 @@ class TrainConfig:
      find_unused_parameters: Optional[bool] = False
      save_top_k: Optional[int] = 1
      validation_only: bool = False
@@ -17,7 +25,7 @@ index 7a6491d..9e13598 100644
      debug: bool = False
      strict_loading: bool = True
      load_confidence_from_trunk: Optional[bool] = False
-@@ -161,18 +164,123 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -161,18 +165,123 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          if cfg.load_confidence_from_trunk:
              os.remove(file_path)
  
@@ -144,6 +152,24 @@ index 7a6491d..9e13598 100644
  
      # Create wandb logger
      loggers = []
+@@ -214,6 +323,17 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+         **trainer,
+     )
+ 
++    # LOCAL PATCH: max_time here is a per-SESSION wall-clock guard -- stop
++    # cleanly, with a final validation, before the queue kills the job -- not a
++    # training budget. But Lightning's Timer saves its elapsed time in every
++    # checkpoint and restores it on resume, so a run that stopped at max_time
++    # stops again almost at once when resumed: on 2026-10-04 a 48 h job resumed
++    # at ~46 h "elapsed" and trained for 70 minutes. Ignore the restored offset
++    # so every session gets the full max_time from its own start.
++    for cb in trainer.callbacks:
++        if isinstance(cb, Timer):
++            cb.load_state_dict = lambda state_dict: None
++
+     if not cfg.strict_loading:
+         model_module.strict_loading = False
+ 
 diff --git a/src/boltz/data/feature/featurizer.py b/src/boltz/data/feature/featurizer.py
 index 8fd4379..876b9e5 100644
 --- a/src/boltz/data/feature/featurizer.py

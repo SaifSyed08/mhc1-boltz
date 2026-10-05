@@ -75,3 +75,31 @@ Resume the run from its end-of-run checkpoint on 3 GPUs (`ALLOW_RESUME=1` is saf
 `max_lr` and warmup are unchanged since 1ba819e), chained `afterok` on the smoke test.
 At 3× the step rate, one job would take it from 40 to ~165 steps, enough to tell flat
 from slow — less whatever offload costs, which the smoke test prints as s/batch.
+
+## The 3-GPU resume ran on 3 GPUs, for 70 minutes
+
+Smoke test (3483555, dev queue, fresh from pretrained): **PASS**. Three ranks
+(`MEMBER: 1/3 … 3/3`), validation weight 6 = 3 ranks × 2 batches, 29.8 s/batch,
+peak 36.98 GiB with offload on.
+
+The resume (3483556) restored step 40 on three ranks and then stopped at 1 h 15 min:
+`Time limit reached. Elapsed time is 1 day, 23:00:36`. Lightning's `Timer` stores
+its elapsed time in every checkpoint and restores it on resume, so a run stopped by
+`max_time` stops again as soon as it is resumed. Ours restarted at ~46 h "elapsed"
+and trained 110 batches per rank — steps 40 → 43 — at 35.0 s/batch, peak 35.37 GiB.
+
+| val | opt. steps | `lddt_pp` | vs control | `intra_protein` | `rmsd` | `best_rmsd` |
+|---|---|---|---|---|---|---|
+| stop (max_time), 3 ranks | 43 | 0.8833 | −0.0025 | 0.9259 | 3.059 | 2.981 |
+
+Same 30 samples, now sharded 10 per rank and summed. Steps 20–43 span
+0.8833–0.8871 — the run is flat, fluctuating around the control.
+Raw state: `reports/ls6/unfrozen_r2/`.
+
+Fixed: `train.py` now ignores the Timer's restored offset, so `max_time` is per
+session as intended (tested on PL 2.4 with a toy model: a checkpoint carrying 48 h
+"elapsed" resumes to zero training steps without the patch and to all of them with
+it). Per-epoch validation files now carry the step
+(`val_state_epoch004_step00043.json`): a stop-time validation and the resumed
+session's end-of-epoch validation share an epoch, and the second had overwritten
+the first twice.

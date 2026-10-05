@@ -129,11 +129,17 @@ class ValProgressDump(Callback):
         # then overfit". Not for the sanity check: its 2 batches would sit in
         # the epoch file until the real validation replaced them, and a run
         # that stopped first would leave a 2-sample "result" behind.
+        # The step is in the name because one epoch can be validated twice: a
+        # max_time stop validates mid-epoch, and the resumed session validates
+        # the same epoch again at its end. Epoch-only names let the second
+        # silently overwrite the first, which happened twice before this.
         if not _is_rank_zero() or trainer.sanity_checking:
             return
         try:
             ep = int(getattr(trainer, "current_epoch", -1))
-            snap = self.path.with_name(f"{self.path.stem}_epoch{ep:03d}.json")
+            step = int(getattr(trainer, "global_step", -1))
+            snap = self.path.with_name(
+                f"{self.path.stem}_epoch{ep:03d}_step{step:05d}.json")
             snap.write_text(self.path.read_text())
         except Exception as exc:      # telemetry must never break a run
             print(f"[val_progress] per-epoch snapshot failed: "
