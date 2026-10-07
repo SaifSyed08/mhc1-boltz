@@ -66,3 +66,15 @@ side, from the published paper:
 
 All of it waits on one dev-queue smoke test that fails unless the training loss
 and six finite per-structure peptide rows come out of the real 3-GPU path.
+
+| job | what | waits on |
+|---|---|---|
+| 3499813 | smoke test, dev queue | — |
+| 3499814 | batch 9, `max_lr` 1e-4, `runs/ls6_b9_lr1e-4` | 3499813 |
+| 3499815 | batch 9, `max_lr` 3e-4, `runs/ls6_b9_lr3e-4` | 3499813 |
+| 3499816 | eval, all 99: pretrained vs step 153, `runs/eval_val99/` | 3499813 |
+| 3499581 | batch 129, `max_lr` 3e-4 (submitted earlier the same day) | 3499813 |
+| 3499582 | batch 129, `max_lr` 1e-3 (submitted earlier the same day) | 3499813 |
+
+Step 153's weights are kept as `runs/ls6_unfrozen/r3_end_step153.ckpt` (a copy of
+that run's `last.ckpt`, written at 03:36, after step 153 and before the stop).
