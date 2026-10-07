@@ -64,6 +64,11 @@ module builds from those representations: structure lDDT stays where it started.
 
 ## 3. Why this may be the expected answer
 
+> **Weakened by `MHCFINE_COMPARISON.md`.** MHC-Fine's training set also predates
+> its base model's cutoff, and it still gained ~0.9 Å of peptide RMSD. So the
+> argument below is at most part of the story; the measurement (no peptide metric)
+> and the batch size (~16× fewer updates) are better-supported candidates.
+
 Every training structure was released on or before 2021-09-30 (`split_report.json`:
 `train_end`), which is Boltz-1's own training cutoff, and the training config applies
 upstream's own `DateFilter` and `ResolutionFilter`. So the pretrained model was almost
