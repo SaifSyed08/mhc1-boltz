@@ -95,7 +95,11 @@ run|status)
         sleep 1
     done
     out=$(tail -c +"$((start + 1))" "$B/out" | sed "/__ls6_done_$id/q")
-    printf '%s\n' "$out" | grep -v -e "__ls6_done_$id" -e "^__ls6_hello$"
+    # Strip the marker, not its line. Output without a trailing newline ends ON the
+    # marker's line, and dropping that line cut the closing } off a copied JSON
+    # file. The second sed drops the line the marker leaves empty when it had its own.
+    printf '%s\n' "$out" | sed -e "s/__ls6_done_$id rc=[0-9]*\$//" -e '/^__ls6_hello$/d' \
+        | sed '${/^$/d;}'
     rc=$(printf '%s\n' "$out" | sed -n "s/.*__ls6_done_$id rc=\([0-9]*\).*/\1/p")
     exit "${rc:-1}"
     ;;
