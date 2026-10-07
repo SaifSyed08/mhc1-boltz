@@ -64,8 +64,29 @@ def _host_free_gb() -> float:
     return float("nan")
 
 
+def _train_metrics(trainer) -> dict:
+    """The losses and LR Boltz logged for THIS micro-batch.
+
+    With `wandb: null` there is no logger, so everything Boltz passes to
+    self.log("train/...") is discarded: no run before this one has a training
+    loss curve, and "flat validation" could not be told apart from "not
+    learning". The values are still on trainer.callback_metrics while this hook
+    runs (on_train_batch_end fires before the logger connector moves on), so read
+    them here. Rank 0's micro-batches only -- a third of each optimizer step
+    under 3-GPU DDP, which is plenty for a trend.
+    """
+    out = {}
+    try:
+        for k, v in trainer.callback_metrics.items():
+            if k.startswith("train/") or k == "lr":
+                out[k] = round(float(v), 6)
+    except Exception as exc:  # telemetry must never break a run
+        out["train_metrics_error"] = f"{type(exc).__name__}: {exc}"
+    return out
+
+
 class MemProbe(Callback):
-    """Record GPU memory per training batch."""
+    """Record GPU memory, and the training losses, per training batch."""
 
     def __init__(self, path: Path, print_every: int = 4) -> None:
         self.path = Path(path)
@@ -111,25 +132,26 @@ class MemProbe(Callback):
         self._t0 = time.time()
 
     def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx) -> None:  # noqa: ANN001
-        if not torch.cuda.is_available():
-            return
-        alloc = torch.cuda.memory_allocated() / GB
-        peak = torch.cuda.max_memory_allocated() / GB
-        resv = torch.cuda.memory_reserved() / GB
-        rec = {
-            "event": "batch",
-            "batch": batch_idx,
-            "global_step": int(trainer.global_step),
-            "alloc_gb": round(alloc, 2),
-            "peak_gb": round(peak, 2),
-            "reserved_gb": round(resv, 2),
-            "frag_gb": round(resv - alloc, 2),
-            "host_free_gb": round(_host_free_gb(), 1),
-            "secs": round(time.time() - self._t0, 1) if self._t0 else None,
-        }
+        rec = {"event": "batch", "batch": batch_idx, "global_step": int(trainer.global_step)}
+        cuda = torch.cuda.is_available()
+        if cuda:
+            alloc = torch.cuda.memory_allocated() / GB
+            peak = torch.cuda.max_memory_allocated() / GB
+            resv = torch.cuda.memory_reserved() / GB
+            rec.update({
+                "alloc_gb": round(alloc, 2),
+                "peak_gb": round(peak, 2),
+                "reserved_gb": round(resv, 2),
+                "frag_gb": round(resv - alloc, 2),
+                "host_free_gb": round(_host_free_gb(), 1),
+            })
+        rec["secs"] = round(time.time() - self._t0, 1) if self._t0 else None
+        rec.update(_train_metrics(trainer))
         fh = self._open()          # None on ranks > 0
         if fh is not None:
             fh.write(json.dumps(rec) + "\n")
+        if not cuda:
+            return
 
         # Always announce a new high-water mark -- that is the line you want when
         # reading back a log that ends in an OOM.

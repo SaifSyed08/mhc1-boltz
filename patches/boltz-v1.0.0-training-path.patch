@@ -1,5 +1,5 @@
 diff --git a/scripts/train/train.py b/scripts/train/train.py
-index 7a6491d..a8f4e79 100644
+index 7a6491d..ea8f59e 100644
 --- a/scripts/train/train.py
 +++ b/scripts/train/train.py
 @@ -1,4 +1,5 @@
@@ -25,7 +25,7 @@ index 7a6491d..a8f4e79 100644
      debug: bool = False
      strict_loading: bool = True
      load_confidence_from_trunk: Optional[bool] = False
-@@ -161,18 +165,123 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -161,18 +165,133 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          if cfg.load_confidence_from_trunk:
              os.remove(file_path)
  
@@ -73,6 +73,16 @@ index 7a6491d..a8f4e79 100644
 +        callbacks.append(ValProgressDump(Path(cfg.output) / "val_state.json"))
 +    except Exception as exc:  # never let telemetry break a run
 +        print(f"[val_progress] disabled: {type(exc).__name__}: {exc}")
++
++    # LOCAL PATCH: per-structure validation rows, including MHC-Fine's
++    # MHC-peptide CA RMSD, which Boltz's pooled metrics cannot show. Reads the
++    # predictions validation_step stashes (model.py). See src/peptide_rmsd.py.
++    try:
++        from peptide_rmsd import PeptideRMSD
++
++        callbacks.append(PeptideRMSD(Path(cfg.output)))
++    except Exception as exc:  # never let telemetry break a run
++        print(f"[peptide_rmsd] disabled: {type(exc).__name__}: {exc}")
 +
 +    # LOCAL PATCH: per-batch GPU memory telemetry. Peak VRAM is the number this
 +    # project keeps getting wrong by inferring it from a dead process, so record
@@ -152,7 +162,7 @@ index 7a6491d..a8f4e79 100644
  
      # Create wandb logger
      loggers = []
-@@ -214,6 +323,17 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -214,6 +333,17 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          **trainer,
      )
  
@@ -189,7 +199,7 @@ index 8fd4379..876b9e5 100644
              residue_constraint_features = process_residue_constraint_features(data)
              chain_constraint_features = process_chain_feature_constraints(data)
 diff --git a/src/boltz/model/model.py b/src/boltz/model/model.py
-index 1e574fd..c3b67bc 100644
+index 1e574fd..d4a8201 100644
 --- a/src/boltz/model/model.py
 +++ b/src/boltz/model/model.py
 @@ -456,7 +456,30 @@ class Boltz1(LightningModule):
@@ -223,6 +233,39 @@ index 1e574fd..c3b67bc 100644
                  return None
  
          else:
+@@ -590,6 +613,9 @@ class Boltz1(LightningModule):
+         return norm
+ 
+     def validation_step(self, batch: dict[str, Tensor], batch_idx: int):
++        # LOCAL PATCH: cleared first so a batch skipped on OOM cannot leave the
++        # previous batch's predictions behind for src/peptide_rmsd.py.
++        self._val_stash = None
+         # Compute the forward pass
+         n_samples = self.validation_args.diffusion_samples
+         try:
+@@ -851,6 +877,22 @@ class Boltz1(LightningModule):
+         self.rmsd.update(rmsds)
+         self.best_rmsd.update(best_rmsds)
+ 
++        # LOCAL PATCH (see reports/UPSTREAM_PATCHES.md): hand this batch's
++        # predictions to src/peptide_rmsd.py, which scores the peptide the way
++        # MHC-Fine does and writes per-structure rows. Every metric above is
++        # summed over structures before anything reaches disk, so without this
++        # no number can be traced to the structure that produced it.
++        # References only, no copies; the callback clears the attribute.
++        self._val_stash = {
++            "pred": out["sample_atom_coords"].detach(),
++            "true": true_coords.detach(),
++            "true_mask": true_coords_resolved_mask.detach(),
++            "n_samples": n_samples,
++            "rmsds": rmsds,
++            "lddt": {k: all_lddt_dict[k].detach() for k in ("protein_protein", "intra_protein") if k in all_lddt_dict},
++            "lddt_total": {k: all_total_dict[k].detach() for k in ("protein_protein", "intra_protein") if k in all_total_dict},
++        }
++
+     def on_validation_epoch_end(self):
+         avg_lddt = {}
+         avg_disto_lddt = {}
 diff --git a/src/boltz/model/modules/diffusion.py b/src/boltz/model/modules/diffusion.py
 index 7b38c4d..ba4b08b 100644
 --- a/src/boltz/model/modules/diffusion.py

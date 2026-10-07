@@ -239,6 +239,23 @@ The patch prints the traceback, the effective `diffusion_multiplicity`, the atom
 count, and the resulting `[mult, n_atoms, n_atoms]` tensor size. On a path that
 is already failing, that costs nothing.
 
+## 7. Validation cannot be traced to a structure, and never scores the peptide
+
+Not a bug, a missing capability. `validation_step` feeds every result into
+`MeanMetric`s that are summed over structures before anything reaches disk, so
+no number can be traced back to the complex that produced it. And none of them
+scores the peptide alone: `lddt_pp` pools every inter-chain contact, most of
+them heavy chain-β2m. MHC-Fine (Glukhov et al., Biophys J 2024), the
+AlphaFold fine-tune this project parallels, is judged on exactly that peptide
+number: superpose on the MHC, RMSD over peptide Cα.
+
+The patch adds two things to `model.py`: `self._val_stash = None` at the top of
+`validation_step` (so a batch skipped on OOM cannot leave stale predictions
+behind), and at the end a dict of references (no copies) to the predicted
+coordinates, the symmetry-corrected true coordinates and mask, and Boltz's own
+per-sample RMSD and lDDT. `src/peptide_rmsd.py` (registered in `train.py`) reads
+it in `on_validation_batch_end`, clears it, and writes one row per structure.
+
 ---
 
 ## Not patched, but worth knowing

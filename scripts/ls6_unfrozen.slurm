@@ -97,7 +97,9 @@ else
 fi
 
 cd boltz-src
-CONFIG=../configs/mhc1_finetune_ls6_unfrozen.yaml
+# Overridable so scripts/ls6_eval_val99.slurm can validate checkpoints through
+# this same launch path with a different split.
+CONFIG="${CONFIG:-../configs/mhc1_finetune_ls6_unfrozen.yaml}"
 NGPU=$(awk '$1 == "devices:" { print $2; exit }' "$CONFIG")
 case "$NGPU" in ''|*[!0-9]*) echo "!! cannot read trainer.devices from $CONFIG"; exit 1 ;; esac
 

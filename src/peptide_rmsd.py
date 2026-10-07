@@ -1,0 +1,231 @@
+"""Score the peptide the way MHC-Fine does, one structure at a time.
+
+Why this exists
+---------------
+MHC-Fine (Glukhov et al., Biophys J 2024) fine-tuned AlphaFold-Multimer v2.2 on
+pMHC-I crystal structures and reports one headline number, "MHC-peptide RMSD":
+superpose the prediction on the true structure using the MHC chain, then take
+the RMSD over the peptide's CA atoms. Median on their test set: 1.59 A for the
+base model, 0.66 A fine-tuned. Boltz's validation never measures the peptide on
+its own. `lddt_pp` pools every inter-chain contact in the complex, most of them
+heavy chain-b2m, so a better peptide can hide inside a flat `lddt_pp`. And every
+Boltz metric is summed over structures before it reaches disk, so no number can
+be traced back to the structure that produced it -- which is why the RMSD
+excursion in reports/ls6/RESULT_round4.md could be sized but not named.
+
+What it writes
+--------------
+One JSON line per validated structure, per rank, to
+<output>/val_peptide_rank{r}.jsonl (append; ranks never share a file, so no
+collective is needed). Each line has the record id, the step, and per diffusion
+sample:
+
+  pep_rmsd       MHC-Fine's metric: superpose on the groove CA, RMSD of peptide CA
+  pep_internal   peptide CA RMSD after superposing the peptide on itself (shape only)
+  groove_rmsd    groove CA RMSD after superposing on the groove
+  ca_rmsd        all resolved protein CA, superposed with a proper rotation
+  ca_rmsd_mirror the same, letting the superposition reflect. ca_rmsd >> ca_rmsd_mirror
+                 means the sample is a mirror image, which lDDT cannot see
+                 (a reflection preserves every distance)
+  boltz_rmsd     Boltz's own per-sample RMSD (all atoms, symmetry-corrected)
+  lddt_pp, lddt_intra   Boltz's own per-sample lDDT, with their pair totals
+
+Superposition uses the CA atoms of the first 180 residues of the heavy chain
+(the alpha1/alpha2 groove; MHC-Fine's inputs contained only those domains) that
+are resolved in the true structure. Chains are identified by length: heavy chain
+= longest protein chain, which must exceed 150 residues; peptide = shortest,
+at most 30. A structure that does not fit, or a batch Boltz skipped, is written
+with null values and a `reason` -- never dropped silently.
+
+Needs the local patch in model.py that stashes each batch's predictions on
+`pl_module._val_stash`. Telemetry must never break a run: any failure becomes
+a `reason` on the row, or a printed warning.
+"""
+import json
+import os
+from pathlib import Path
+
+import torch
+from pytorch_lightning.callbacks import Callback
+
+try:
+    from boltz.data import const
+    PROTEIN = const.chain_type_ids["PROTEIN"]
+except Exception:  # importable for tests without boltz
+    PROTEIN = 0
+
+GROOVE_RESIDUES = 180
+MIN_HEAVY = 150
+MAX_PEPTIDE = 30
+
+
+def kabsch_rmsd(P, T, allow_reflection=False, Q=None, U=None):
+    """Superpose P onto T (both [n, 3]) and return the RMSD of P->T, or, if Q
+    and U are given, of Q->U after applying the same transform (score a part of
+    the structure after superposing on another part). Proper rotation unless
+    allow_reflection."""
+    P, T = P.double(), T.double()
+    pc, tc = P.mean(0), T.mean(0)
+    H = (P - pc).T @ (T - tc)
+    Uh, S, Vt = torch.linalg.svd(H)
+    d = torch.ones(3, dtype=P.dtype, device=P.device)
+    if not allow_reflection and torch.det(Vt.T @ Uh.T) < 0:
+        d[2] = -1.0
+    R = Vt.T @ torch.diag(d) @ Uh.T          # maps (x - pc) onto (y - tc)
+    if Q is None:
+        Q, U = P, T
+    Q, U = Q.double(), U.double()
+    moved = (Q - pc) @ R.T + tc
+    return float(((moved - U) ** 2).sum(-1).mean().sqrt())
+
+
+def record_ids(trainer):
+    """Record ids in the order this rank validates them, or None.
+
+    Lightning puts a DistributedSampler (shuffle=False) on the validation loader
+    under DDP, so rank r sees dataset indices r, r+W, r+2W, ...; iterating the
+    sampler gives exactly that list. Boltz's ValidationDataset maps a flat index
+    onto its datasets the same way this walks them (training.py, __getitem__).
+    """
+    try:
+        dl = trainer.val_dataloaders
+        if isinstance(dl, (list, tuple)):
+            dl = dl[0]
+        ds = dl.dataset
+        out = []
+        for idx in iter(dl.sampler):
+            for d in ds.datasets:
+                n = len(d.manifest.records)
+                if getattr(ds, "overfit", None) is not None:
+                    n = min(n, ds.overfit)
+                if idx < n:
+                    out.append(str(d.manifest.records[idx].id))
+                    break
+                idx -= n
+            else:
+                out.append(None)
+        return out
+    except Exception as exc:
+        print(f"[peptide_rmsd] record ids unavailable: {type(exc).__name__}: {exc}")
+        return None
+
+
+def _floats(x, n):
+    if x is None:
+        return [None] * n
+    if torch.is_tensor(x):
+        return [round(float(v), 4) for v in x.detach().flatten().tolist()]
+    return [round(float(v), 4) for v in x]
+
+
+def score_structure(batch, stash, b):
+    """Per-sample scores for structure b of the batch. Returns a dict."""
+    n = stash["n_samples"]
+    asym = batch["asym_id"][b]
+    mol = batch["mol_type"][b]
+    pad = batch["token_pad_mask"][b].bool()
+    frames = batch["frames_idx"][b]
+    frame_ok = batch["frame_resolved_mask"][b].bool()
+
+    prot = pad & (mol == PROTEIN)
+    chains = {}
+    for a in torch.unique(asym[prot]).tolist():
+        chains[a] = torch.nonzero(prot & (asym == a)).flatten()   # token order
+    if not chains:
+        return {"reason": "no protein chains"}
+    by_len = sorted(chains, key=lambda a: len(chains[a]))
+    pep_a, hc_a = by_len[0], by_len[-1]
+    out = {"hc_len": len(chains[hc_a]), "pep_len": len(chains[pep_a]),
+           "n_protein_chains": len(chains)}
+    if pep_a == hc_a or len(chains[hc_a]) <= MIN_HEAVY or len(chains[pep_a]) > MAX_PEPTIDE:
+        out["reason"] = "chains do not look like heavy chain + peptide"
+        return out
+
+    groove_tok = chains[hc_a][:GROOVE_RESIDUES]
+    pep_tok = chains[pep_a]
+    all_tok = torch.nonzero(prot).flatten()
+
+    keys = ("pep_rmsd", "pep_internal", "groove_rmsd", "ca_rmsd", "ca_rmsd_mirror")
+    res = {k: [] for k in keys}
+    for s in range(n):
+        i = b * n + s
+        pred, true, tmask = stash["pred"][i], stash["true"][i], stash["true_mask"][i].bool()
+
+        def ca(tok):
+            tok = tok[frame_ok[tok]]
+            idx = frames[tok, 1]
+            return idx[tmask[idx]]
+
+        g, p, a = ca(groove_tok), ca(pep_tok), ca(all_tok)
+        if s == 0:
+            out["n_groove_ca"], out["n_pep_ca"], out["n_all_ca"] = len(g), len(p), len(a)
+        if len(g) < 3 or len(p) < 3:
+            out["reason"] = "too few resolved CA atoms"
+            return out
+        res["pep_rmsd"].append(kabsch_rmsd(pred[g], true[g], Q=pred[p], U=true[p]))
+        res["pep_internal"].append(kabsch_rmsd(pred[p], true[p]))
+        res["groove_rmsd"].append(kabsch_rmsd(pred[g], true[g]))
+        res["ca_rmsd"].append(kabsch_rmsd(pred[a], true[a]))
+        res["ca_rmsd_mirror"].append(kabsch_rmsd(pred[a], true[a], allow_reflection=True))
+    for k in keys:
+        out[k] = [round(v, 4) for v in res[k]]
+    out["pep_rmsd_best"] = min(out["pep_rmsd"])
+    out["pep_rmsd_mean"] = round(sum(out["pep_rmsd"]) / n, 4)
+    return out
+
+
+class PeptideRMSD(Callback):
+    def __init__(self, output_dir):
+        self.dir = Path(output_dir)
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self._ids = None
+        self._best = []
+
+    def on_validation_epoch_start(self, trainer, pl_module):
+        self._ids = record_ids(trainer)
+        self._best = []
+
+    def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx,
+                                dataloader_idx=0):
+        stash = getattr(pl_module, "_val_stash", None)
+        pl_module._val_stash = None
+        try:
+            rank, ws = int(trainer.global_rank), int(trainer.world_size)
+            bsz = int(batch["asym_id"].shape[0])
+            for b in range(bsz):
+                pos = batch_idx * bsz + b
+                row = {
+                    "record_id": (self._ids[pos] if self._ids and pos < len(self._ids) else None),
+                    "global_step": int(trainer.global_step),
+                    "epoch": int(trainer.current_epoch),
+                    "sanity": bool(trainer.sanity_checking),
+                    "rank": rank, "world_size": ws, "batch_idx": int(batch_idx),
+                }
+                if stash is None:
+                    row["reason"] = "no predictions (batch skipped by Boltz)"
+                else:
+                    n = stash["n_samples"]
+                    try:
+                        row.update(score_structure(batch, stash, b))
+                    except Exception as exc:
+                        row["reason"] = f"scoring failed: {type(exc).__name__}: {exc}"
+                    row["boltz_rmsd"] = _floats(stash.get("rmsds"), n)[b * n:(b + 1) * n]
+                    for k, v in stash.get("lddt", {}).items():
+                        row[f"lddt_{'pp' if k == 'protein_protein' else 'intra'}"] = \
+                            _floats(v, n)[b * n:(b + 1) * n]
+                    for k, v in stash.get("lddt_total", {}).items():
+                        row[f"lddt_{'pp' if k == 'protein_protein' else 'intra'}_pairs"] = \
+                            _floats(v, n)[b * n:(b + 1) * n]
+                if "pep_rmsd_best" in row and not row["sanity"]:
+                    self._best.append(row["pep_rmsd_best"])
+                with (self.dir / f"val_peptide_rank{rank}.jsonl").open("a") as fh:
+                    fh.write(json.dumps(row) + "\n")
+        except Exception as exc:  # telemetry must never break a run
+            print(f"[peptide_rmsd] row failed: {type(exc).__name__}: {exc}")
+
+    def on_validation_epoch_end(self, trainer, pl_module):
+        if self._best and not trainer.sanity_checking:
+            v = sorted(self._best)
+            print(f"[peptide_rmsd] rank {trainer.global_rank} step {trainer.global_step}: "
+                  f"n={len(v)} median best-of-N MHC-peptide CA RMSD {v[len(v) // 2]:.2f} A "
+                  f"(this rank's share; full set in val_peptide_rank*.jsonl)")

@@ -13,8 +13,11 @@
 #   * val_state.json reports world_size 3            (torchrun really launched 3)
 #   * lddt weight == 3 ranks x 2 batches = 6          (the cross-rank sum works)
 #   * mem.jsonl has batch records                     (telemetry survived DDP)
+#   * mem.jsonl batch records carry train/loss        (the loss curve is recorded)
+#   * val_peptide_rank*.jsonl: 6 real-validation rows, distinct record ids,
+#     3 finite MHC-peptide RMSDs each                 (peptide scoring works)
 # and prints peak memory and s/batch, the two numbers that decide whether
-# activation offload can come off.
+# activation offload can come off, plus each row's peptide RMSD.
 #----------------------------------------------------------------------------
 
 #SBATCH -J mhc1-ddpsmk
@@ -65,8 +68,31 @@ try:
           f"median_s_per_batch={statistics.median(secs):.1f} last_global_step={b[-1]['global_step']}")
     if not b:
         fail.append("no batch records in mem.jsonl")
+    losses = [r.get("train/loss") for r in b]
+    print(f"train/loss on {sum(l is not None for l in losses)}/{len(b)} batches, "
+          f"first {losses[0]} last {losses[-1]}")
+    if not all(isinstance(l, float) and l == l for l in losses):
+        fail.append("train/loss missing or NaN in mem.jsonl batch records")
 except Exception as e:
     fail.append(f"mem.jsonl unreadable: {e}")
+try:
+    rows = [json.loads(l) for f in sorted(run.glob("val_peptide_rank*.jsonl"))
+            for l in f.read_text().splitlines() if l.strip()]
+    real = [r for r in rows if not r.get("sanity")]
+    for r in real:
+        print(f"  rank {r['rank']} {r.get('record_id')}: pep_rmsd {r.get('pep_rmsd')} "
+              f"groove {r.get('groove_rmsd')} boltz_rmsd {r.get('boltz_rmsd')} {r.get('reason', '')}")
+    ids = [r.get("record_id") for r in real]
+    good = [r for r in real if len(r.get("pep_rmsd") or []) == 3
+            and all(isinstance(x, float) and 0 <= x < 30 for x in r["pep_rmsd"])]
+    if len(real) != 6:
+        fail.append(f"{len(real)} peptide rows from the real validation, expected 6")
+    if None in ids or len(set(ids)) != len(ids):
+        fail.append(f"record ids missing or repeated: {ids}")
+    if len(good) != len(real):
+        fail.append(f"{len(real) - len(good)} rows without 3 finite peptide RMSDs")
+except Exception as e:
+    fail.append(f"val_peptide rows unreadable: {e}")
 print("SMOKE " + ("PASS" if not fail else "FAIL: " + "; ".join(fail)))
 sys.exit(1 if fail else 0)
 EOF
