@@ -87,6 +87,17 @@ design, so it is a decision for Saif and Ernest, not a default.
 
 ## 4. The RMSD excursion: most likely one structure, not a chain-selection bug
 
+> **Explained by the 2026-10-09 audit (`UPSTREAM_PATCHES.md` §8).** The structure
+> is almost certainly `7ndt`. It has a second, masked-out copy of the whole
+> complex 67–120 Å away. Boltz's symmetry correction may score a sample against
+> that copy, because doing so drops the worst-predicted interface from the lDDT
+> it maximises. A swapped β2m gives ~49 Å. Whether a swap wins changes from
+> validation to validation. So the excursion is a metric artefact, not a model
+> failure, and the mirror-image candidate below is very likely wrong. The
+> per-structure rows confirm or refute this through `boltz_truth_dev` on 7ndt.
+> Our own selection was right: chains were picked correctly. Boltz then looked
+> past them, into chains we had masked out.
+
 `rmsd` sits near 3.04 in seven validations and drops in five (steps 51, 71, 91, 111,
 121); steps 71/91/121 land on 2.613/2.621/2.614 with `best_rmsd` 1.681/1.688/1.690,
 the same values as r1's step 20 (2.617/1.679). The drop in `best_rmsd` is three times

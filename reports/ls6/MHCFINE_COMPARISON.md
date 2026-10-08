@@ -39,6 +39,16 @@ side, from the published paper:
    PDB. If it already starts near 0.7 Å, there was little left to gain and a flat
    curve is the right answer. Measuring that comes first.
 
+   **Compare like with like.** MHC-Fine's 1.59 and 0.66 Å come from one model per
+   target, picked by pLDDT without seeing the answer. Boltz-1 runs here without a
+   confidence head, so nothing can be ranked. The comparable number is the median
+   over all diffusion samples, or over sample 0 alone. The best of 3 is picked by
+   looking at the answer, so it is biased low. It is reported only as "oracle
+   best-of-N", never against 1.59 Å. MHC-Fine's peptides are 8–11-mers; ours run
+   4–20. Non-standard residues, in 14 of the 99 validation peptides, are tokenized
+   per atom, so they have no Cα frame and drop out of the peptide set. The
+   comparison therefore also needs an 8–11-mer subset.
+
 3. **Far fewer optimizer updates.** At batch 129, one 47 h session is ~110 updates;
    MHC-Fine trained at batch 8, which it says "proved beneficial". Per structure
    seen, we take ~16× fewer steps. Our batch size was copied from Boltz's
@@ -55,7 +65,10 @@ side, from the published paper:
   structure: MHC-peptide Cα RMSD per diffusion sample (superposed on the α1/α2
   groove), peptide shape and groove RMSD, a mirror-image check, and Boltz's own
   per-sample RMSD and lDDT. Every run below records it at every validation.
-  Training loss is now recorded too (`mem.jsonl`).
+  Training loss is now recorded too (`mem.jsonl`). Since 822e470 it scores against
+  the real complex, never Boltz's chain-swapped truth (`UPSTREAM_PATCHES.md` §8).
+  `boltz_truth_dev` marks the samples where Boltz's own numbers measured a swapped
+  complex.
 * **Eval on all 99 validation-era records** — pretrained vs step 153
   (`scripts/ls6_eval_val99.slurm`). 69 of them were never trained on or used for
   selection. This gives Boltz-1's starting point on MHC-Fine's metric.
@@ -64,17 +77,29 @@ side, from the published paper:
 * The batch-129 arms at 3e-4 and 1e-3 (3499581, 3499582) stay queued, re-chained behind
   the same smoke test, as the large-batch half of the comparison.
 
-All of it waits on one dev-queue smoke test that fails unless the training loss
-and six finite per-structure peptide rows come out of the real 3-GPU path.
+The jobs were first chained behind one dev-queue smoke test. It fails unless the
+training loss and six finite per-structure peptide rows come out of the real
+3-GPU path. At ~18:05 the same day Saif removed the chain:
+* On LS6 a job held on a dependency earns no queue-age priority. Age is the
+  largest priority factor there.
+* `gpu-a100` was ~2 days deep: 98 jobs pending, and `sbatch --test-only` gave
+  Oct 11 18:46 for any new job.
+* So the gate was costing queue position while protecting nothing. The smoke test
+  reports days before any arm can start. If it fails, the arms are held and the
+  code is fixed before they start; they read the code at start.
+* The smoke test was also given `nice` 200, so the eval takes the one dev slot
+  first.
 
-| job | what | waits on |
+| job | what | queue (2026-10-09 18:10) |
 |---|---|---|
-| 3499813 | smoke test, dev queue | — |
-| 3499814 | batch 9, `max_lr` 1e-4, `runs/ls6_b9_lr1e-4` | 3499813 |
-| 3499815 | batch 9, `max_lr` 3e-4, `runs/ls6_b9_lr3e-4` | 3499813 |
-| 3499816 | eval, all 99: pretrained vs step 153, `runs/eval_val99/` | 3499813 |
-| 3499581 | batch 129, `max_lr` 3e-4 (submitted earlier the same day) | 3499813 |
-| 3499582 | batch 129, `max_lr` 1e-3 (submitted earlier the same day) | 3499813 |
+| 3499816 | eval, all 99: pretrained vs step 153, `runs/eval_val99/` | dev, est. start 19:50 |
+| 3499813 | smoke test, dev queue | after the eval |
+| 3499814 | batch 9, `max_lr` 1e-4, `runs/ls6_b9_lr1e-4` | gpu-a100, pending |
+| 3499815 | batch 9, `max_lr` 3e-4, `runs/ls6_b9_lr3e-4` | gpu-a100, pending |
+| 3499581 | batch 129, `max_lr` 3e-4 (submitted earlier the same day) | gpu-a100, pending |
+| 3499582 | batch 129, `max_lr` 1e-3 (submitted earlier the same day) | gpu-a100, pending |
+
+All of them run 822e470, pulled on LS6 at ~18:20, before any of them had started.
 
 Step 153's weights are kept as `runs/ls6_unfrozen/r3_end_step153.ckpt` (a copy of
 that run's `last.ckpt`, written at 03:36, after step 153 and before the stop).

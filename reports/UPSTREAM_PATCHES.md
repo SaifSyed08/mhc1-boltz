@@ -255,6 +255,55 @@ behind), and at the end a dict of references (no copies) to the predicted
 coordinates, the symmetry-corrected true coordinates and mask, and Boltz's own
 per-sample RMSD and lDDT. `src/peptide_rmsd.py` (registered in `train.py`) reads
 it in `on_validation_batch_end`, clears it, and writes one row per structure.
+It scores against the batch's own `coords`, not the stash's symmetry-corrected
+truth, because of §8; the stash's truth is used only to report how far it is
+from the real one (`boltz_truth_dev`).
+
+## 8. Symmetry correction can swap a kept chain for a copy the dataset masked out
+
+**Not patched**: fixing it changes `val/lddt` and `val/rmsd`, so Rounds 1–4 would no
+longer compare. That decision belongs to Saif and Ernest. Found by the 2026-10-09 audit
+(`reports/AUDIT_2026-10-09_round5.md`).
+
+`get_chain_symmetries` (`data/feature/symmetry.py`) builds the chain swaps that
+validation's symmetry correction tries. For every chain in the crop it lists
+*every* chain of the full structure with the same `entity_id` and atom count. It
+checks `chain_in_crop` for the chain being replaced but not for its replacement.
+`load_input` keeps the structure's `mask` and the tokenizer skips masked chains,
+so chains our pipeline masked out (`step6_write.py` masks unrelated chains rather
+than deleting them) are still offered as replacements. `minimum_lddt_symmetry_coords`
+then keeps whichever truth gives the highest all-atom lDDT against the prediction.
+lDDT only scores pairs within 15 Å *in the truth*, so swapping in a far-away copy
+removes that chain's interface pairs from the score. Interfaces are predicted worse
+than chain interiors, so the swap can win.
+
+`7ndt` (subset30, so in every training-time validation) is a TCR–pMHC crystal with
+two complexes in the asymmetric unit:
+
+| kept chain | masked twin | centroid distance |
+|---|---|---|
+| A1 heavy chain (entity 0, 2,249 atoms) | F1 | 102 Å |
+| B1 β2m (entity 1, 836 atoms) | G1 | 120 Å |
+| C1 peptide (entity 2, 71 atoms) | H1 | 67 Å |
+
+The audit reproduced the swap on 7ndt's real coordinates with numpy. With the
+prediction set to the truth with β2m and the peptide nudged 3–5° / ~1 Å, the truth
+with the peptide swapped for H1 scores lDDT 0.9246, above the real truth at 0.9219,
+so the swap is selected. Swapping β2m gives an all-atom RMSD of ~49 Å. `7bh8` (val99
+only) also has twins, packed against the kept chains.
+
+Consequences, all pre-existing in Boltz's own metrics:
+* 7ndt's `val/rmsd` and `val/best_rmsd` are measured against a disassembled complex
+  whenever a swap wins. This is almost certainly the "~40 Å excursion" of
+  `RESULT_round4.md` §4, and worth ~1.3 Å of the subset30 mean RMSD.
+* 7ndt's share of `val/lddt` (`lddt_pp` included) is computed without the interface
+  the model got most wrong, and which truth wins flips between validations. That is
+  one structure in 30: extra noise, not a trend.
+
+Root-cause fix, if wanted: also require `chain_in_crop[j]` for the replacement (or
+drop masked chains before validation). The per-structure rows make the effect
+measurable without the fix: `boltz_truth_dev` is large on exactly the samples where
+Boltz scored a swapped truth.
 
 ---
 
