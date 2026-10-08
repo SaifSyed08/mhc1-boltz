@@ -307,6 +307,11 @@ Consequences, all pre-existing in Boltz's own metrics:
   term, so re-score close picks from the per-structure rows without 7ndt. That is
   one structure in 30: extra noise, not a trend.
 
+**Confirmed** by the 99-record eval (`reports/ls6/RESULT_eval99.md`): on 7ndt,
+Boltz's RMSD is ~49.2 Å with `boltz_truth_dev` 48.9 Å in every sample, while the
+peptide is within 0.4–0.7 Å of the real complex. 7bh8 flips between a 9.85 Å swap
+and the correct truth.
+
 Root-cause fix, if wanted: also require `chain_in_crop[j]` for the replacement (or
 drop masked chains before validation). The per-structure rows make the effect
 measurable without the fix: `boltz_truth_dev` is above ~5 Å on exactly the samples

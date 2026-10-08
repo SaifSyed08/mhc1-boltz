@@ -87,6 +87,10 @@ design, so it is a decision for Saif and Ernest, not a default.
 
 ## 4. The RMSD excursion: most likely one structure, not a chain-selection bug
 
+> **Confirmed by the eval (`RESULT_eval99.md`):** on 7ndt, `boltz_truth_dev` reads
+> 48.9 Å and Boltz's RMSD ~49.2 Å in every sample, while the peptide RMSD against
+> the real complex is 0.4–0.7 Å.
+>
 > **Leading explanation since the 2026-10-09 audits (`UPSTREAM_PATCHES.md` §8): a
 > hypothesis until 7ndt's per-structure rows confirm it.** `7ndt` has a second,
 > masked-out copy of the whole complex 67–120 Å away. Boltz's symmetry
