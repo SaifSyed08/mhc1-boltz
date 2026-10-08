@@ -87,16 +87,37 @@ design, so it is a decision for Saif and Ernest, not a default.
 
 ## 4. The RMSD excursion: most likely one structure, not a chain-selection bug
 
-> **Explained by the 2026-10-09 audit (`UPSTREAM_PATCHES.md` §8).** The structure
-> is almost certainly `7ndt`. It has a second, masked-out copy of the whole
-> complex 67–120 Å away. Boltz's symmetry correction may score a sample against
-> that copy, because doing so drops the worst-predicted interface from the lDDT
-> it maximises. A swapped β2m gives ~49 Å. Whether a swap wins changes from
-> validation to validation. So the excursion is a metric artefact, not a model
-> failure, and the mirror-image candidate below is very likely wrong. The
-> per-structure rows confirm or refute this through `boltz_truth_dev` on 7ndt.
-> Our own selection was right: chains were picked correctly. Boltz then looked
-> past them, into chains we had masked out.
+> **Leading explanation since the 2026-10-09 audits (`UPSTREAM_PATCHES.md` §8): a
+> hypothesis until 7ndt's per-structure rows confirm it.** `7ndt` has a second,
+> masked-out copy of the whole complex 67–120 Å away. Boltz's symmetry
+> correction may score a sample against parts of that copy, because doing so
+> drops the worst-predicted interface from the lDDT it maximises. On 7ndt's real
+> coordinates the swapped truths sit at all-atom RMSD ~49 Å (β2m or heavy chain
+> swapped), ~10 Å (peptide swapped) or ~1.2 Å (the whole twin complex).
+> Converted to sums (`rmsd` × 90 samples, `best_rmsd` × 30 structures), the table
+> above has four modes, not two, and those levels fit every one of them:
+>
+> | mode | validations | `rmsd` sum | `best_rmsd` sum | 7ndt's samples |
+> |---|---|---|---|---|
+> | high | control and 10 others | ~274 | ~89 | all three at ~49 Å |
+> | mid | steps 20, 71, 91, 121 | ~235 | ~50 | one dropped 39 Å (49 → 10) |
+> | low, all | step 51 | 156 | 50 | all three dropped 39 Å |
+> | low, one | step 111 | 227 | 41 | one dropped ~48 Å (49 → ~1.5) |
+>
+> Take 7ndt out that way and the other 29 structures sit at `rmsd` ≈ 1.46 Å and
+> `best_rmsd` ≈ 1.38 Å in every validation, the pretrained control included. So:
+> * The "one structure ~40 Å off" reading below was half right. The structure is
+>   ~49 Å off in the usual mode and ~10 Å off in the "good" mode, which is still
+>   mis-scored.
+> * 7ndt adds ~1.6 Å to every subset30 `rmsd` / `best_rmsd` ever recorded, the
+>   baseline included.
+> * Boltz's RMSD on the other 29 has not moved in training.
+> * The mirror-image candidate below is very likely wrong.
+>
+> On 7ndt's rows, `boltz_truth_dev` should read 0, ~0.5 (harmless whole-copy swap),
+> ~10.7 or ~48–49. Treat values above ~5 Å as swaps. Our own selection was right:
+> the chains were picked correctly, and Boltz then looked past them into chains we
+> had masked out.
 
 `rmsd` sits near 3.04 in seven validations and drops in five (steps 51, 71, 91, 111,
 121); steps 71/91/121 land on 2.613/2.621/2.614 with `best_rmsd` 1.681/1.688/1.690,

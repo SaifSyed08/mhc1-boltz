@@ -294,10 +294,16 @@ only) also has twins, packed against the kept chains.
 
 Consequences, all pre-existing in Boltz's own metrics:
 * 7ndt's `val/rmsd` and `val/best_rmsd` are measured against a disassembled complex
-  whenever a swap wins. This is almost certainly the "~40 Å excursion" of
-  `RESULT_round4.md` §4, and worth ~1.3 Å of the subset30 mean RMSD.
+  whenever a swap wins: ~49 Å with β2m or the heavy chain swapped, ~10 Å with the
+  peptide swapped. These levels fit all four modes of the round-4 table
+  (`RESULT_round4.md` §4) exactly, leaving the other 29 structures at a constant
+  `rmsd` ≈ 1.46 Å and `best_rmsd` ≈ 1.38 Å. So 7ndt adds ~1.6 Å to every subset30
+  RMSD recorded, the baseline included. This is the leading explanation; 7ndt's
+  per-structure rows (`boltz_truth_dev` > ~5 Å) will confirm or refute it.
 * 7ndt's share of `val/lddt` (`lddt_pp` included) is computed without the interface
-  the model got most wrong, and which truth wins flips between validations. That is
+  the model got most wrong, and which truth wins flips between validations. Best
+  checkpoints are picked on `val/lddt` margins of ~0.002, about the size of this
+  term, so re-score close picks from the per-structure rows without 7ndt. That is
   one structure in 30: extra noise, not a trend.
 
 Root-cause fix, if wanted: also require `chain_in_crop[j]` for the replacement (or

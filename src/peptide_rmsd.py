@@ -41,7 +41,7 @@ symmetry-corrected truth Boltz uses for its metrics. Boltz's chain-swap search
 a replacement, including copies the dataset masked out, and keeps whichever
 truth gives the best lDDT -- which a far-away copy can win, since it deletes
 that chain's interface from the lDDT. 7ndt (in subset30) has a second complete
-pMHC copy 85-120 A away. CA atoms have no within-residue symmetry and the kept
+pMHC copy 67-120 A away. CA atoms have no within-residue symmetry and the kept
 chains are distinct entities, so the raw truth loses nothing for these scores.
 
 `pep_rmsd_best` (min over samples) is an oracle pick: it is chosen with the

@@ -288,3 +288,107 @@ CRITICAL-1 lives; frames_idx is synthetic (the real CA index was checked by read
 featurizer); record_ids gets `sampler=[0]` and one rank; `lddt_total` is 100.0, a value Boltz
 never produces.
 
+
+---
+
+# Second audit (same day): the fix, 822e470 and 0c472cf
+
+Verdict: no blockers; the code fix is correct. Dispositions:
+
+| finding | disposition |
+|---|---|
+| MAJOR-1: round-4 swap explanation wrong in detail (four modes; 7ndt ~49 / ~10 Å; ~1.6 Å, not ~1.3) | **Fixed in docs**: `RESULT_round4.md` §4 and `UPSTREAM_PATCHES.md` §8 now carry the four-mode table and the constant 1.46 / 1.38 Å for the other 29, worded as a hypothesis. The sums were re-derived from the table first-hand. |
+| MINOR: best-checkpoint picks within ~0.002 | **Noted** in `UPSTREAM_PATCHES.md` §8: re-score close picks without 7ndt. |
+| MINOR: docstring said 85-120 Å | **Fixed** (67-120 Å). Docstring only, so LS6 keeps 822e470 until the next pull. |
+| MINOR: `groove_start` non-zero for 25 of 99, not 6 | **Accepted**: most start 1-2 residues in, the effect is negligible, and the field is recorded. |
+| MINOR: test uses one mask for both truths, all frames resolved | **Open**: extend the test at the next code change. |
+| MINOR: overstated wording | **Fixed**, as part of MAJOR-1. |
+| Unverified: LS6 at 822e470 | **Verified**: the pull printed `822e470` and ran the tests there. First eval rows to be checked for `groove_start`. |
+
+NO BLOCKERS. The fix in 822e470 is correct: batch["coords"] is the unswapped truth, indexed like the prediction, when the callback runs. One MAJOR documentation finding (MAJOR-1): the round-4 swap story is quantitatively stronger than written but wrong in detail, and every subset30 Boltz rmsd, the "good" mode included, carries a 7ndt artefact. Five MINOR.
+
+# Audit of the Round 5 fix (822e470) and docs (0c472cf)
+
+Started 18:20 CDT 2026-10-09. Read-only; numpy only; no torch, no bridge.
+
+## Findings (appended as confirmed)
+
+### MAJOR-1 (docs, interpretation; does not affect any job). The swap story is right, but RESULT_round4 section 4 and UPSTREAM_PATCHES section 8 describe it wrongly in detail, and they miss that the "good" validations are contaminated too
+Evidence:
+* numpy on data/processed/structures/7ndt.npz. All 8 chain-swap combinations Boltz can offer for the kept chains A1/B1/C1 (twins F1/G1/H1: same entity, same atom count, identical atom-name arrays). All-atom Kabsch RMSD of each swapped truth against the real truth: none 0.0; peptide only 10.2; b2m only 48.5; b2m+peptide 49.2; HC only 49.2; HC+peptide 48.6; HC+b2m 10.3; all three (the other NCS copy) 1.2 A. **No swap gives ~40 A. The possible levels are about 1, 10 and 49 A.**
+* RESULT_round4.md table (lines 14-29), turned into sums (rmsd x 90 samples, best_rmsd x 30 structures). There are four modes, not two:
+  - high (control and 10 others): sum rmsd ~275, sum best ~89.3
+  - steps 20/71/91/121: 235.5 / 50.5. Drop 39 in both, so ONE sample is 39 A lower.
+  - step 51: 156.3 / 49.7. rmsd drops 118 = 3 x 39.3, best 39.3, so ALL THREE samples are 39 A lower.
+  - step 111: 226.7 / 41.4. Drop 47.7 in both, so ONE sample is 48 A lower.
+* Fit the swap levels to 7ndt and keep the other 29 structures fixed. In high mode all 3 samples are at ~49 A. In the 20/71/91/121 mode one sample is at ~10 A, a peptide swap: 49 - 10 = 39. At step 51 all three are at ~10. At step 111 one sample is at ~1.5 A, actually scored right: 49 - 1.5 = 47.5. Take 7ndt out and the other 29 come to rmsd 127/87 = 1.46 A and best_rmsd 40/29 = 1.38 A, the same to +/-0.01 in every one of the 16 validations (control: (274.0 - 147)/87 = 1.46, (89.0 - 49)/29 = 1.38; step 111: (226.7 - 99.5)/87 = 1.46, (41.4 - 1.5)/29 = 1.38).
+What the docs get wrong:
+1. RESULT_round4 section 4 says "one of its three samples comes in ~39 A closer" and "one complex is ~40 A off". Under the swap account, which the numbers above fit at every step, 7ndt sits at ~49 A in high mode and its *low* mode is still a ~10 A peptide-swap artefact. Only step 111 has a correctly scored 7ndt sample. Step 51 (all three samples) and step 111 (a 48 A drop) do not fit the 3:1 reasoning the section uses, and the note does not mention them.
+2. UPSTREAM_PATCHES section 8 says the swap is "worth ~1.3 A of the subset30 mean RMSD". That is the gap between two modes, not 7ndt's share. Its share in high mode is ~1.63 A of BOTH val/rmsd (147/90) and val/best_rmsd (49/30). In the "good" mode it is still ~1.2 A of rmsd and ~0.33 A of best_rmsd. So every Boltz rmsd/best_rmsd ever recorded on subset30 carries a 7ndt artefact. That includes the r1 step 20 and 71/91/121 values the docs treat as the clean mode, and the pretrained baseline.
+3. Missing, and the most useful result: with 7ndt removed, Boltz's own RMSD on the other 29 structures has not moved by more than ~0.01 A in any validation, control included. That fits "training has not changed the structures" (consistent with flat lddt_pp). It belongs in the docs, labelled as inferred from sums.
+4. "A swapped b2m gives ~49 A". An HC swap also gives ~49. The ~40 A that the docs then match it to is a *difference* (49 -> 10), not a level.
+5. Wording: the RESULT_round4 note says "So the excursion is a metric artefact, not a model failure, and the mirror-image candidate below is very likely wrong", and section 8 says "almost certainly". That is still a hypothesis until the 7ndt rows land. The quantitative fit above makes it much stronger than the docs show, but say "fits every validation quantitatively; confirmed when boltz_truth_dev on 7ndt reads ~49/~10".
+Smallest fix: replace the 3:1 paragraph's interpretation with the four-mode table above. Change "worth ~1.3 A" to "7ndt alone is ~1.6 A of val/rmsd and val/best_rmsd in high mode, ~1.2/0.33 A in the 'good' mode". Add the 29-structure constants (1.46 / 1.38 A). For whoever reads the eval rows, say what values boltz_truth_dev should take on 7ndt (next item).
+
+Expected boltz_truth_dev values, so the eval rows can be read without guessing (numpy, CA-only Kabsch of each possible swapped truth against the real truth):
+* 7ndt: no swap 0.00; whole twin complex (F1,G1,H1) 0.54, a harmless NCS-copy swap; peptide-only or HC+b2m 10.7; any b2m-only or HC-only combination 48.1-49.0.
+* 7bh8 (val99 only; twins A1/C1, B1/D1, I1/J1): none 0.0; all three 1.1; peptide or HC+b2m ~10; the others 16.6-19.2.
+So "boltz_truth_dev is large on exactly the samples where Boltz scored a swapped truth" (UPSTREAM_PATCHES section 8, peptide_rmsd docstring) is true only for *harmful* swaps. A whole-copy swap is a real swap that reads 0.5-1.1 A. Use a threshold of ~5 A, and say so.
+
+## MINOR
+
+### MINOR-1. Checkpoint selection is where the 7ndt flip matters, and the docs call it "noise, not a trend"
+UPSTREAM_PATCHES section 8, 2nd bullet. The four training arms keep `best-*.ckpt` by `val/lddt` (train.py patch, the second ModelCheckpoint). Round 4's "best" was +0.0016 over the control, "the largest of twelve noisy reads" (RESULT_round4.md:49). Which truth wins changes the set of 7ndt pairs that count, and that set enters `val/lddt` at 1/30 weight. The size is unmeasured; a shift of 0.03-0.05 in 7ndt's lddt_pp moves the mean by 0.001-0.0017, the same size as the selection margin. Fix (docs only): say that best-checkpoint picks within ~0.002 are not to be trusted until they are re-scored from the per-structure rows without 7ndt (the rows carry lddt_pp per sample).
+
+### MINOR-2. The docstring distance is wrong
+src/peptide_rmsd.py:43-44 says "a second complete pMHC copy 85-120 A away". The centroid distances, recomputed with numpy, are A1-F1 102.4, B1-G1 119.5 and C1-H1 67.0 A, which match the UPSTREAM_PATCHES table. Fix: "67-120 A".
+
+### MINOR-3. groove_start is non-zero for 25 of 99 records, not 6
+Real data (numpy, first heavy-chain residue with is_present): 25/99 heavy chains start at index 1-2. Examples: 6zkx 2, 7ndt 2, 7n9j 2, 7wj3 2, 7dzn 2 and 16 more at 1. 7ejm/7ejn are at 7, 7phr at 12, 7rtd/7rtr/7tlt at 24. For the 1-2 cases the 180-token window now runs one or two residues into the alpha3 linker. Before, it was one or two residues short at the N-terminus. The effect on the superposition is negligible, and `groove_start` is recorded. The commit message and docstring ("a few records") undersell how many rows changed definition. Nine of these are subset30 records, but no rows exist from the old code (it never ran), so comparability is not affected. No fix needed; note it.
+
+### MINOR-4. The test cannot tell the stash mask from the batch mask
+tests/test_peptide_rmsd.py:51 passes the same `mask` as the batch's `atom_resolved_mask` and as both of the stash's `true_mask`, and `frame_resolved_mask` is all True (:49). If the code used `stash["true_mask"]` for `ca()`, or ignored `frame_ok` in `hc_ok`, the test would still pass. It does discriminate the main fix: on the old code, pep_rmsd sample 0 would be ~60 A and `groove_start` would be missing, so the test fails. The expected values are correct and not tautological: groove_start 5, n_groove_ca 179 (tokens 5-184 less token 10), and pep_rmsd 1.0. Fix: in the swapped sample, make the stash mask differ (e.g. mark the swapped peptide's CA unresolved in `true_mask[0]`) and assert n_pep_ca == 9. Set one heavy-chain token's frame_resolved_mask to False and assert groove_start skips it.
+
+### MINOR-5. Overstatement
+RESULT_round4.md section 4 note: "So the excursion is a metric artefact, not a model failure". UPSTREAM_PATCHES section 8: "almost certainly". The MAJOR-1 arithmetic makes the hypothesis much stronger than the docs argue, but nothing has observed it per structure yet. Phrase it as "fits all 16 validations quantitatively (MAJOR-1); the eval's 7ndt rows confirm it".
+
+## Verified OK (evidence)
+
+1. **`batch["coords"][b, 0]` is the unswapped truth, indexed like the prediction, when the callback runs.**
+   * featurizer.py:737-739, 803, 814 build `coords` from `data.structure.atoms["coords"]` token by token. The atom table is the same one `frames_idx` (:774-776, `+ atom_idx`) and `atom_to_token` index, so `frames[t, 1]` is that token's CA in `coords`.
+   * :840-842 centre it. That is a translation only, harmless under Kabsch.
+   * :846 random augmentation touches `ref_pos` only.
+   * :866 pads `coords` at the END (dim 1), so indices stay valid. The shape is (1, N, 3) per example; collate (training.py:125-165) stacks to (B, 1, N, 3), so `[b, 0]` is right. B = 1 here.
+   * `sample_atom_coords` has the same N (it is sampled over `atom_pad_mask`).
+   * `crop_validation: false` in both configs (unfrozen.yaml:169, eval_val99.yaml:179), so there is no crop and no max-token/max-atom padding (featurizer is only padded when crop_validation).
+   * Nothing in validation modifies `batch["coords"]` or `atom_resolved_mask`:
+     - the only write, `feats["coords"] = ...` (diffusion.py:717), is in the training forward, reached only under `self.training` (model.py:325);
+     - `get_true_coordinates` clones (`all_coords.clone()`, symmetry.py:269) or builds new tensors (`repeat_interleave`, model.py:416);
+     - weighted_rigid_align and weighted_minimum_rmsd do no in-place work on their inputs (grep);
+     - the other callbacks (val_progress, mem_probe) do not touch the batch.
+   * PL 2.4 passes the device-moved batch to `on_validation_batch_end` (evaluation_loop.py:370, 409-410).
+   * `precision: 32` in both configs, so there is no half-precision input cast.
+2. **Same notion of "resolved".** The featurizer's `atom_resolved_mask` = `atom_data["is_present"]` (:815). The stash's mask comes from `structure.atoms["is_present"]` via `crop_to_all_atom_map` (symmetry.py:424, 453-458), in the same token-major atom order. With no swap the two are identical, and the stash truth is a rigid transform of `coords`, so boltz_truth_dev is ~0 (float error).
+3. **Atom-level symmetries do not touch CA, so they cannot create a false boltz_truth_dev.** The amino-acid symmetry swaps are side-chain atoms. Non-standard residues (the 14 peptides: SEP, QM8, QMB, DPN, E7P, OSE, MYR) are per-atom tokens with frame mask False (featurizer.py:743-745), so they are excluded from `a`.
+4. **Twins are real, and the swap levels are as stated.** 7ndt: F1/G1/H1 have the same entity, atom count and atom-name arrays as A1/B1/C1. Centroid distances are 102.4 / 119.5 / 67.0 A (UPSTREAM_PATCHES table correct). A b2m swap gives 48.5 A all-atom ("~49" correct). In val99 only 7ndt and 7bh8 have masked twins. Every kept chain in all 99 records is a protein of a distinct entity, so "CA loses nothing" holds.
+5. **7ndt is in subset30.** The split file has 582 lines, but only 30 match manifest ids, and 7ndt is one of them. It is in val99 (validation_ids.txt:29).
+6. **"Training loss is not affected" is true.**
+   * training_step (model.py:432-520) calls get_true_coordinates only under `self.confidence_prediction`, which is false (unfrozen.yaml:231, eval:241).
+   * The diffusion loss uses `feats["coords"]` with weighted_rigid_align and no chain symmetry (diffusion.py:703-830).
+   * `return_train_symmetries: false`.
+7. **The 14/99 non-standard peptides and the 4-20 residue range are right.** The peptide token count is at most 28 (<= MAX_PEPTIDE). No heavy chain has a non-standard residue, so the groove window is 180 real residues.
+8. **None-safety and crash paths.**
+   * `boltz_truth_dev` None is only `round`ed when not None (:206). It never reaches min/sum/_median, which read only pep_rmsd, never None.
+   * The smoke test reads only pep_rmsd (ls6_ddp_smoke.slurm:86-87).
+   * `int(hc_ok[0])`, `torch.nonzero` and the slicing work on CUDA. All index tensors and stash tensors share the batch's device; `frames` is int64.
+   * 8d5q (180-residue HC, start 1) gives a 179-token window and no error. The first resolved HC residue in any of the 99 records is at most index 24, so the far-in alpha1 case does not occur.
+   * on_validation_batch_end is fully wrapped. on_validation_epoch_end is not, but it is only reached with a non-empty `_all` of floats.
+9. **The test discriminates the fix.** See MINOR-4: it would fail on the old code, and its expected values are correct.
+10. **The tree is clean and HEAD 0c472cf is on origin/master.** 822e470 changes only src/ and tests/, so the boltz-src patch and LS6's patched checkout are unaffected.
+11. **The four-mode arithmetic (MAJOR-1)** comes from RESULT_round4.md:14-29 via sums: rmsd x 90 = 274-277 / 235.5 / 226.7 / 156.3; best x 30 = 89-90 / 50.5 / 41.4 / 49.7.
+
+## UNVERIFIED (and what settles it)
+- **Whether LS6's checkout is actually at 822e470 before the 19:50 eval.** The doc says it was pulled at ~18:20. I cannot look (no bridge). If it is not, the eval scores 7ndt and 7bh8 against the swapped truth. Settle with `git -C $WORK/mhc1-boltz rev-parse HEAD` on LS6, or look for `groove_start` in the first eval row.
+- **That peptide_rmsd runs at all on real Boltz batches.** It never has: the smoke test now runs after the eval. Any exception becomes a row with `reason: "scoring failed: ..."`, not a crash, but the eval could then spend its slot with null peptide rows. Settle by checking the first rows of runs/eval_val99/pretrained/val_peptide_rank0.jsonl a few minutes after 19:50, before the step153 pass.
+- **The 0.9246 vs 0.9219 lDDT reproduction.** It is not re-run here: the pair matrices for 3,156 atoms are too large for the free RAM. The swap levels do not depend on it.
+- **The queue claims** (age factor weight, Oct 11 18:46 estimate, nice 200) and MHC-Fine's paper details (pLDDT pick of 5, 8-11-mers) are not checkable offline.
