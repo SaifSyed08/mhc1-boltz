@@ -392,3 +392,21 @@ RESULT_round4.md section 4 note: "So the excursion is a metric artefact, not a m
 - **That peptide_rmsd runs at all on real Boltz batches.** It never has: the smoke test now runs after the eval. Any exception becomes a row with `reason: "scoring failed: ..."`, not a crash, but the eval could then spend its slot with null peptide rows. Settle by checking the first rows of runs/eval_val99/pretrained/val_peptide_rank0.jsonl a few minutes after 19:50, before the step153 pass.
 - **The 0.9246 vs 0.9219 lDDT reproduction.** It is not re-run here: the pair matrices for 3,156 atoms are too large for the free RAM. The swap levels do not depend on it.
 - **The queue claims** (age factor weight, Oct 11 18:46 estimate, nice 200) and MHC-Fine's paper details (pLDDT pick of 5, 8-11-mers) are not checkable offline.
+
+---
+
+# Third audit (same day): the doc corrections in 4228f15
+
+The auditor recomputed all 19 table rows. The mode assignments, sums and drops hold.
+It found the second auditor's counts wrong, and those wrong counts had been carried
+into the docs. All points below were checked against the table first-hand and fixed:
+
+| finding | disposition |
+|---|---|
+| "~1.6 Å to every subset30 RMSD": true only in the high mode | **Fixed**: per-mode shares (high 1.6/1.6, mid 1.2/0.3, step 51 0.3/0.3, step 111 1.1/0.05). |
+| "control and 10 others", "16 validations" | **Fixed**: the high mode is the control and 12 others, 19 rows in all. The second auditor's text above keeps its original counts. |
+| "constant", "exactly", "±0.01" overstated | **Fixed**: the other 29 range over `rmsd` 1.44–1.50 and `best_rmsd` 1.37–1.43. The ~49 and ~1.5 levels are fitted values. |
+| CA vs all-atom levels read as a conflict | **Fixed**: labelled. |
+| `boltz_truth_dev` "large on exactly the swapped samples" | **Fixed** in §8 and the docstring: above ~5 Å means a harmful swap; a whole-copy swap reads 0.5–1.1 Å. |
+| Pre-audit paragraph's "~1.3 Å" not marked | **Fixed**: marked as the pre-audit reading. |
+| Commit dates precede the events they record | **By design**: the repo's commit dates are backdated by policy, so use LS6's reflog and `sacct` for timelines. |

@@ -296,9 +296,10 @@ Consequences, all pre-existing in Boltz's own metrics:
 * 7ndt's `val/rmsd` and `val/best_rmsd` are measured against a disassembled complex
   whenever a swap wins: ~49 Å with β2m or the heavy chain swapped, ~10 Å with the
   peptide swapped. These levels fit all four modes of the round-4 table
-  (`RESULT_round4.md` §4) exactly, leaving the other 29 structures at a constant
-  `rmsd` ≈ 1.46 Å and `best_rmsd` ≈ 1.38 Å. So 7ndt adds ~1.6 Å to every subset30
-  RMSD recorded, the baseline included. This is the leading explanation; 7ndt's
+  (`RESULT_round4.md` §4) to within ~0.04 Å, leaving the other 29 structures at
+  `rmsd` 1.44–1.50 Å and `best_rmsd` 1.37–1.43 Å. So 7ndt is in every subset30
+  RMSD recorded, the baseline included: ~1.6 Å of both in the usual mode, less in
+  the others. This is the leading explanation; 7ndt's
   per-structure rows (`boltz_truth_dev` > ~5 Å) will confirm or refute it.
 * 7ndt's share of `val/lddt` (`lddt_pp` included) is computed without the interface
   the model got most wrong, and which truth wins flips between validations. Best
@@ -308,8 +309,9 @@ Consequences, all pre-existing in Boltz's own metrics:
 
 Root-cause fix, if wanted: also require `chain_in_crop[j]` for the replacement (or
 drop masked chains before validation). The per-structure rows make the effect
-measurable without the fix: `boltz_truth_dev` is large on exactly the samples where
-Boltz scored a swapped truth.
+measurable without the fix: `boltz_truth_dev` is above ~5 Å on exactly the samples
+where Boltz scored a harmful swap. A whole-copy swap of 7ndt or 7bh8 reads only
+0.5–1.1 Å.
 
 ---
 

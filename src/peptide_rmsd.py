@@ -28,8 +28,9 @@ sample:
                  means the sample is a mirror image, which lDDT cannot see
                  (a reflection preserves every distance)
   boltz_truth_dev  CA RMSD between the "truth" Boltz scored this sample against
-                 and the real one (below). ~0 normally; large means Boltz's own
-                 rmsd/lDDT for this sample measured a different complex
+                 and the real one (below). ~0 normally; above ~5 A means Boltz's
+                 own rmsd/lDDT for this sample measured a disassembled complex
+                 (a harmless swap of a whole twin copy reads ~0.5-1.1 A)
   boltz_rmsd     Boltz's own per-sample RMSD (all atoms, symmetry-corrected)
   lddt_pp, lddt_intra   Boltz's own per-sample lDDT. The `_pairs` fields are 0/1
                  flags (does the structure have such pairs at all), not counts:

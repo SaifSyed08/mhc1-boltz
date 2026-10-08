@@ -99,25 +99,32 @@ design, so it is a decision for Saif and Ernest, not a default.
 >
 > | mode | validations | `rmsd` sum | `best_rmsd` sum | 7ndt's samples |
 > |---|---|---|---|---|
-> | high | control and 10 others | ~274 | ~89 | all three at ~49 Å |
+> | high | control and 12 others | ~275 | ~89 | all three at ~49 Å |
 > | mid | steps 20, 71, 91, 121 | ~235 | ~50 | one dropped 39 Å (49 → 10) |
 > | low, all | step 51 | 156 | 50 | all three dropped 39 Å |
 > | low, one | step 111 | 227 | 41 | one dropped ~48 Å (49 → ~1.5) |
 >
-> Take 7ndt out that way and the other 29 structures sit at `rmsd` ≈ 1.46 Å and
-> `best_rmsd` ≈ 1.38 Å in every validation, the pretrained control included. So:
+> Take 7ndt out that way and the other 29 structures sit at `rmsd` 1.44–1.50 Å and
+> `best_rmsd` 1.37–1.43 Å in every validation, the pretrained control included.
+> (The ~49 Å and ~1.5 Å levels are fitted; only the 39 / 48 Å drops are
+> independent evidence.) So:
 > * The "one structure ~40 Å off" reading below was half right. The structure is
 >   ~49 Å off in the usual mode and ~10 Å off in the "good" mode, which is still
 >   mis-scored.
-> * 7ndt adds ~1.6 Å to every subset30 `rmsd` / `best_rmsd` ever recorded, the
->   baseline included.
-> * Boltz's RMSD on the other 29 has not moved in training.
+> * 7ndt contributes to every subset30 `rmsd` / `best_rmsd` ever recorded: ~1.6 /
+>   ~1.6 Å in the high mode (the control included), ~1.2 / ~0.3 Å in the mid mode,
+>   ~0.3 / ~0.3 Å at step 51 and ~1.1 / ~0.05 Å at step 111.
+> * Boltz's RMSD on the other 29 has not moved in training beyond ~±0.03 Å.
 > * The mirror-image candidate below is very likely wrong.
 >
-> On 7ndt's rows, `boltz_truth_dev` should read 0, ~0.5 (harmless whole-copy swap),
-> ~10.7 or ~48–49. Treat values above ~5 Å as swaps. Our own selection was right:
+> On 7ndt's rows, `boltz_truth_dev` (CA-only, so slightly different from the
+> all-atom levels above) should read 0, ~0.5 (harmless whole-copy swap), ~10.7 or
+> ~48–49. Treat values above ~5 Å as swaps. Our own selection was right:
 > the chains were picked correctly, and Boltz then looked past them into chains we
 > had masked out.
+>
+> The paragraphs below are the pre-audit reading, kept for the record. Their
+> "~1.3 Å" is the gap between the high and mid modes, not 7ndt's share.
 
 `rmsd` sits near 3.04 in seven validations and drops in five (steps 51, 71, 91, 111,
 121); steps 71/91/121 land on 2.613/2.621/2.614 with `best_rmsd` 1.681/1.688/1.690,
