@@ -27,15 +27,36 @@ sample:
   ca_rmsd_mirror the same, letting the superposition reflect. ca_rmsd >> ca_rmsd_mirror
                  means the sample is a mirror image, which lDDT cannot see
                  (a reflection preserves every distance)
+  boltz_truth_dev  CA RMSD between the "truth" Boltz scored this sample against
+                 and the real one (below). ~0 normally; large means Boltz's own
+                 rmsd/lDDT for this sample measured a different complex
   boltz_rmsd     Boltz's own per-sample RMSD (all atoms, symmetry-corrected)
-  lddt_pp, lddt_intra   Boltz's own per-sample lDDT, with their pair totals
+  lddt_pp, lddt_intra   Boltz's own per-sample lDDT. The `_pairs` fields are 0/1
+                 flags (does the structure have such pairs at all), not counts:
+                 Boltz reduces the totals to (total > 0) unless cardinality_weighted
 
-Superposition uses the CA atoms of the first 180 residues of the heavy chain
-(the alpha1/alpha2 groove; MHC-Fine's inputs contained only those domains) that
-are resolved in the true structure. Chains are identified by length: heavy chain
-= longest protein chain, which must exceed 150 residues; peptide = shortest,
-at most 30. A structure that does not fit, or a batch Boltz skipped, is written
-with null values and a `reason` -- never dropped silently.
+Every score here is against the batch's own ground truth (`coords`), not the
+symmetry-corrected truth Boltz uses for its metrics. Boltz's chain-swap search
+(get_chain_symmetries) offers every same-entity chain of the full structure as
+a replacement, including copies the dataset masked out, and keeps whichever
+truth gives the best lDDT -- which a far-away copy can win, since it deletes
+that chain's interface from the lDDT. 7ndt (in subset30) has a second complete
+pMHC copy 85-120 A away. CA atoms have no within-residue symmetry and the kept
+chains are distinct entities, so the raw truth loses nothing for these scores.
+
+`pep_rmsd_best` (min over samples) is an oracle pick: it is chosen with the
+answer in hand. MHC-Fine's numbers are one model per target picked by pLDDT,
+and there is no confidence head here, so compare their medians with the median
+over all samples (or sample 0), never with best-of-N.
+
+Superposition uses the CA atoms of 180 heavy-chain residues starting at the
+first one resolved in the true structure (the alpha1/alpha2 groove; MHC-Fine's
+inputs contained only those domains; a few records carry an unresolved signal
+peptide or leader, so the window cannot start at token 0), recorded as
+`groove_start`. Chains are identified by length: heavy chain = longest protein
+chain, which must exceed 150 residues; peptide = shortest, at most 30. A
+structure that does not fit, or a batch Boltz skipped, is written with null
+values and a `reason` -- never dropped silently.
 
 Needs the local patch in model.py that stashes each batch's predictions on
 `pl_module._val_stash`. Telemetry must never break a run: any failure becomes
@@ -118,6 +139,12 @@ def _floats(x, n):
     return [round(float(v), 4) for v in x]
 
 
+def _median(v):
+    v = sorted(v)
+    m = len(v) // 2
+    return v[m] if len(v) % 2 else (v[m - 1] + v[m]) / 2
+
+
 def score_structure(batch, stash, b):
     """Per-sample scores for structure b of the batch. Returns a dict."""
     n = stash["n_samples"]
@@ -126,6 +153,8 @@ def score_structure(batch, stash, b):
     pad = batch["token_pad_mask"][b].bool()
     frames = batch["frames_idx"][b]
     frame_ok = batch["frame_resolved_mask"][b].bool()
+    true = batch["coords"][b, 0]                      # the real complex, never chain-swapped
+    tmask = batch["atom_resolved_mask"][b].bool()
 
     prot = pad & (mol == PROTEIN)
     chains = {}
@@ -141,34 +170,40 @@ def score_structure(batch, stash, b):
         out["reason"] = "chains do not look like heavy chain + peptide"
         return out
 
-    groove_tok = chains[hc_a][:GROOVE_RESIDUES]
-    pep_tok = chains[pep_a]
-    all_tok = torch.nonzero(prot).flatten()
+    def ca(tok):
+        tok = tok[frame_ok[tok]]
+        idx = frames[tok, 1]
+        return idx[tmask[idx]]
 
-    keys = ("pep_rmsd", "pep_internal", "groove_rmsd", "ca_rmsd", "ca_rmsd_mirror")
+    hc = chains[hc_a]
+    hc_ok = torch.nonzero(frame_ok[hc] & tmask[frames[hc, 1]]).flatten()
+    if len(hc_ok) == 0:
+        out["reason"] = "no resolved heavy-chain CA"
+        return out
+    out["groove_start"] = int(hc_ok[0])
+    groove_tok = hc[out["groove_start"]:out["groove_start"] + GROOVE_RESIDUES]
+    g, p, a = ca(groove_tok), ca(chains[pep_a]), ca(torch.nonzero(prot).flatten())
+    out["n_groove_ca"], out["n_pep_ca"], out["n_all_ca"] = len(g), len(p), len(a)
+    if len(g) < 3 or len(p) < 3:
+        out["reason"] = "too few resolved CA atoms"
+        return out
+
+    keys = ("pep_rmsd", "pep_internal", "groove_rmsd", "ca_rmsd", "ca_rmsd_mirror",
+            "boltz_truth_dev")
     res = {k: [] for k in keys}
     for s in range(n):
         i = b * n + s
-        pred, true, tmask = stash["pred"][i], stash["true"][i], stash["true_mask"][i].bool()
-
-        def ca(tok):
-            tok = tok[frame_ok[tok]]
-            idx = frames[tok, 1]
-            return idx[tmask[idx]]
-
-        g, p, a = ca(groove_tok), ca(pep_tok), ca(all_tok)
-        if s == 0:
-            out["n_groove_ca"], out["n_pep_ca"], out["n_all_ca"] = len(g), len(p), len(a)
-        if len(g) < 3 or len(p) < 3:
-            out["reason"] = "too few resolved CA atoms"
-            return out
+        pred = stash["pred"][i]
         res["pep_rmsd"].append(kabsch_rmsd(pred[g], true[g], Q=pred[p], U=true[p]))
         res["pep_internal"].append(kabsch_rmsd(pred[p], true[p]))
         res["groove_rmsd"].append(kabsch_rmsd(pred[g], true[g]))
         res["ca_rmsd"].append(kabsch_rmsd(pred[a], true[a]))
         res["ca_rmsd_mirror"].append(kabsch_rmsd(pred[a], true[a], allow_reflection=True))
+        bt, bm = stash["true"][i], stash["true_mask"][i].bool()
+        both = a[bm[a]]
+        res["boltz_truth_dev"].append(kabsch_rmsd(bt[both], true[both]) if len(both) >= 3 else None)
     for k in keys:
-        out[k] = [round(v, 4) for v in res[k]]
+        out[k] = [None if v is None else round(v, 4) for v in res[k]]
     out["pep_rmsd_best"] = min(out["pep_rmsd"])
     out["pep_rmsd_mean"] = round(sum(out["pep_rmsd"]) / n, 4)
     return out
@@ -180,10 +215,12 @@ class PeptideRMSD(Callback):
         self.dir.mkdir(parents=True, exist_ok=True)
         self._ids = None
         self._best = []
+        self._all = []
 
     def on_validation_epoch_start(self, trainer, pl_module):
         self._ids = record_ids(trainer)
         self._best = []
+        self._all = []
 
     def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx,
                                 dataloader_idx=0):
@@ -218,6 +255,7 @@ class PeptideRMSD(Callback):
                             _floats(v, n)[b * n:(b + 1) * n]
                 if "pep_rmsd_best" in row and not row["sanity"]:
                     self._best.append(row["pep_rmsd_best"])
+                    self._all.extend(row["pep_rmsd"])
                 with (self.dir / f"val_peptide_rank{rank}.jsonl").open("a") as fh:
                     fh.write(json.dumps(row) + "\n")
         except Exception as exc:  # telemetry must never break a run
@@ -225,7 +263,8 @@ class PeptideRMSD(Callback):
 
     def on_validation_epoch_end(self, trainer, pl_module):
         if self._best and not trainer.sanity_checking:
-            v = sorted(self._best)
             print(f"[peptide_rmsd] rank {trainer.global_rank} step {trainer.global_step}: "
-                  f"n={len(v)} median best-of-N MHC-peptide CA RMSD {v[len(v) // 2]:.2f} A "
-                  f"(this rank's share; full set in val_peptide_rank*.jsonl)")
+                  f"{len(self._best)} structures, median MHC-peptide CA RMSD "
+                  f"{_median(self._all):.2f} A over all {len(self._all)} samples "
+                  f"(oracle best-of-N {_median(self._best):.2f} A; this rank's share, "
+                  f"full set in val_peptide_rank*.jsonl)")
