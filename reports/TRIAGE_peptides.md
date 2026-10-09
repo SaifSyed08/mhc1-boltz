@@ -29,9 +29,9 @@ Rules (first pass, to be checked in PyMOL):
 | `7sih` | NPDIVIYQY | 1.05 | mean RSCC 0.77, min 0.53. The same peptide in `7sif` is well resolved (0.94) |
 
 `7ejm` and `7ejn` "improved" most at step 153 (1.72 → 1.02, 1.54 → 0.69). Against a
-poorly resolved peptide, that is not evidence of anything. Across all splits, 28
-train records have peptide mean RSCC < 0.8 and 4 carry a covalent ligand (3 MYR,
-1 NAG, 1 3IB). Dropping them from training is a separate decision.
+poorly resolved peptide, that is not evidence of anything. In training, 28
+records have peptide mean RSCC < 0.8 and 4 carry a covalent ligand on the peptide
+(5 across all splits: 3 MYR, 1 NAG, 1 3IB). Dropping them from training is a separate decision.
 
 ## Difficult (7)
 
@@ -53,10 +53,11 @@ train records have peptide mean RSCC < 0.8 and 4 carry a covalent ligand (3 MYR,
 `7r7v` 1.22
 
 Two families stand out:
-* **KRAS G12 neoantigens** (`VVVGA[G/D]GVGK`, `GADGVGKSL`: `7ow3`/`7ow5`/`7ow6`/
-  `7pb2`/`7su9`) sit at 1.3–2.5 Å while `7ow4`, the same peptide, sits at 0.72.
-  So the same peptide gets different errors in different complexes: a test of
-  allele/context, not peptide sequence.
+* **KRAS 5–14 peptides**: wild-type `VVVGAGGVGK` (`7ow3`, `7ow5`), G12D
+  `VVVGADGVGK` (`7ow6`, `7pb2`), and `GADGVGKSL` (`7su9`). They sit at 1.3–2.5 Å.
+  `7ow4` has the same G12D peptide as `7ow6` and `7pb2` but sits at 0.72 Å. So one
+  peptide gets different errors in different complexes, which points at
+  allele/context rather than peptide sequence.
 * **`8d5q`** (HPGSVNEFDF) is fixed by fine-tuning: 2.20 → 0.66–0.73 in three of
   four Round 5 arms.
 
