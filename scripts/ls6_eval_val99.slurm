@@ -34,6 +34,16 @@ CKPTS=(
   "pretrained:$REPO/data/assets/boltz1_conf.ckpt"
   "step153:$REPO/runs/ls6_unfrozen/r3_end_step153.ckpt"
 )
+# Other checkpoints: EVAL_CKPTS="name:path name:path" (paths relative to the repo
+# or absolute), e.g. sbatch --export=ALL,EVAL_CKPTS="b9_3e-4_last:runs/ls6_b9_lr3e-4/last.ckpt" ...
+if [ -n "${EVAL_CKPTS:-}" ]; then
+    read -r -a CKPTS <<< "$EVAL_CKPTS"
+    for i in "${!CKPTS[@]}"; do
+        n=${CKPTS[$i]%%:*}; p=${CKPTS[$i]#*:}
+        case "$p" in /*) ;; *) p="$REPO/$p" ;; esac
+        CKPTS[$i]="$n:$p"
+    done
+fi
 rc_all=0
 for spec in "${CKPTS[@]}"; do
     name=${spec%%:*}; ckpt=${spec#*:}
