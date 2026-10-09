@@ -15,7 +15,7 @@ Rules (first pass, to be checked in PyMOL):
   peptide, or a peptide whose mean RSCC is below 0.8.
 * **Difficult:** the length is outside 8–11, or the peptide has a modified
   residue (X in the sequence) and pretrained Boltz-1 is above 1.2 Å. Modified
-  residues on their own are not difficult. 15 validation peptides carry one, and
+  residues on their own are not difficult. 14 validation peptides carry one, and
   11 of them are at or below 1.2 Å (see "Modified residues" below).
 * **Can improve:** a canonical 8–11-mer with a good density fit, where pretrained
   Boltz-1 is above 1.2 Å.
@@ -71,17 +71,29 @@ These 70 records are 8–11-mers at or below 1.2 Å. They are not drop cases:
 
 There is little room here; this group's median is Boltz-1's floor.
 
-## Modified residues (15 records)
+## Modified residues (14 records)
 
 From the RCSB canonical sequences:
-* **Phosphoserine peptides:** `7cir`, `7cis`, `7dyn` (RRF[pS]R[pS]PIRR family);
-  `7s8e`, `7s8a`, `7rzj`, `7s7d`, `7s79` (EPR[pS]PSHSM); `7s7f` (LPA[pS]PAHQL).
+* **Phosphoserine (SEP), 7 records:**
+  * the RRF…PIRR family: `7cir` RRF[pS]RSPIRR (singly phosphorylated);
+    `7dyn` RRF[pS]R[pS]PIRR; `7cis` RRF[pS]R[pS]PIR (9-mer);
+  * EPR[pS]PSHSM: `7s8e`, `7s8a`, `7rzj`;
+  * LPA[pS]PAHQL: `7s7f`.
+
   All but `7cir` are at or below 1.2 Å, so phosphorylation as such is handled.
   `7cir` is the outlier, and it gets worse with fine-tuning.
-* **Modified C-terminal residues:** `7ndt` and `7ndu` (canonical Leu), and `6zky`
-  (RLPAKAPLX). `7ndu` is at 1.62 Å; `7ndt` is at 0.50 Å.
-* **Modified core residue:** `7p0a`, Phe6 → X (0.32 Å).
-* **Modified N-terminus:** `7wt3` (XGANF, 5-mer).
+* **Other serine-site modifications in the EPR family:** `7s7d` carries
+  O-sulfo-serine (OSE) and `7s79` carries E7P. Both are fine (≤ 0.41 Å).
+* **Modified C-terminal residues:** `7ndt` and `7ndu` end in QM8 (canonical Leu);
+  `6zky` ends in QMB. `7ndu` is at 1.62 Å; `7ndt` is at 0.50 Å.
+* **Modified core residue:** `7p0a`, Phe6 → D-phenylalanine (DPN) (0.32 Å).
+* **Myristoylated N-terminus:** `7wt3` (MYR-GANF). This is the same chemistry as
+  the dropped `7wj3`, but deposited differently. In `7wt3` the myristoyl group is a
+  residue of the peptide chain, so Boltz sees it. In `7wj3` it is a separate
+  ligand, which our pipeline masks. With the lipid in the input, Boltz places
+  `7wt3` at 1.32 Å; without it, `7wj3` lands at 15 Å. That is direct evidence that
+  `7wj3` fails because of the missing lipid. It also suggests a fix: keep
+  covalently linked ligands as part of the peptide.
 
 Which modification each X is (for example, how Boltz tokenizes SEP) is the thing
 to check in PyMOL for `7cir` vs `7cis`.
