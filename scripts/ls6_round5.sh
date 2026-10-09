@@ -144,24 +144,7 @@ PY
 done
 
 echo
-echo "=================== eval_val99 per record (mean of 3 samples) ==="
-# Compact enough to paste; feeds the peptide triage (reports/TRIAGE_peptides.md).
-python3 - <<'PY'
-import json, pathlib
-tab = {}
-for name in ("pretrained", "step153"):
-    for p in pathlib.Path("runs/eval_val99", name).glob("val_peptide_rank*.jsonl"):
-        for l in p.open():
-            r = json.loads(l)
-            if r.get("sanity") or not r.get("pep_rmsd"):
-                continue
-            v = [x for x in r["pep_rmsd"] if x is not None]
-            tab.setdefault(r["record_id"], {})[name] = (sum(v) / len(v), min(v), max(v))
-print("record pre_mean pre_min pre_max s153_mean")
-for k in sorted(tab, key=lambda k: -tab[k].get("pretrained", (0,))[0]):
-    a, b = tab[k].get("pretrained"), tab[k].get("step153")
-    print(k, *(f"{x:.2f}" for x in (a or (float("nan"),) * 3)), f"{b[0]:.2f}" if b else "nan")
-PY
+echo "(per-record eval table and the eval summaries: scripts/ls6_evals.sh)"
 
 echo
 echo "=================== smoke ==================="
