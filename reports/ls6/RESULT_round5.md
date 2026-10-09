@@ -98,7 +98,8 @@ What this shows:
 ## Next
 
 The 99-record eval of the candidates (`scripts/ls6_eval_val99.slurm` with
-`EVAL_CKPTS`), queued behind 3499815:
+`EVAL_CKPTS`) is job **3506252**, `afterany:3499815`, in the dev queue behind the MSA-depth
+eval 3506180. Read both with `scripts/ls6_evals.sh`. It covers:
 * b9 3e-4 final, and its best checkpoint (step 1008, picked by `val/lddt`). If the
   final validation beats it, the file is replaced and the eval skips it;
 * b9 1e-4 final;
