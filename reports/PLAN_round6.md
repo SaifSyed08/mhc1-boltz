@@ -107,6 +107,11 @@ the hard cases. Ask Ernest whether 2 is in scope.
   and 128 rows. Validation takes the first N rows, and row 0 is the query. Full
   depth (2048) is `runs/eval_val99/pretrained`. This gives the size of the drop
   Ernest expects, per peptide length.
+* **Training already varies MSA depth.** Upstream's featurizer draws a depth
+  uniformly from 1 to `max_seqs` (2048) for every training sample
+  (`featurizer.py` ~1174). So Boltz-1 and every fine-tune here have already seen
+  shallow MSAs, but depth ≤ 16 in only ~0.8% of draws. Gradual removal moves that
+  distribution down; it is not a new mechanism.
 * **4b. Gradual removal (next).** A callback lowers `max_seqs` each epoch, e.g.
   2048 → 512 → 128 → 32 → 8 → 1, then trains on the query alone. The DataLoader
   does not keep workers between epochs (`persistent_workers` is unset), so each
