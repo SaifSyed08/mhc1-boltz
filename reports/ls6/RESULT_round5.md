@@ -48,22 +48,26 @@ Columns, averaged over each arm's validations:
 |---|---|---|---|---|
 | b9 1e-4 | 0.8881 / 0.8898 | −0.032 / −0.040 Å | 17–19 | 1.39 Å |
 | **b9 3e-4** | **0.8926 / 0.8941** | −0.035 / −0.043 Å | 16–20 | **1.19 Å** |
-| b129 3e-4 | 0.8884 / 0.8908 | −0.038 / −0.049 Å | 17–21 | 1.22 Å |
+| b129 3e-4 | 0.8887 / 0.8910 | −0.038 / −0.049 Å | 17–21 | 1.22 Å |
 | b129 1e-3 | 0.8900 / 0.8908 | −0.034 / −0.044 Å | 15–21 | 1.28 Å |
 
 What this shows:
-1. **Every arm ends a little better than pretrained, and almost every validation
-   agrees.** The paired peptide Δ is negative at 41 of 44 validations. It is about
-   −0.04 Å, with 17–20 of 30 structures improving. `lddt_pp` sits above the control
-   in all four arms (0.888–0.894 vs 0.8858). Round 4 ranged 0.8824–0.8874 and never
-   cleared the control consistently.
+1. **Every arm ends a little better than pretrained.** The paired peptide Δ is
+   negative at 40 of 44 validations, about −0.04 Å, with 17–20 of 30 structures
+   improving. Those 44 points are not independent replicates: neighbouring
+   checkpoints are correlated, and all of them are scored on the same 30 records
+   that select the checkpoints. Each arm's mean `lddt_pp` is above the control
+   (0.888–0.893 vs 0.8858), but six single validations fall below it. Round 4
+   ranged 0.8824–0.8874. Suggestive, not established: the held-out eval below
+   decides it.
 2. **The gain is small and nearly arm-independent.** Batch 9 took 13× more steps
    than batch 129 and ended in the same place on the paired Δ. So "too few updates"
    was not why Round 4 looked flat. This matches the eval: typical peptides are
    already at ~0.8 Å.
-3. **Batch 9 at 3e-4 is the best candidate.** It has the highest `lddt_pp` at
-   every validation from step 144 on, and the lowest mean peptide RMSD, which
-   comes from the hard cases (below).
+3. **Batch 9 at 3e-4 is the best candidate.** It has the highest mean `lddt_pp`
+   (0.8926; the others 0.888–0.890), though most per-validation gaps are within
+   the ±0.002 noise. It also has the lowest mean peptide RMSD, driven by the hard
+   cases (below).
 4. **The movement is in the hard cases.** Pretrained → end of run:
 
    | record | what it is | pretrained | b9 1e-4 | b9 3e-4 | b129 3e-4 | b129 1e-3 |
@@ -75,7 +79,7 @@ What this shows:
    | `8d5n` | 16-mer | 3.66 | 3.62 | 3.70 | 3.20 | 4.39 |
    | `7cir` | phosphopeptide | 1.98 | 2.57 | 2.63 | 2.52 | 2.23 |
 
-   `8d5q` is fixed in every arm. `7t5m` halves in three. `7cir` gets worse in
+   `8d5q` is fixed in three of four arms (1.30 Å in b9 1e-4). `7t5m` halves in three. `7cir` gets worse in
    every arm. `7cir` carries a phosphoserine (`RRF[SEP]RSPIRR`); its sibling `7ciq`
    is the unphosphorylated form.
 
@@ -95,7 +99,8 @@ What this shows:
 
 The 99-record eval of the candidates (`scripts/ls6_eval_val99.slurm` with
 `EVAL_CKPTS`), queued behind 3499815:
-* b9 3e-4 final, and its best by `lddt_pp` (step 1008);
+* b9 3e-4 final, and its best checkpoint (step 1008, picked by `val/lddt`). If the
+  final validation beats it, the file is replaced and the eval skips it;
 * b9 1e-4 final;
 * b129 3e-4 final.
 
