@@ -95,6 +95,12 @@ From the RCSB canonical sequences:
   `7wj3` fails because of the missing lipid. It also suggests a fix: keep
   covalently linked ligands as part of the peptide.
 
+  Myristoyl is on six peptides in the dataset. `4zfz`, `7byd` (train) and `7wj3`
+  (validation) have it masked as a separate covalent ligand; `6iwg`, `6iwh`
+  (train) and `7wt3` (validation) keep it as the peptide's first residue. The
+  Round 5 fine-tunes move `7wj3` a long way (`reports/ls6/RESULT_eval_round5_msa.md`),
+  so re-check the "drop" verdict on it before acting.
+
 Which modification each X is (for example, how Boltz tokenizes SEP) is the thing
 to check in PyMOL for `7cir` vs `7cis`.
 
