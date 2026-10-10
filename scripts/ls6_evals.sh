@@ -2,7 +2,8 @@
 # Every validation-only eval on the 99 validation-era records, side by side,
 # paired per structure against pretrained Boltz-1. Paste the output back.
 #   cd $WORK/mhc1-boltz && git pull && bash scripts/ls6_evals.sh [--records]
-# Covers runs/eval_val99/* (checkpoints) and runs/eval_msa/* (MSA depth).
+# Covers runs/eval_val99/* (checkpoints), runs/eval_msa/* (MSA depth) and
+# runs/eval_pocket/* (pocket conditioning).
 # --records adds the per-record table (mean over samples) for every eval.
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 sacct -X --starttime now-3days --format=JobID%10,JobName%14,State%12,Elapsed%11 2>/dev/null | grep -i eval
@@ -37,7 +38,8 @@ def mean(v):
     return sum(v) / len(v)
 
 held_in = set(pathlib.Path("data/processed/subset30_ids.txt").read_text().split())
-dirs = sorted(pathlib.Path("runs/eval_val99").glob("*/")) + sorted(pathlib.Path("runs/eval_msa").glob("*/"))
+dirs = [d for top in ("runs/eval_val99", "runs/eval_msa", "runs/eval_pocket")
+        for d in sorted(pathlib.Path(top).glob("*/")) if d.is_dir()]
 evals = {f"{d.parent.name}/{d.name}": load(d) for d in dirs}
 pre = evals.get("eval_val99/pretrained", {})
 if not pre:

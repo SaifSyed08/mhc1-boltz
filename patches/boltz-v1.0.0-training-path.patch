@@ -1,5 +1,5 @@
 diff --git a/scripts/train/train.py b/scripts/train/train.py
-index 7a6491d..ea8f59e 100644
+index 7a6491d..6ef4eb8 100644
 --- a/scripts/train/train.py
 +++ b/scripts/train/train.py
 @@ -1,4 +1,5 @@
@@ -25,7 +25,7 @@ index 7a6491d..ea8f59e 100644
      debug: bool = False
      strict_loading: bool = True
      load_confidence_from_trunk: Optional[bool] = False
-@@ -161,18 +165,133 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -161,18 +165,152 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          if cfg.load_confidence_from_trunk:
              os.remove(file_path)
  
@@ -73,6 +73,25 @@ index 7a6491d..ea8f59e 100644
 +        callbacks.append(ValProgressDump(Path(cfg.output) / "val_state.json"))
 +    except Exception as exc:  # never let telemetry break a run
 +        print(f"[val_progress] disabled: {type(exc).__name__}: {exc}")
++
++    # LOCAL PATCH: predicted + true mmCIF and a PyMOL script for the records in
++    # STRUCTURE_DUMP_IDS. Must be registered BEFORE PeptideRMSD, which clears
++    # the validation stash. See src/structure_dump.py.
++    try:
++        from structure_dump import StructureDump
++
++        callbacks.append(StructureDump(Path(cfg.output)))
++    except Exception as exc:  # never let telemetry break a run
++        print(f"[structure_dump] disabled: {type(exc).__name__}: {exc}")
++
++    # LOCAL PATCH: gradual MSA removal (Ernest, 2026-10-12). Off unless
++    # MSA_SCHEDULE is set. See src/msa_schedule.py.
++    try:
++        from msa_schedule import MSASchedule
++
++        callbacks.append(MSASchedule(Path(cfg.output)))
++    except Exception as exc:
++        print(f"[msa_schedule] disabled: {type(exc).__name__}: {exc}")
 +
 +    # LOCAL PATCH: per-structure validation rows, including MHC-Fine's
 +    # MHC-peptide CA RMSD, which Boltz's pooled metrics cannot show. Reads the
@@ -162,7 +181,7 @@ index 7a6491d..ea8f59e 100644
  
      # Create wandb logger
      loggers = []
-@@ -214,6 +333,17 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
+@@ -214,6 +352,17 @@ def train(raw_config: str, args: list[str]) -> None:  # noqa: C901, PLR0912, PLR
          **trainer,
      )
  
@@ -198,6 +217,74 @@ index 8fd4379..876b9e5 100644
          if compute_constraint_features:
              residue_constraint_features = process_residue_constraint_features(data)
              chain_constraint_features = process_chain_feature_constraints(data)
+diff --git a/src/boltz/data/module/training.py b/src/boltz/data/module/training.py
+index c96beee..0628763 100644
+--- a/src/boltz/data/module/training.py
++++ b/src/boltz/data/module/training.py
+@@ -2,6 +2,8 @@ from dataclasses import dataclass
+ from pathlib import Path
+ from typing import Optional
+ 
++import json
++import os
+ import numpy as np
+ import pytorch_lightning as pl
+ import torch
+@@ -81,6 +83,32 @@ class Dataset:
+     featurizer: BoltzFeaturizer
+ 
+ 
++_VAL_POCKETS = None
++
++
++def _val_pocket(record_id) -> dict:
++    """LOCAL PATCH: inference_binder/inference_pocket for one validation record.
++
++    Read once from the JSON named by VAL_POCKET_FILE ({record id: {"binder":
++    [asym_id], "pocket": [[asym_id, res_idx], ...]}}). Unset -> {} (upstream
++    behaviour). Set but missing a record -> loud error, so a run never reports
++    "pocket-conditioned" numbers for unconditioned samples.
++    """
++    global _VAL_POCKETS  # noqa: PLW0603
++    path = os.environ.get("VAL_POCKET_FILE")
++    if not path:
++        return {}
++    if _VAL_POCKETS is None:
++        with open(path) as fh:
++            _VAL_POCKETS = json.load(fh)
++        print(f"[val_pocket] {len(_VAL_POCKETS)} pockets from {path}")
++    p = _VAL_POCKETS[str(record_id)]
++    return {
++        "inference_binder": [int(x) for x in p["binder"]],
++        "inference_pocket": [(int(a), int(r)) for a, r in p["pocket"]],
++    }
++
++
+ def load_input(record: Record, target_dir: Path, msa_dir: Path) -> Input:
+     """Load the given input data.
+ 
+@@ -418,6 +446,10 @@ class ValidationDataset(torch.utils.data.Dataset):
+             msg = "No tokens in cropped structure."
+             raise ValueError(msg)
+ 
++        # LOCAL PATCH: outside the try below, whose except silently substitutes
++        # record 0 -- a missing pocket must fail, not be swapped for another record.
++        pocket_kw = _val_pocket(record.id)
++
+         # Compute features
+         try:
+             pad_atoms = self.crop_validation and self.pad_to_max_atoms
+@@ -440,6 +472,10 @@ class ValidationDataset(torch.utils.data.Dataset):
+                 binder_pocket_cutoff=self.binder_pocket_cutoff,
+                 binder_pocket_sampling_geometric_p=1.0,  # this will only sample a single pocket token
+                 only_ligand_binder_pocket=True,
++                # LOCAL PATCH: a fixed binder + pocket per record when
++                # VAL_POCKET_FILE is set (src/make_pockets.py); otherwise None,
++                # which is upstream behaviour.
++                **pocket_kw,
+             )
+         except Exception as e:
+             print(f"Featurizer failed on {record.id} with error {e}. Skipping.")
 diff --git a/src/boltz/model/model.py b/src/boltz/model/model.py
 index 1e574fd..d4a8201 100644
 --- a/src/boltz/model/model.py
