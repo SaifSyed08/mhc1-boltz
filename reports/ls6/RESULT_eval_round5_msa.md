@@ -58,11 +58,11 @@ not improved). "Paired" is the median of the per-record differences. Digest:
    was still falling and the LR never decayed, so the arm was still improving when
    the 47 h session ended. Next: a second session of the same run.
 4. **The mean falls much more than the median** (1.21 → 0.93 Å), which means the
-   tail moved. How much of that is one record is not yet known: `7wj3` alone
-   contributes ~0.15 Å of the 0.28 Å mean drop if it fell from 15.3 Å to ~1 Å, and
-   the `< 8` column below is consistent with exactly that. **Do not claim "the hard
-   cases move most" until the per-record table
-   (`scripts/ls6_evals.sh --records`) is in.**
+   tail moved. How much of that is one record is not yet known: `7wj3` alone would
+   contribute ~0.14 Å of the 0.28 Å mean drop if it fell from 15.3 Å to ~1 Å, and
+   the `< 8` column below shows at least one of its samples did move a long way in
+   the four Round 5 checkpoints. **Do not claim "the hard cases move most" until
+   the per-record table (`scripts/ls6_evals.sh --records`) is in.**
 
 ## MSA depth: 16 sequences are almost enough; the query alone is not
 
@@ -89,23 +89,48 @@ not improved). "Paired" is the median of the per-record differences. Digest:
 ## The length buckets in that run, and what the `< 8` column really was
 
 The digest bucketed by the rows' `pep_len`, which counts **tokens**: a modified
-residue tokenizes per atom, so `7wt3` (MYR-GANF, 5 residues) counted as 19 tokens
-and 12 phosphopeptides were pushed into `12+`. Fixed: the digest now takes residue
-counts from `data/peptide_quality.json`. By residue the 99 split 3 / 93 / 3, so
-`< 8` and `12+` are three-record anecdotes either way.
+residue tokenizes per atom, so `7wt3` (MYR-GANF, 5 residues) counted as 19 tokens.
+17 validation records reach 12 tokens but only 3 have 12 residues, so **14** short
+peptides were pushed into `12+` — 7 of them phosphoserine, the rest carrying QM8,
+QMB, DPN, E7P, OSE or (for `7wt3`) MYR. Fixed: the digest now takes residue counts
+from `data/peptide_quality.json`. By residue the 99 split 3 / 93 / 3, so `< 8` and
+`12+` are three-record anecdotes either way.
 
 The `< 8` value of 8.47 Å for pretrained is **not** an artefact, though. Under
-token counting that bucket held exactly two records, `7wj3` and `7tud`, and the
-median of their six pooled samples is (1.80 + 15.15) / 2 = 8.475 — the printed
-number. That the fine-tuned arms show ~1.15–1.54 there therefore means `7wj3`
-itself dropped from ~15 Å to roughly 1 Å in every arm.
+token counting that bucket held exactly two records, `7wj3` (4 tokens) and `7tud`
+(6); the next smallest is 8. The median of their six pooled samples is
+(1.80 + 15.15) / 2 = 8.475 — the printed number.
 
-If that holds in the per-record table it is the single most interesting result
-here. `7wj3` is the N-myristoylated lipopeptide whose MYR group our pipeline masks
-(`reports/TRIAGE_peptides.md`), and **training contains two more MYR lipopeptides,
-`4zfz` and `7byd`** — the only two in the whole dataset. A model that learns from
-them where a masked lipid puts its peptide would explain a 15 Å → 1 Å move, and
-would also argue against dropping `7wj3`.
+**What the fine-tuned columns do and do not prove.** The digest pools *samples*,
+so the column is the mean of the 3rd and 4th of six values. A column of 1.15 forces
+x(4) ≤ 2.30, i.e. at least four of the six are ≤ 2.30 Å; `7tud` supplies only
+three, so **at least one of `7wj3`'s three samples is ≤ 2.30 Å**. It does *not*
+follow that all three fell, nor that its mean is ~1 Å: {0.9, 15.0, 15.4} against a
+well-placed `7tud` prints the same column. Even so, every pretrained `7wj3` sample
+was 15.15–15.42 Å, so one sample at ≤ 2.3 Å is a real change. The columns and the
+bound each implies: b9 3e-4 final 1.15 (≤ 2.30), b129 3e-4 1.17 (≤ 2.34), b9 3e-4
+s1008 1.35 (≤ 2.70), b9 1e-4 1.54 (≤ 3.08).
+
+**Not "every arm".** Round 4's step 153 reads 8.07 in that column, and its `7wj3`
+mean is 15.02 against 15.26 pretrained (`eval_val99/per_record_mean.tsv`). The three
+MSA-depth runs read 8.48–9.00. So this is the four Round 5 checkpoints only. The
+column values come from the 2026-10-12 terminal run; the raw rows are not yet in
+the repo.
+
+If the per-record table bears it out, it is the most interesting result here.
+`7wj3` is the N-myristoylated lipopeptide whose MYR group our pipeline masks
+(`reports/TRIAGE_peptides.md`). Myristoyl is on six peptides in the dataset, in two
+different forms:
+
+| form | train | validation |
+|---|---|---|
+| MYR masked as a separate covalent ligand (what `7wj3` is) | `4zfz`, `7byd` | `7wj3` |
+| MYR kept as the peptide's first residue, so the model sees it | `6iwg`, `6iwh` | `7wt3` |
+
+So training shows the model four myristoylated peptides, two of them in `7wj3`'s
+exact configuration. That is a plausible route to a 15 Å → ~2 Å move, and it argues
+against dropping `7wj3` from the set. It is a hypothesis, not a measurement: four
+training records is thin, and nothing here tests the mechanism.
 
 ## Queue (2026-10-12)
 
