@@ -45,8 +45,18 @@ pre = evals.get("eval_val99/pretrained", {})
 if not pre:
     print("!! no runs/eval_val99/pretrained rows: paired columns will be empty")
 
+# Peptide length in RESIDUES, from data/peptide_quality.json. The rows' pep_len
+# counts TOKENS, and a modified residue (SEP, MYR, ...) tokenizes per atom, which
+# put phosphopeptides in "12+" and kept 7wt3 out of "<8".
+try:
+    QLEN = {k.lower(): v["pep_len"] for k, v in
+            json.loads(pathlib.Path("data/peptide_quality.json").read_text()).items()}
+except Exception as exc:
+    print(f"!! no residue lengths ({exc}); buckets use token counts")
+    QLEN = {}
+
 def bucket(r):
-    n = r.get("pep_len") or 0
+    n = QLEN.get(str(r.get("record_id")), r.get("pep_len") or 0)
     return "<8" if n < 8 else ("8-11" if n <= 11 else "12+")
 
 print("\nper-sample median peptide CA RMSD (A); paired = per-record mean minus pretrained "
@@ -75,6 +85,6 @@ if sys.argv[1] == "--records":
     print("\nrecord len " + " ".join(n.split("/")[1][:12] for n in names))
     ids = sorted(pre or next(iter(evals.values())), key=lambda k: -mean(fin(pre[k]["pep_rmsd"])) if k in pre else 0)
     for k in ids:
-        L = (pre.get(k) or {}).get("pep_len", "?")
+        L = QLEN.get(k, (pre.get(k) or {}).get("pep_len", "?"))
         print(k, L, " ".join(f"{mean(fin(evals[n][k]['pep_rmsd'])):.2f}" if k in evals[n] else "-" for n in names))
 PY
