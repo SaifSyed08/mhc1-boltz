@@ -147,8 +147,9 @@ class StructureDump(Callback):
         groove = f"chain {hc} and resi {'+'.join(spans)} and name CA"
         lines = ["load truth.cif, truth"]
         for k in range(n):
-            lines += [f"load sample{k}.cif, sample{k}",
-                      f"pair_fit sample{k} and {groove}, truth and {groove}"]
+            lines.append(f"load sample{k}.cif, sample{k}")
+            if spans:   # no resolved heavy-chain CA: the metric skips it too
+                lines.append(f"pair_fit sample{k} and {groove}, truth and {groove}")
         lines += [
             "hide everything",
             f"show cartoon, chain {hc}",
