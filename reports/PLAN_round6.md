@@ -126,3 +126,16 @@ the hard cases. Ask Ernest whether 2 is in scope.
 
 The batch-9 and batch-129 learning-rate arms. Their results are read with
 `scripts/ls6_round5.sh` and will be written up in `reports/ls6/RESULT_round5.md`.
+
+## 6. Built (2026-10-12), submitted with `scripts/ls6_submit_round6.sh`
+
+| piece | code | job |
+|---|---|---|
+| Structures for PyMOL | `src/structure_dump.py` (env `STRUCTURE_DUMP_IDS`): `truth.cif`, `sample{k}.cif`, `view.pml` per record, superposed on the groove | inside the pocket eval |
+| Pocket conditioning, NetMHCpan pseudo-sequence | `src/make_pockets.py` → `data/pockets_pseudoseq.json`. The 34 positions are mapped by alignment to HLA-A*02:01; the reference reproduces NetMHCpan's A*02:01 pseudo-sequence exactly. A median of 30 of the 34 lie within 6 Å of the crystal peptide. | `scripts/ls6_eval_pocket.slurm` (dev) |
+| Pocket conditioning, oracle (upper bound) | the same script → `data/pockets_oracle.json`: heavy-chain residues within 6 Å of the crystal peptide (median 43) | the same job |
+| Gradual MSA removal | `src/msa_schedule.py` (env `MSA_SCHEDULE`, `MSA_VAL_DEPTH`): the cap per epoch. The batch's MSA depth is checked against the cap and the run stops on a mismatch. | gpu-a100: `taper` (2048 → 512 → 128 → 32 → 8 → 1) and `abrupt` (1 from the start). Both use the batch-9, 3e-4 recipe and validate at depth 1 |
+| Smoke test of all three | `scripts/ls6_round6_smoke.slurm` | dev, in the same job as the pocket eval |
+
+The MSA arms validate at depth 1, so their reference is pretrained at depth 1
+(`runs/eval_msa/msa1`), not `eval_val99/pretrained`.
