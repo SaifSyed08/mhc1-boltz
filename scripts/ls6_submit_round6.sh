@@ -23,13 +23,14 @@ fi
 echo "boltz-src synced to $(git log -1 --format=%h)"
 
 id() { grep -E '^[0-9]+$' | tail -1; }    # TACC's sbatch prints a banner before the id
-dev=$(sbatch --parsable scripts/ls6_round6_dev.slurm | id)
 RECIPE="trainer.accumulate_grad_batches=3 model.training_args.max_lr=0.0003"
 taper=$(RUN_DIR="$WORK/mhc1-boltz/runs/ls6_msa_taper" MSA_SCHEDULE="2048,512,128,32,8,1" MSA_VAL_DEPTH=1 \
         EXTRA_ARGS="$RECIPE" sbatch --parsable --export=ALL -J mhc1-msa-taper scripts/ls6_unfrozen.slurm | id)
 abrupt=$(RUN_DIR="$WORK/mhc1-boltz/runs/ls6_msa_abrupt" MSA_SCHEDULE="1" MSA_VAL_DEPTH=1 \
         EXTRA_ARGS="$RECIPE" sbatch --parsable --export=ALL -J mhc1-msa-abrupt scripts/ls6_unfrozen.slurm | id)
-echo "dev (smoke + pocket eval): $dev"
+# Last, and allowed to fail: the dev queue takes 3 submitted jobs per user.
+dev=$(sbatch --parsable scripts/ls6_round6_dev.slurm | id || true)
+echo "dev (smoke + pocket eval): ${dev:-NOT SUBMITTED (dev queue full?) -- resubmit scripts/ls6_round6_dev.slurm later}"
 echo "msa taper:  $taper"
 echo "msa abrupt: $abrupt"
 echo "--- how the Round 5 b9 3e-4 arm was launched (for parity):"

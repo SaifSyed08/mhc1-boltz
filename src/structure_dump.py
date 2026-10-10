@@ -118,19 +118,27 @@ class StructureDump(Callback):
         save("truth", true, resolved)
         for k, p in enumerate(preds):
             save(f"sample{k}", p, np.ones(len(p), dtype=bool))
-        (out / "view.pml").write_text(self._pml(struct, n))
+        (out / "view.pml").write_text(self._pml(struct, n, resolved))
 
     @staticmethod
-    def _pml(struct, n):
-        """Superpose on the heavy chain's groove, colour the peptide."""
-        chains = [(str(c["name"]), int(c["res_num"])) for c in struct.chains]
-        hc = max(chains, key=lambda c: c[1])[0]
-        pep = min(chains, key=lambda c: c[1])[0]
-        groove = f"chain {hc} and resi 1-{GROOVE_RESIDUES + 5} and name CA"
+    def _pml(struct, n, resolved):
+        """Superpose on the groove exactly as peptide_rmsd does, colour the peptide.
+
+        Groove = GROOVE_RESIDUES heavy-chain residues from the first one with a
+        resolved CA (peptide_rmsd's groove_start), so PyMOL's frame is the
+        metric's frame. Residues are numbered res_idx + 1 in the written mmCIF.
+        """
+        chains = list(struct.chains)
+        hc = max(chains, key=lambda c: int(c["res_num"]))
+        pep = min(chains, key=lambda c: int(c["res_num"]))
+        res = struct.residues[hc["res_idx"]:hc["res_idx"] + hc["res_num"]]
+        first = next((int(r["res_idx"]) for r in res if resolved[int(r["atom_center"])]), 0)
+        hc, pep = str(hc["name"]), str(pep["name"])
+        groove = f"chain {hc} and resi {first + 1}-{first + GROOVE_RESIDUES} and name CA"
         lines = ["load truth.cif, truth"]
         for k in range(n):
             lines += [f"load sample{k}.cif, sample{k}",
-                      f"super sample{k} and {groove}, truth and {groove}, cycles=0"]
+                      f"pair_fit sample{k} and {groove}, truth and {groove}"]
         lines += [
             "hide everything",
             f"show cartoon, chain {hc}",

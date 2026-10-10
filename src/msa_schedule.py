@@ -24,10 +24,16 @@ epoch's cap and the MSA depth actually seen in the first batch go to
 <output>/msa_schedule.jsonl (with pad_to_max_seqs the batch's MSA dimension
 equals the cap, so a mismatch means the workers did not pick it up).
 
-Timing: the DataLoader does not keep workers between epochs (persistent_workers
-is unset), so workers are re-created from the dataset object at each epoch's
-start. The cap for epoch e+1 is set at the end of epoch e, and the first one at
-on_train_start, after a resume has restored current_epoch.
+Timing (checked against PL 2.4): FitLoop.run() builds the train iterator -- and
+forks the workers -- in setup_data(), BEFORE on_train_start fires, and on a
+resume it does not rebuild it for the restored epoch. So the cap must already be
+on the dataset by then:
+  * setup()               -> cap(0), for a fresh run;
+  * on_load_checkpoint()  -> cap(checkpoint epoch), for a resume (runs during
+                             checkpoint restore, before setup_data);
+  * on_train_epoch_end()  -> cap(e + 1). Workers are not persistent and train.py
+                             reloads dataloaders every epoch, so epoch e+1's
+                             workers are forked after this.
 """
 import json
 import os
@@ -73,10 +79,12 @@ class MSASchedule(Callback):
             if self.out is None:
                 self.out = Path(trainer.default_root_dir) / "msa_schedule.jsonl"
             self._set_val(trainer)
+        if self.sched and stage == "fit":
+            self._set_train(trainer, 0)
 
-    def on_train_start(self, trainer, pl_module):
+    def on_load_checkpoint(self, trainer, pl_module, checkpoint):
         if self.sched:
-            self._set_train(trainer, trainer.current_epoch)
+            self._set_train(trainer, int(checkpoint.get("epoch", 0)))
 
     def on_train_epoch_end(self, trainer, pl_module):
         if self.sched:

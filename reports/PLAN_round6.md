@@ -139,3 +139,8 @@ The batch-9 and batch-129 learning-rate arms. Their results are read with
 
 The MSA arms validate at depth 1, so their reference is pretrained at depth 1
 (`runs/eval_msa/msa1`), not `eval_val99/pretrained`.
+
+Caveat for reading the pocket results: in training, Boltz marked about 4 pocket
+tokens per conditioned sample (geometric sampling, `featurizer.py` ~474). Here we
+mark 34 (pseudo-sequence) or about 43 (oracle). So the conditioning is outside the
+training distribution, and a null result does not rule out a well-matched pocket.
