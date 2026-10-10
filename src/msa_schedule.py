@@ -29,7 +29,7 @@ forks the workers -- in setup_data(), BEFORE on_train_start fires, and on a
 resume it does not rebuild it for the restored epoch. So the cap must already be
 on the dataset by then:
   * setup()               -> cap(0), for a fresh run;
-  * on_load_checkpoint()  -> cap(checkpoint epoch), for a resume (runs during
+  * on_load_checkpoint()  -> cap(next epoch to train), for a resume (runs during
                              checkpoint restore, before setup_data);
   * on_train_epoch_end()  -> cap(e + 1). Workers are not persistent and train.py
                              reloads dataloaders every epoch, so epoch e+1's
@@ -83,8 +83,16 @@ class MSASchedule(Callback):
             self._set_train(trainer, 0)
 
     def on_load_checkpoint(self, trainer, pl_module, checkpoint):
+        # checkpoint["epoch"] is epochs COMPLETED, which is one behind for a
+        # last.ckpt written in on_train_epoch_end (e.g. after a max_time stop):
+        # there processed = e + 1 but completed = e. The epoch Lightning trains
+        # next is epoch_progress.current.processed.
         if self.sched:
-            self._set_train(trainer, int(checkpoint.get("epoch", 0)))
+            try:
+                nxt = int(checkpoint["loops"]["fit_loop"]["epoch_progress"]["current"]["processed"])
+            except (KeyError, TypeError):
+                nxt = int(checkpoint.get("epoch", 0))
+            self._set_train(trainer, nxt)
 
     def on_train_epoch_end(self, trainer, pl_module):
         if self.sched:

@@ -132,9 +132,19 @@ class StructureDump(Callback):
         hc = max(chains, key=lambda c: int(c["res_num"]))
         pep = min(chains, key=lambda c: int(c["res_num"]))
         res = struct.residues[hc["res_idx"]:hc["res_idx"] + hc["res_num"]]
-        first = next((int(r["res_idx"]) for r in res if resolved[int(r["atom_center"])]), 0)
+        ok = [int(r["res_idx"]) for r in res if resolved[int(r["atom_center"])]]
+        first = ok[0] if ok else 0
+        # Only groove residues whose CA the crystal resolved: truth.cif omits the
+        # rest, and pair_fit needs equal atom counts (the metric drops them too).
+        keep = [i + 1 for i in ok if first <= i < first + GROOVE_RESIDUES]
+        spans, start = [], None
+        for a, b in zip(keep, keep[1:] + [None]):
+            start = a if start is None else start
+            if b != a + 1:
+                spans.append(f"{start}-{a}" if a > start else f"{a}")
+                start = None
         hc, pep = str(hc["name"]), str(pep["name"])
-        groove = f"chain {hc} and resi {first + 1}-{first + GROOVE_RESIDUES} and name CA"
+        groove = f"chain {hc} and resi {'+'.join(spans)} and name CA"
         lines = ["load truth.cif, truth"]
         for k in range(n):
             lines += [f"load sample{k}.cif, sample{k}",
