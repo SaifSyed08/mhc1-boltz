@@ -56,7 +56,9 @@ for spec in "${CKPTS[@]}"; do
     if [ ! -f "$ckpt" ]; then echo "!! $name: no checkpoint at $ckpt"; rc_all=1; continue; fi
     rm -rf "$out"                    # a half-finished earlier attempt, never results
     echo "== $name: $ckpt -> $out"
-    RUN_DIR="$out" EXTRA_ARGS="pretrained=$ckpt validation_only=true disable_checkpoint=true" \
+    # EVAL_MAX_SEQS=1 evaluates query-only (the MSA arms), like ls6_eval_msa.slurm.
+    depth_arg=""; [ -n "${EVAL_MAX_SEQS:-}" ] && depth_arg=" data.max_seqs=$EVAL_MAX_SEQS"
+    RUN_DIR="$out" EXTRA_ARGS="pretrained=$ckpt validation_only=true disable_checkpoint=true$depth_arg" \
         bash scripts/ls6_unfrozen.slurm || { echo "!! $name failed"; rc_all=1; }
 done
 exit $rc_all
