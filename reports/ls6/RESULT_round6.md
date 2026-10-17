@@ -79,7 +79,89 @@ Round 5 produced. Three arms were compared here with no multiplicity correction.
 Claim what the data supports: **an MSA-free fine-tuned model matches pretrained
 Boltz-1 that has its MSA.** Do not claim it beats it.
 
-## 4. What would settle it
+## 4. Where the error actually is: peptide length
+
+Median peptide RMSD by peptide length in **residues** (`data/peptide_quality.json`
+`pep_len`, never the eval rows' token count — modified residues tokenize per atom):
+
+| length | n | pretrained, full MSA | pretrained, query only | b9 3e-4, full MSA | abrupt, query only |
+|---|---|---|---|---|---|
+| ≤ 7 | 3 | 1.519 | 1.268 | 1.094 | 1.206 |
+| 8–9 | 78 | 0.727 | 0.988 | 0.656 | 0.674 |
+| 10–11 | 15 | 1.277 | 1.989 | 0.817 | 0.924 |
+| ≥ 12 | 3 | 3.655 | 3.215 | 3.366 | 3.539 |
+
+* The canonical 8–9mers are 78 of the 99 and are already near the crystals' own
+  precision; fine-tuning moves them 0.73 → 0.66 Å.
+* **Fine-tuning helps most at 10–11 residues: 1.28 → 0.82 Å.**
+* **≥ 12 residues does not improve at all** (3.66 → 3.37/3.54). n = 3, and the
+  training set holds only 4 peptides of 15+ residues, so this is as likely a data
+  limit as a modelling one.
+* **MSA removal costs the non-canonical lengths most** in the pretrained model:
+  8–9mers +0.26 Å, 10–11mers +0.71 Å. Fine-tuning recovers both.
+
+Per record, the short and long tail:
+
+| record | residues | pretrained | b9 3e-4 full | abrupt query-only |
+|---|---|---|---|---|
+| 7wj3 | 4 | 15.26 | 1.31 | 1.21 |
+| 7wt3 | 5 | 1.32 | 0.75 | 0.62 |
+| 7tud | 6 | 1.52 | 1.09 | 1.56 |
+| 6zkx | 12 | 2.84 | 2.22 | 2.57 |
+| 8d5n | 16 | 3.66 | 3.99 | 3.54 |
+| 7t5m | 20 | 7.56 | 3.37 | 5.15 |
+
+**7wj3 settles the open question from `RESULT_eval_round5_msa.md`.** That file could
+only bound one of its three samples; the per-record means here show 15.26 → 1.21 Å.
+It remains a hypothesis that this is the four myristoylated training peptides (two
+masked exactly as 7wj3 is) being learned, not the lipid being placed for the right
+reason. Nothing here tests the mechanism.
+
+## 5. Pocket conditioning does not work, and the oracle says why that matters
+
+`scripts/ls6_eval_pocket.slurm`, all 99, paired against `eval_val99/pretrained`:
+
+| run | median | paired | improved | p |
+|---|---|---|---|---|
+| plain (no pocket, same code path) | 0.847 | +0.014 | 42/99 | 0.159 |
+| NetMHCpan pseudo-sequence (34 positions) | 0.793 | +0.012 | 46/99 | 0.547 |
+| oracle (HC residues within 6 Å of the true peptide) | 0.808 | −0.016 | 57/99 | 0.159 |
+
+* The `plain` run reproduces the baseline median exactly, so the conditioning
+  harness itself changes nothing. That is the control that makes the rest readable.
+* Neither pocket helps. **Even the oracle pocket — perfect information about which
+  heavy-chain residues the real peptide touches — does nothing** (57/99, p = 0.16).
+* Note the unpaired medians (0.793, 0.808) look better than 0.847 while the paired
+  medians say no. The distribution shifts; per structure it is a wash. Trust the
+  paired column.
+* Caveat already in `PLAN_round6.md` §6: training marks ~4 pocket tokens per
+  conditioned sample and these mark 34 or 43, so the conditioning is out of
+  distribution and a well-matched pocket is not ruled out. But the oracle result
+  argues pocket constraints are not the vehicle for MHC-Fine's template idea.
+  The untried route is threading peptides onto same-length structures for real or
+  partial templates, or moving to Boltz-2, which has a template module.
+
+## 6. 7cir: fine-tuning makes the phosphopeptide worse, every time
+
+| checkpoint | 7cir |
+|---|---|
+| pretrained, full MSA | **1.979** |
+| pretrained, query only | 1.830 |
+| taper, query only | 2.215 |
+| b9 3e-4, query only | 2.296 |
+| b9 3e-4 s1008 | 2.328 |
+| b129 3e-4 | 2.347 |
+| b9 1e-4 | 2.397 |
+| step 153 | 2.457 |
+| abrupt, query only | 2.540 |
+| b9 3e-4, full MSA | 2.597 |
+
+Nine fine-tuned checkpoints, all worse than pretrained, spread 2.21–2.60 Å against
+1.98. This is consistent and not a single-draw artefact. Phospho-Tune (Kozakov
+group, 2024) fine-tunes for phosphopeptides specifically — the open question for
+Ernest.
+
+## 7. What would settle it
 
 1. A second seed for `abrupt` and for `b9_3e-4`, scored query-only. 0.036 Å apart
    with ~0.02 Å noise is not a difference yet.
