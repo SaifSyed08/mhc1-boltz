@@ -56,8 +56,8 @@ structures apparently teach directly.
 query-only for the first time. It reaches 0.749 Å — already past pretrained-with-MSA
 and 0.37 Å better than pretrained query-only.
 
-The two MSA arms beat it by 0.024 (taper) and 0.036 Å (abrupt). This eval's
-single-draw noise is about 0.02 Å, and neither arm was repeated with a second seed.
+The two MSA arms beat it by 0.024 (taper) and 0.036 Å (abrupt) on a single draw.
+**Job 3588218 re-ran all three evals and showed that gap is noise** — see §3a.
 
 **So the headline is not "gradual removal works".** It is that ordinary fine-tuning
 on this dataset already produces a model that barely needs its MSA, and training
@@ -69,6 +69,50 @@ Upstream's featurizer already draws a training depth uniformly from 1 to `max_se
 for every sample (`featurizer.py` ~1174), so even the "full MSA" arm saw shallow
 alignments in ~0.8% of draws and depth-1 draws occasionally. That is the most
 likely mechanism, and it is a better explanation than anything the schedule adds.
+
+## 3a. The second draw: the schedule's advantage was noise
+
+Job 3588218 (2026-11-16, 54 min) re-ran the same three checkpoints query-only.
+Diffusion draws are unseeded, so this is an independent draw of the same model.
+
+**Draw-to-draw movement, same checkpoint:**
+
+| arm | draw 1 | draw 2 | Δ median | per-record \|Δ\|, median / p90 |
+|---|---|---|---|---|
+| abrupt | 0.713 | 0.759 | +0.045 | 0.053 / 0.254 |
+| taper | 0.725 | 0.759 | +0.034 | 0.066 / 0.207 |
+| b9 3e-4 (no schedule) | 0.749 | 0.799 | +0.051 | 0.062 / 0.247 |
+
+**Single-draw noise on the median is ~0.04–0.05 Å, not the ~0.02 Å assumed
+earlier**, and individual records move by 0.25 Å at the 90th percentile. Every
+gap between these three arms is smaller than that.
+
+Pooling both draws (6 samples per record) and comparing the arms directly:
+
+| comparison | all 99 | held-out 69 |
+|---|---|---|
+| abrupt vs b9 | +0.016, 41/99, p = 0.107 | +0.014, 29/69, p = 0.228 |
+| taper vs b9 | −0.006, 51/99, p = 0.841 | −0.006, 36/69, p = 0.810 |
+| abrupt vs taper | +0.010, 42/99, p = 0.159 | +0.007, 30/69, p = 0.336 |
+
+Pooled medians: abrupt 0.744, taper 0.746, b9 0.763. On the paired median abrupt
+is now *behind* b9, the opposite of draw 1.
+
+**Conclusion: the MSA schedule gives no measurable benefit over plain fine-tuning.**
+Section 2's reading was right and is now established rather than suspected. Neither
+taper nor abrupt separates from a fine-tune that never saw a shortened MSA.
+
+Pooled, against pretrained with its full MSA, held-out 69:
+
+| arm | paired | improved | p |
+|---|---|---|---|
+| abrupt | −0.036 | 43/69 | 0.053 |
+| taper | −0.056 | 42/69 | 0.091 |
+| b9 3e-4 | −0.037 | 41/69 | 0.148 |
+
+Still short of 0.05 with twice the sampling, so §1's "matches, does not beat"
+holds. The second *training* seeds (3588216, 3588217) are still queued and test a
+different question: whether a rerun of the training itself lands in the same place.
 
 ## 3. What is still borderline
 
@@ -163,10 +207,12 @@ Ernest.
 
 ## 7. What would settle it
 
-1. A second seed for `abrupt` and for `b9_3e-4`, scored query-only. 0.036 Å apart
-   with ~0.02 Å noise is not a difference yet.
-2. The held-out comparison that matters for a paper is arm vs pretrained-with-MSA,
-   and it needs more than 69 records or a repeated draw to clear 0.05 honestly.
+1. ~~A second draw~~ — done (§3a): the arms do not separate from each other.
+   Still open is a second *training* seed (3588216, 3588217, queued), which asks
+   whether re-running the training lands in the same place.
+2. The held-out comparison that matters for a paper is arm vs pretrained-with-MSA.
+   Pooling two draws did not clear 0.05 (abrupt p = 0.053), so this needs more
+   records or more sampling, not more re-reads of the same 69.
 3. Wall-clock: the practical claim is that dropping the MSA removes the MSA search
    from the pipeline. That has not been timed here.
 
