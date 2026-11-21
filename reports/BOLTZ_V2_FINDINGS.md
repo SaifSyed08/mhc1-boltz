@@ -5,7 +5,8 @@ Audit run 2026-11-17 against a clean clone of `jwohlwend/boltz` at `v2.2.1`
 then re-verified by hand at the cited line**, and the ones that did not survive
 that check are listed at the bottom.
 
-Nothing here has been reported upstream yet. Saif decides what gets filed.
+Round 2 (2026-11-21) added two more confirmed defects and filed eight items
+upstream. See "Round 2" and "Filed upstream" at the bottom.
 
 Line numbers are in `src/boltz/` unless a `scripts/` path is given.
 
@@ -103,7 +104,8 @@ either in a bug report.
 
 **Severity: medium. Produces duplicate MSA rows that displace distinct sequences.**
 
-`data/feature/featurizer.py:210` and the same line in `featurizerv2.py`:
+`data/feature/featurizer.py:210` and `featurizerv2.py:324` (re-checked 2026-11-21 —
+the v2 line is 324, not 210 as first written here):
 
 ```python
 taxonomy_map = sorted(taxonomy_map.items(), key=..., reverse=True)
@@ -223,10 +225,117 @@ Treat as leads, not findings. Do not file without checking.
 * **v1 pocket conditioning does not filter by `is_present`** (`featurizer.py` ~596).
   Marked PLAUSIBLE by the agent.
 
-## Filing guidance
+---
 
-File separately, smallest first, each with the quoted lines and the one-line fix.
-**A** and **F** are the most provable and need no data. **B** is the most
-consequential and the most likely to draw a substantive reply. **D** carries Saif's
-own reproduction from v1.0.0 and should say so plainly — the logic is unchanged in
-v2.2.1, but it has not been re-executed there.
+# Round 2 — 2026-11-21
+
+Four agents, scoped to regions round 1 never touched: the inference/output path;
+affinity + steering potentials; input parsing and constraints; losses, confidence,
+cropping and tokenisation. Same evidence contract (file:line, quoted code, concrete
+failure scenario, CONFIRMED vs PLAUSIBLE). Every claim below was re-verified by hand
+before filing. Line numbers still against `b1ebfc4`, which is also `origin/main`.
+
+## G. Chains that differ only in `modifications` or `cyclic` are silently merged
+
+**Severity: high. User-facing, documented input syntax, silent wrong answer.**
+
+`data/parse/schema.py:1037`. The comment above the loop says items are grouped by
+"type, sequence and modifications"; the key is `(entity_type, seq)`. Each group is
+then read from `items[0]` only — modifications at `:1168`, `cyclic` at `:1178` — and
+the one resulting `parsed_chain` is assigned to every id in the group at
+`:1301-1308`.
+
+```yaml
+sequences:
+  - protein: {id: A, sequence: MKTAYIAK}
+  - protein: {id: B, sequence: MKTAYIAK, modifications: [{position: 3, ccd: SEP}]}
+```
+
+Both chains are built from the unmodified entry; B's SEP is dropped. Listing B
+first gives *both* chains the SEP. `msa` has an explicit cross-item check for this
+exact hazard at `:1117-1124`; `modifications` and `cyclic` have none.
+
+Also at `:1168`: `idx = mod["position"] - 1` with no bounds check, so `position: 0`
+modifies the last residue of the chain instead of raising.
+
+## H. `--max_parallel_samples` does not cap anything
+
+**Severity: medium-high. Affects anyone hitting OOM at high `diffusion_samples`.**
+
+`model/modules/diffusionv2.py:383` and `diffusion.py:541` — both versions:
+
+```python
+sample_ids_chunks = sample_ids.chunk(
+    multiplicity % max_parallel_samples + 1
+)
+```
+
+`chunk(n)` takes a *number of chunks*, not a chunk size. 6 samples with a cap of 3
+gives one chunk of 6; 10 with a cap of 5 gives one chunk of 10; 10 with a cap of 3
+gives two chunks of 5. The affinity path passes `max_parallel_samples: 1`
+(`main.py:1376`) with `diffusion_samples_affinity` defaulting to 5, so that runs as
+one chunk of 5 too. Predictions unchanged; only peak memory.
+
+Relevant to us directly — this is the knob that was supposed to bound VRAM.
+
+## Round 2 findings deliberately NOT filed
+
+* **`com_counts` computed and discarded** in `potentials.py:111`, so the COM
+  gradient is never divided by atoms per chain. Real-looking, but open PR
+  [#718](https://github.com/jwohlwend/boltz/pull/718) already covers COM reduction
+  and gradient scaling.
+* **`--write_full_pae` help text contradicts the flag.** Covered by open PR
+  [#602](https://github.com/jwohlwend/boltz/pull/602).
+* **Contact potential underflow / kernel fallback.** Covered by open PR
+  [#682](https://github.com/jwohlwend/boltz/pull/682).
+* **`--subsample_msa` is a bare `is_flag`** (`main.py:1022`) whose help says
+  "Default is True", while the dataclass default at `main.py:104` is `False` and the
+  function signature default at `:1076` is `True`. Click always wins, so subsampling
+  is off and cannot be turned off. Verified, but it is a three-way documentation
+  disagreement where the intended default is genuinely unclear, so it is a question
+  for the maintainers, not a patch. Not filed.
+* **`confidencev2.py:489-495` fallback builds `pair_chains_iptm` as a tensor** where
+  consumers expect a nested dict, and **`confidencev2.py:285` does not
+  `repeat_interleave` `asym_id`** under `use_separate_heads`. Both PLAUSIBLE only —
+  neither agent could produce a trigger, and `use_separate_heads` defaults to False.
+* An agent reported that `--max_parallel_samples 5` yields "chunks of 5". That is
+  wrong — see **H**. Caught by reading the line, which is the whole point of the
+  verification pass.
+
+Loss/confidence/cropping/tokenisation came back with **nothing airtight**, which is
+a real result: that part of the tree is in better shape than the data pipeline.
+
+---
+
+# Filed upstream — 2026-11-21
+
+Fork: `SaifSyed08/boltz`. Commits authored as `SaifSyed08 <saifsyed2999@gmail.com>`,
+dated 2026-11-19, no AI attribution.
+
+**Pull requests** (fix is unambiguous, nothing about trained weights changes):
+
+| PR | Finding | Change |
+|----|---------|--------|
+| [#726](https://github.com/jwohlwend/boltz/pull/726) | F | three `_target_` lines in the shipped training configs |
+| [#727](https://github.com/jwohlwend/boltz/pull/727) | H | `chunk()` -> `split()` in both diffusion samplers |
+| [#728](https://github.com/jwohlwend/boltz/pull/728) | G | modifications + cyclic added to the entity grouping key |
+| [#729](https://github.com/jwohlwend/boltz/pull/729) | A, E | unpack arity in `boltz2.py`; `ref_space_uid` off-by-one |
+
+**Issues** (the fix is a maintainer judgement call, so reported not patched):
+
+| Issue | Finding | Why not a PR |
+|-------|---------|--------------|
+| [#730](https://github.com/jwohlwend/boltz/issues/730) | B | if the weights were trained with the features dead, fixing it creates a train/inference mismatch — asked which way they want it |
+| [#731](https://github.com/jwohlwend/boltz/issues/731) | new | failed input predicted as record 0; the right shape of the fix (sentinel vs re-raise) is theirs to pick |
+| [#732](https://github.com/jwohlwend/boltz/issues/732) | C | present in v1 too, so the weights may depend on it |
+| [#733](https://github.com/jwohlwend/boltz/issues/733) | D | design call: guard `chain_in_crop[j]` or drop masked chains earlier |
+
+#733 states plainly that the 7ndt reproduction is from v1.0.0 and that the v2.2.1
+path has not been re-executed. #730 and #732 say outright that we cannot tell from
+source whether the released weights depend on the broken behaviour.
+
+Every claim was checked against the 30+ open upstream PRs first; three candidates
+were dropped as already-reported, and #731 explicitly notes that PR #720 addresses a
+different failure path.
+
+The four unverified leads from round 1 are still unfiled and still quarantined.
